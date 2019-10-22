@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN" monitorInterval="300">
+
+    <Properties>
+        <Property name="pattern">%highlight{%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L -%m%n}{FATAL=red, ERROR=red, WARN=yellow, INFO=cyan, TRACE=blue}</Property>
+        <Property name="filepath">e:/log</Property>
+    </Properties>
+    <appenders>
+        <!--  输出控制台的配置 -->
+        <Console name="console" target="SYSTEM_OUT">
+            <!--  控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->
+            <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!--  这个都知道是输出日志的格式 -->
+            <PatternLayout disableAnsi="false" noConsoleNoAnsi="false" pattern="${pattern}"/>
+        </Console>
+
+        <!--配置自定义日志，按天输出-->
+        <RollingFile name="RollingFileInfo" fileName="${filepath}/shop-user.log" filePattern="${filepath}/shop-user-%d{yyyy-MM-dd}.log" >
+            <Filters>
+                <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+                <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+                <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>
+            </Filters>
+            <PatternLayout pattern="${pattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingFile>
+
+        <!-- 把系统所有的error全部打到这个文件里  -->
+        <RollingFile name="RollingFileError" fileName="${filepath}/shop-user_error.log"
+                     filePattern="${filepath}/$${date:yyyy-MM}/shop-user_error-%d{yyyy-MM-dd}-%i.log">
+            <ThresholdFilter level="ERROR"/>
+            <PatternLayout pattern="${pattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+        </RollingFile>
+
+    </appenders>
+
+    <!-- 然后定义logger，只有定义了logger并引入的appender，appender才会生效 -->
+    <loggers>
+        <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
+        <logger name="org.springframework" level="ERROR"></logger>
+        <!--<logger name="org.mybatis" level="ERROR"></logger>-->
+
+        <root level="info">
+            <appender-ref ref="console"/>
+            <appender-ref ref="RollingFileInfo" />
+            <appender-ref ref="RollingFileError" />
+        </root>
+
+    </loggers>
+</configuration>
