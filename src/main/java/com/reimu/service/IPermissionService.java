@@ -2,6 +2,7 @@ package com.reimu.service;
 
 import com.reimu.entity.Permission;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.reimu.security.SysPermission;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ import java.util.List;
  */
 public interface IPermissionService extends IService<Permission> {
     List<Permission> getListByUserId(String userId);
+
+    List<SysPermission> getAllPermAndRole();
 }

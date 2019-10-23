@@ -2,6 +2,7 @@ package com.reimu.service.impl;
 
 import com.reimu.entity.Permission;
 import com.reimu.dao.PermissionMapper;
+import com.reimu.security.SysPermission;
 import com.reimu.service.IPermissionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,10 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
     @Override
     public List<Permission> getListByUserId(String userId) {
         return permissionMapper.getListByUserId(userId);
+    }
+
+    @Override
+    public List<SysPermission> getAllPermAndRole() {
+        return permissionMapper.getAllPermAndRole();
     }
 }

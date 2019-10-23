@@ -10,6 +10,16 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-        id, name, description
+        r.id, r.name, r.description
     </sql>
+
+	<select id="getListByUserId" parameterType="String" resultType="com.reimu.entity.Role">
+		SELECT
+			<include refid="Base_Column_List"/>
+		FROM
+			t_role r
+		LEFT JOIN t_user_role ur ON r.id = ur.role_id
+		WHERE
+			ur.user_id = #{userId}
+	</select>
 </mapper>

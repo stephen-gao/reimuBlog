@@ -11,13 +11,13 @@ public class LoginController {
 //        return "login.html";
 //    }
 
-    @RequestMapping("/success")
-    public String success(){
-        return "success.html";
-    }
+//    @RequestMapping("/success")
+//    public String success(){
+//        return "success.html";
+//    }
 
-    @RequestMapping("/login-error")
+    @RequestMapping("/403")
     public String error(){
-        return "login-error.html";
+        return "403.html";
     }
 }

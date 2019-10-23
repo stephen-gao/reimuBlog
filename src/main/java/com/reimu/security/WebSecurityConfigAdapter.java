@@ -1,5 +1,7 @@
 package com.reimu.security;
 
+import com.reimu.service.IPermissionService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,37 +11,33 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
+import java.util.List;
+
+@Log4j2
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)  //  启用方法级别的权限认证
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private IPermissionService permissionService;
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //  允许所有用户访问"/"和"/index.html"
-//        http.authorizeRequests()
-//                .antMatchers("/", "/index.html").permitAll()
-//                .anyRequest().authenticated()   // 其他地址的访问均需验证权限
-//                .and()
-//                .formLogin()
-//                .loginPage("/login.html")   //  登录页
-//                .failureUrl("/login-error.html").permitAll()
-//                .and()
-//                .logout()
-//                .logoutSuccessUrl("/index.html");
 
+        http = addAntMatchers(http);
         http.authorizeRequests()
-                // 如果有允许匿名的url，填在下面
-                .antMatchers("/test/a").permitAll()
-                .anyRequest().authenticated()
                 .and()
                 // 设置登陆页
                 .formLogin()
@@ -52,7 +50,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .passwordParameter("password")
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login").permitAll();
+                .logoutSuccessUrl("/login").permitAll()
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/403");
 
 //        // 关闭CSRF跨域
 //        http.csrf().disable();
@@ -68,13 +69,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 设置拦截忽略文件夹，可以对静态资源放行
         web.ignoring().antMatchers("/css/**", "/js/**");
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+
+    private HttpSecurity addAntMatchers(HttpSecurity http) throws Exception {
+        List<SysPermission> permissionList = permissionService.getAllPermAndRole();
+        String[] writeList = {"/", "/index", "/a", "/login", "/404", "/403", "/500"};
+        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http.authorizeRequests();
+        log.info("注册中心配置信息：");
+        // 如果有允许匿名的url，填在下面
+        registry.antMatchers(writeList).permitAll();
+        log.info("权限白名单：{}", CollectionUtils.arrayToList(writeList));
+//        registry.antMatchers("/test/b").hasRole("B");
+        // 设置接口权限
+        permissionList.forEach(p -> {
+            if (!StringUtils.isEmpty(p.getRoleName())) {
+                registry.antMatchers(p.getCode()).hasAnyRole(p.getRoleName().split(","));
+                log.info("权限[{}]：角色[{}]", p.getCode(), ("ROLE_" + p.getRoleName()).replace(",", ",ROLE_"));
+            }
+        });
+        registry.anyRequest().authenticated();
+        return http;
+    }
+
     public static void main(String[] args) {
-        String  pwd = "123456";
+        String pwd = "123456";
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encode = encoder.encode(pwd);
         System.out.println(encode);

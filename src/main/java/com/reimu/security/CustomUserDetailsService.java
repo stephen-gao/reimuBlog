@@ -1,6 +1,7 @@
 package com.reimu.security;
 
 import com.reimu.entity.Permission;
+import com.reimu.entity.Role;
 import com.reimu.entity.User;
 import com.reimu.service.IPermissionService;
 import com.reimu.service.IRoleService;
@@ -38,9 +39,9 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("用户名不存在");
         }
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        List<Permission> permissionList = permissionService.getListByUserId(user.getId());
-        permissionList.forEach(p -> {
-            authorities.add(new SimpleGrantedAuthority(p.getCode()));
+        List<Role> roleList = roleService.getListByUserId(user.getId());
+        roleList.forEach(role -> {
+            authorities.add(new SimpleGrantedAuthority("ROLE_"+role.getName()));
         });
 
         return new SysUser(user.getId(), user.getUsername(), user.getPassword(), authorities);

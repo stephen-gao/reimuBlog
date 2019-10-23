@@ -2,6 +2,7 @@ package com.reimu.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.reimu.entity.Permission;
+import com.reimu.security.SysPermission;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ import java.util.List;
 public interface PermissionMapper extends BaseMapper<Permission> {
 
     List<Permission> getListByUserId(String userId);
+
+    List<SysPermission> getAllPermAndRole();
 }
