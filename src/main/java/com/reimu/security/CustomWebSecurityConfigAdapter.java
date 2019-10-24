@@ -24,13 +24,16 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)  //  启用方法级别的权限认证
-public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
+public class CustomWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Autowired
     private IPermissionService permissionService;
+
+    @Autowired
+    private CustomAccessDeniedHandler accessDeniedHandler;
 
 
     @Override
@@ -53,6 +56,7 @@ public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login").permitAll()
                 .and()
                 .exceptionHandling()
+//                .accessDeniedHandler(accessDeniedHandler);
                 .accessDeniedPage("/403");
 
 //        // 关闭CSRF跨域
@@ -90,6 +94,9 @@ public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
             if (!StringUtils.isEmpty(p.getRoleName())) {
                 registry.antMatchers(p.getCode()).hasAnyRole(p.getRoleName().split(","));
                 log.info("权限[{}]：角色[{}]", p.getCode(), ("ROLE_" + p.getRoleName()).replace(",", ",ROLE_"));
+            }else {
+                registry.antMatchers(p.getCode()).denyAll();
+                log.info("权限[{}]：禁止访问", p.getCode());
             }
         });
         registry.anyRequest().authenticated();
