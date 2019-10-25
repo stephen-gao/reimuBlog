@@ -32,9 +32,6 @@ public class CustomWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter
     @Autowired
     private IPermissionService permissionService;
 
-    @Autowired
-    private CustomAccessDeniedHandler accessDeniedHandler;
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -44,20 +41,16 @@ public class CustomWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter
                 .and()
                 // 设置登陆页
                 .formLogin()
-//                .loginPage("/login")
+                .loginPage("/login")
                 // 设置登陆成功页
                 .defaultSuccessUrl("/success")
                 .failureUrl("/login-error").permitAll()
-                // 自定义登陆用户名和密码参数，默认为username和password
-//                .usernameParameter("username")
-//                .passwordParameter("password")
                 .and()
                 .logout()
                 .logoutSuccessUrl("/login").permitAll()
                 .and()
                 .exceptionHandling()
-//                .accessDeniedHandler(accessDeniedHandler);
-                .accessDeniedPage("/403");
+                .accessDeniedPage("/error-403");
 
 //        // 关闭CSRF跨域
 //        http.csrf().disable();

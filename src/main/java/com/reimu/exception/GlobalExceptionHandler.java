@@ -24,8 +24,7 @@ public class GlobalExceptionHandler {
         log.info("系统异常", e);
         ModelAndView mv = new ModelAndView();
         mv.addObject("exception", e);
-        mv.addObject("url", request.getRequestURL());
-        mv.setViewName("/404.html");
+        mv.setViewName("/500.html");
         return mv;
     }
 }
