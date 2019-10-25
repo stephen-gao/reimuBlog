@@ -16,14 +16,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("index.html");
-        registry.addViewController("/index").setViewName("index.html");
-        registry.addViewController("/login").setViewName("login.html");
-        registry.addViewController("/success").setViewName("success.html");
-        registry.addViewController("/error-login").setViewName("/error/login-error.html");
-        registry.addViewController("/403").setViewName("/error/403.html");
-        registry.addViewController("/404").setViewName("/error/404.html");
-        registry.addViewController("/500").setViewName("/error/500.html");
+//        registry.addViewController("/manage-index").setViewName("manage/index");
+//        registry.addViewController("/manage-head").setViewName("manage/common/head");
+        registry.addViewController("/login").setViewName("manage/login");
+        registry.addViewController("/error-login").setViewName("error/login-error");
+        registry.addViewController("/403").setViewName("error/403");
+        registry.addViewController("/404").setViewName("error/404");
+        registry.addViewController("/500").setViewName("error/500");
         registry.addRedirectViewController("/login-error","/error-login");
         registry.addRedirectViewController("/error-403","/403");
         registry.addRedirectViewController("/error-404","/404");
