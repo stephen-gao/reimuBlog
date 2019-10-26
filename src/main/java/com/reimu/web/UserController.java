@@ -2,6 +2,7 @@ package com.reimu.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * <p>
@@ -12,7 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @since 2019-10-22
  */
 @Controller
-@RequestMapping("/tuser")
+@RequestMapping("/user")
 public class UserController {
-	
+
+    @RequestMapping("user-page")
+    public ModelAndView userPage() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("manage/user/user");
+        return mv;
+    }
 }

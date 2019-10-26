@@ -7,9 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
     @RequestMapping("/manage-index")
-    public String index(){
-
+    public String indexPage(){
 
         return "manage/index";
+    }
+
+    @RequestMapping("/manage-main")
+    public String mainPage(){
+
+        return "manage/main";
     }
 }

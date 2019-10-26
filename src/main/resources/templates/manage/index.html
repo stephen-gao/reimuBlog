@@ -1,75 +1,104 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="description" content="overview &amp; stats"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<head th:include="manage/common/header::header">
 
-    <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css"/>
-
-    <!-- page specific plugin styles -->
-
-    <!-- text fonts -->
-    <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css"/>
-
-    <!-- ace styles -->
-    <link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
-
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet"/>
-    <![endif]-->
-    <link rel="stylesheet" href="assets/css/ace-skins.min.css"/>
-    <link rel="stylesheet" href="assets/css/ace-rtl.min.css"/>
-
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
-    <![endif]-->
-
-    <!-- inline styles related to this page -->
-
-    <!-- ace settings handler -->
-    <script src="assets/js/ace-extra.min.js"></script>
-
-    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
-
-    <!--[if lte IE 8]>
-    <script src="assets/js/html5shiv.min.js"></script>
-    <script src="assets/js/respond.min.js"></script>
-    <![endif]-->
 </head>
-<body>
-<div th:include="manage/head::head" id="navbar" class="navbar navbar-default ace-save-state"></div>
+<body class="no-skin">
+<div th:include="manage/common/head::head" id="navbar" class="navbar navbar-default ace-save-state"></div>
 <div class="main-container ace-save-state" id="main-container">
     <script type="text/javascript">
-        try{ace.settings.loadState('main-container')}catch(e){}
+        try {
+            ace.settings.loadState('main-container')
+        } catch (e) {
+        }
     </script>
-    <div th:include="manage/left::left" id="sidebar" class="sidebar responsive ace-save-state"></div>
-</div>
-<!-- basic scripts -->
+    <div th:include="manage/common/left::left" id="sidebar" class="sidebar responsive ace-save-state"></div>
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a data-toggle="tab" href="#" class="tabs_refresh_page" data="/500">Home</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#" class="tabs_refresh_page" data="/404">Other Pages</a>
+                    </li>
+                    <li class="active">
+                        Error 500
+                    </li>
+                </ul><!-- /.breadcrumb -->
+                <!--<ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">-->
+                    <!--<li id="/500-li" class="active">-->
+                        <!--<a data-toggle="tab" href="#">-->
+                            <!--<span class="tabs_toggle_text" data="/500">Home</span>-->
+                            <!--<i data="/500-li" class="tabs_toggle_close ace-icon fa fa-times bigger-90 width-auto"></i>-->
+                        <!--</a>-->
+                    <!--</li>-->
 
+                    <!--<li>-->
+                        <!--<a data-toggle="tab" href="#profile4">Profile</a>-->
+                    <!--</li>-->
+
+                    <!--<li>-->
+                        <!--<a data-toggle="tab" href="#dropdown14">More</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            </div>
+
+            <div class="page-content" style="padding: 0px 1px 0px;">
+                <!--<div class="row" style="margin-left: -13px;margin-right: 0px;">-->
+                <!--<div class="col-sm-12">-->
+                <!-- PAGE CONTENT BEGINS -->
+
+                <div id="tabContainer" class="tab-content">
+                    <!--<div id="home4" class="tab-pane in active">-->
+                    <!--<p>Raw denim you probably haven't heard of them jean shorts Austin.</p>-->
+                    <!--</div>-->
+
+                    <!--<div id="profile4" class="tab-pane">-->
+                    <!--<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>-->
+                    <!--</div>-->
+
+                    <!--<div id="dropdown14" class="tab-pane">-->
+                    <!--<p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade.</p>-->
+                    <!--</div>-->
+                </div>
+                <!-- PAGE CONTENT ENDS -->
+                <!--</div>&lt;!&ndash; col end &ndash;&gt;-->
+                <!--</div>&lt;!&ndash; /.row &ndash;&gt;-->
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- main-content end-->
+    <div th:include="manage/common/footer::footer" class="footer"></div>
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+    </a>
+</div><!-- main-container end -->
+<!-- basic scripts -->
 <!--[if !IE]> -->
 <script src="assets/js/jquery-2.1.4.min.js"></script>
-
 <!-- <![endif]-->
-
 <!--[if IE]>
 <script src="assets/js/jquery-1.11.3.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
-    if('ontouchstart' in document.documentElement) document.write("<script src='js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    if ('ontouchstart' in document.documentElement) document.write("<script src='js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
 </script>
 <script src="assets/js/bootstrap.min.js"></script>
-
 <!-- page specific plugin scripts -->
-
+<script src="assets/js/jquery.dataTables.min.js"></script>
+<script src="assets/js/jquery.dataTables.bootstrap.min.js"></script>
+<script src="assets/js/dataTables.buttons.min.js"></script>
+<script src="assets/js/buttons.flash.min.js"></script>
+<script src="assets/js/buttons.html5.min.js"></script>
+<script src="assets/js/buttons.print.min.js"></script>
+<script src="assets/js/buttons.colVis.min.js"></script>
+<script src="assets/js/dataTables.select.min.js"></script>
 <!-- ace scripts -->
 <script src="assets/js/ace-elements.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
-
 <!-- inline scripts related to this page -->
+<script src="js/index.js"></script>
 </body>
 </html>
