@@ -37,5 +37,9 @@ public class PermissionVO extends BaseVO {
      */
     private Integer sort;
 
+    /**
+     * 子节点
+     */
+    private List<PermissionVO> list;
 
 }

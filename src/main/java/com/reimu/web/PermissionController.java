@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -63,43 +61,31 @@ public class PermissionController {
     @RequestMapping("permission-tree")
     @ResponseBody
     public Result permissionTree() {
-//        List<PermissionVO> tree = new ArrayList<>();
-//
-//        QueryWrapper wrapper = new QueryWrapper();
-//        wrapper.eq("pid","root");
-//        wrapper.orderByAsc("sort");
-//        List<Permission> list = permissionService.list(wrapper);
-//        list.forEach(po -> {
-//            PermissionVO vo = new PermissionVO();
-//            BeanUtils.copyProperties(po,vo);
-//            List<PermissionVO> subvos = new ArrayList<>();
-//            QueryWrapper wrap = new QueryWrapper();
-//            wrap.eq("pid",vo.getId());
-//            wrap.orderByAsc("sort");
-//            List subs = permissionService.list(wrap);
-//            subs.forEach(sub ->{
-//                PermissionVO subVO = new PermissionVO();
-//                BeanUtils.copyProperties(sub,subVO);
-//                subvos.add(subVO);
-//            });
-//            tree.add(vo);
-//        });
+        List<PermissionVO> tree = new ArrayList<>();
 
-        Map<String,Object> data = new HashMap<>();
-        TreeItem item = new TreeItem();
-        item.setId("b");
-        item.setName("b");
-        item.setText("b");
-        item.setType("item");
-        data.put("aaa",item);
-        TreeItem p = new TreeItem();
-        p.setId("a");
-        p.setName("a");
-        p.setText("a");
-        p.setType("item");
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("pid","root");
+        wrapper.orderByAsc("sort");
+        List<Permission> list = permissionService.list(wrapper);
+        list.forEach(po -> {
+            PermissionVO vo = new PermissionVO();
+            BeanUtils.copyProperties(po,vo);
+            List<PermissionVO> subvos = new ArrayList<>();
+            QueryWrapper wrap = new QueryWrapper();
+            wrap.eq("pid",vo.getId());
+            wrap.orderByAsc("sort");
+            List subs = permissionService.list(wrap);
+            subs.forEach(sub ->{
+                PermissionVO subVO = new PermissionVO();
+                BeanUtils.copyProperties(sub,subVO);
+                subvos.add(subVO);
+            });
+            vo.setList(subvos);
+            tree.add(vo);
+        });
 
-        data.put("data",p);
-        return Result.getSuccess(data);
+
+        return Result.getSuccess(tree);
     }
 
     @RequestMapping("permission-add")
