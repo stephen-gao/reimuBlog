@@ -37,5 +37,30 @@ public class User implements Serializable {
 	 */
 	private String password;
 
+	/**
+	 * 昵称
+	 */
+	private String nickname;
+
+	/**
+	 *
+	 */
+	private String photo;
+
+	/**
+	 * 邮箱
+	 */
+	private String email;
+
+	/**
+	 * 性别
+	 */
+	private Integer gender;
+
+	/**
+	 * 简介
+	 */
+	private String information;
+
 
 }

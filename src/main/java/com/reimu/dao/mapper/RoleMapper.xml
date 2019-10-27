@@ -6,11 +6,12 @@
 		<id column="id" property="id" />
 		<result column="name" property="name" />
 		<result column="description" property="description" />
+		<result column="sort" property="sort" />
 	</resultMap>
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-        r.id, r.name, r.description
+        r.id, r.name, r.description,r.sort
     </sql>
 
 	<select id="getListByUserId" parameterType="String" resultType="com.reimu.entity.Role">

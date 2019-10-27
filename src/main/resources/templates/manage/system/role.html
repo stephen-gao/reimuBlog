@@ -1,0 +1,83 @@
+<div class="common-container">
+    <div class="row">
+        <div class="col-sm-2">
+            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#roleModel">
+                <i class="ace-icon fa fa-plus bigger-100"></i>
+                新增
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table id="role-table" style="width: 100%"></table>
+        </div>
+    </div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="roleModel" tabindex="-1" role="dialog" aria-labelledby="roleModel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">添加角色</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <input type="text" class="form-control hidden" id="roleId">
+                    <div class="form-group">
+                        <label for="roleName" class="col-sm-2 control-label">角色名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="roleName" placeholder="请输入角色名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="roleDescription" class="col-sm-2 control-label">角色描述</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="roleDescription" placeholder="请输入角色描述">
+                        </div>
+                    </div>
+                   <div class="form-group">
+                        <label for="roleSort" class="col-sm-2 control-label">排序</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="roleSort" placeholder="请输入角色描述">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="roleBtn" class="btn btn-primary">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="rolePermissionModal" tabindex="-1" role="dialog" aria-labelledby="rolePermissionModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="rpModalLabel">选择角色</h4>
+            </div>
+            <div class="modal-body">
+                <div id="rolePermissionCheckBox" class="row">
+                    <ul id="rolePermissionTree1"></ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="rolePermissionBtn" class="btn btn-primary">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<style type="text/css">
+    .common-container{
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<script src="/js/table.js"></script>
+<script src="/js/role.js"></script>

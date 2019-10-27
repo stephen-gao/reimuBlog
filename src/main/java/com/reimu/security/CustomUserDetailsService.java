@@ -34,16 +34,16 @@
 //
 //    @Override
 //    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        User user = userService.getOneByName(username);
-//        if (user == null) {
+//        User system = userService.getOneByName(username);
+//        if (system == null) {
 //            throw new UsernameNotFoundException("用户名不存在");
 //        }
 //        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-//        List<Role> roleList = roleService.getListByUserId(user.getId());
+//        List<Role> roleList = roleService.getListByUserId(system.getId());
 //        roleList.forEach(role -> {
 //            authorities.add(new SimpleGrantedAuthority("ROLE_"+role.getName()));
 //        });
 //
-//        return new SysUser(user.getId(), user.getUsername(), user.getPassword(), authorities);
+//        return new SysUser(system.getId(), system.getUsername(), system.getPassword(), authorities);
 //    }
 //}

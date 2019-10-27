@@ -13,37 +13,15 @@
         }
     </script>
     <div th:include="manage/common/left::left" id="sidebar" class="sidebar responsive ace-save-state"></div>
-    <div class="main-content">
+    <div id="section" class="main-content section">
         <div class="main-content-inner">
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
-                <ul class="breadcrumb">
-                    <li>
+                <ul id="breadcrumb-path" class="breadcrumb">
+                    <li id="breadcrumb-home">
                         <i class="ace-icon fa fa-home home-icon"></i>
-                        <a data-toggle="tab" href="#" class="tabs_refresh_page" data="/500">Home</a>
-                    </li>
-                    <li>
-                        <a data-toggle="tab" href="#" class="tabs_refresh_page" data="/404">Other Pages</a>
-                    </li>
-                    <li class="active">
-                        Error 500
+                        <a data-toggle="tab" href="#" class="tabs_refresh_page" data="/manage-main" name="首页">首页</a>
                     </li>
                 </ul><!-- /.breadcrumb -->
-                <!--<ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">-->
-                    <!--<li id="/500-li" class="active">-->
-                        <!--<a data-toggle="tab" href="#">-->
-                            <!--<span class="tabs_toggle_text" data="/500">Home</span>-->
-                            <!--<i data="/500-li" class="tabs_toggle_close ace-icon fa fa-times bigger-90 width-auto"></i>-->
-                        <!--</a>-->
-                    <!--</li>-->
-
-                    <!--<li>-->
-                        <!--<a data-toggle="tab" href="#profile4">Profile</a>-->
-                    <!--</li>-->
-
-                    <!--<li>-->
-                        <!--<a data-toggle="tab" href="#dropdown14">More</a>-->
-                    <!--</li>-->
-                <!--</ul>-->
             </div>
 
             <div class="page-content" style="padding: 0px 1px 0px;">
@@ -75,6 +53,14 @@
         <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
     </a>
 </div><!-- main-container end -->
+<style type="text/css">
+    html{
+        height:100%
+    }
+    body{
+        height:100%;
+    }
+</style>
 <!-- basic scripts -->
 <!--[if !IE]> -->
 <script src="assets/js/jquery-2.1.4.min.js"></script>
@@ -87,18 +73,15 @@
 </script>
 <script src="assets/js/bootstrap.min.js"></script>
 <!-- page specific plugin scripts -->
-<script src="assets/js/jquery.dataTables.min.js"></script>
-<script src="assets/js/jquery.dataTables.bootstrap.min.js"></script>
-<script src="assets/js/dataTables.buttons.min.js"></script>
-<script src="assets/js/buttons.flash.min.js"></script>
-<script src="assets/js/buttons.html5.min.js"></script>
-<script src="assets/js/buttons.print.min.js"></script>
-<script src="assets/js/buttons.colVis.min.js"></script>
-<script src="assets/js/dataTables.select.min.js"></script>
+<script src="js/bootstrap-table.min.js"></script>
+<script src="js/bootstrap-table-locale-all.min.js"></script>
 <!-- ace scripts -->
+<script src="assets/js/tree.min.js"></script>
 <script src="assets/js/ace-elements.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
 <!-- inline scripts related to this page -->
 <script src="js/index.js"></script>
+<script src="js/common.js"></script>
+<script src="js/message.js"></script>
 </body>
 </html>

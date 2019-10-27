@@ -7,11 +7,13 @@
         <result column="code" property="code"/>
         <result column="name" property="name"/>
         <result column="description" property="description"/>
+        <result column="pid" property="pid"/>
+        <result column="sort" property="sort"/>
     </resultMap>
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-        p.id, p.code, p.name, p.description
+        p.id, p.code, p.name, p.description,p.pid,p.sort
     </sql>
 
     <select id="getListByUserId" parameterType="String" resultType="com.reimu.entity.Permission">
