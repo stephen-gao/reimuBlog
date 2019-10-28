@@ -1,9 +1,7 @@
 package com.reimu.web;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.reimu.common.Result;
-import com.reimu.entity.User;
 import com.reimu.model.vo.UserVO;
 import com.reimu.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;

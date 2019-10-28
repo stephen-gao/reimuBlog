@@ -38,6 +38,11 @@ public class PermissionVO extends BaseVO {
     private Integer sort;
 
     /**
+     * 排序
+     */
+    private Boolean checked;
+
+    /**
      * 子节点
      */
     private List<PermissionVO> list;
