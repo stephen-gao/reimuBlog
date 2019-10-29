@@ -21,19 +21,19 @@ public class MailUtil {
      * PS: 某些邮箱服务器为了增加邮箱本身密码的安全性，给 SMTP 客户端设置了独立密码（有的邮箱称为“授权码”）,
      * 对于开启了独立密码的邮箱, 这里的邮箱密码必需使用这个独立密码（授权码）。
      */
-    private static String EmailAccount = "zzzz";
-    private static String EmailPassword = "xxxx";
+    private static String EmailAccount = "gaoshengok@126.com";
+    private static String EmailPassword = "126shouquanma";
 
     /**
      * 发件人邮箱的 SMTP 服务器地址, 必须准确, 不同邮件服务器地址不同, 一般(只是一般, 绝非绝对)格式为: smtp.xxx.com
      * 网易163邮箱的 SMTP 服务器地址为: smtp.163.com
      */
-    private static String EmailSMTPHost = "smtp.sina.com";
+    private static String EmailSMTPHost = "smtp.126.com";
 
     /**
      * 收件人邮箱（替换为自己知道的有效邮箱）
      */
-    private static String receiveMailAccount = "zzzz";
+    private static String receiveMailAccount = "gaoshengok@sina.com";
 
     public static void main(String[] args) throws Exception {
         String msg = "你部署在187服务器上的程序意外中断，请尽快处理";
@@ -52,6 +52,12 @@ public class MailUtil {
         props.setProperty("mail.smtp.host", host);
         // 需要请求认证
         props.setProperty("mail.smtp.auth", "true");
+
+        String smtpPort = "465";
+        //端口号
+        props.setProperty("mail.smtp.port", smtpPort);
+        //加认证机制*/
+        props.setProperty("mail.smtp.ssl.enable", "true");
 
         // 2. 根据配置创建会话对象, 用于和邮件服务器交互
         Session session = Session.getInstance(props);
