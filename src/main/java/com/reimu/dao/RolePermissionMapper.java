@@ -3,6 +3,8 @@ package com.reimu.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.reimu.entity.RolePermission;
 
+import java.util.List;
+
 /**
  * <p>
  * Mapper接口
@@ -13,4 +15,6 @@ import com.reimu.entity.RolePermission;
  */
 public interface RolePermissionMapper extends BaseMapper<RolePermission> {
 
+
+    List<RolePermission> getRPByUserId(String userId);
 }

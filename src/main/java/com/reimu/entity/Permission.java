@@ -44,6 +44,17 @@ public class Permission implements Serializable {
 	private String name;
 
 	/**
+	 * 类型 0叶子，1 非叶子
+	 */
+	private Integer type;
+
+
+	/**
+	 * 菜单图标
+	 */
+	private String icon;
+
+	/**
 	 * 权限描述
 	 */
 	private String description;
