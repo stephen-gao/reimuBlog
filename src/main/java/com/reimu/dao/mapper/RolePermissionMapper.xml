@@ -10,6 +10,16 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-        id, role_id AS roleId, permission_id AS permissionId
+        rp.id, rp.role_id AS roleId, rp.permission_id AS permissionId
     </sql>
+
+	<select id="getRPByUserId" parameterType="String" resultType="com.reimu.entity.RolePermission">
+		SELECT
+			<include refid="Base_Column_List"/>
+		FROM
+			t_role_permission rp
+		LEFT JOIN t_user_role ur ON rp.role_id = ur.role_id
+		WHERE
+			ur.user_id = #{userId}
+	</select>
 </mapper>

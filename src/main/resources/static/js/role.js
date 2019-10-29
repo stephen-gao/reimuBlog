@@ -12,7 +12,7 @@ $(document).ready(function () {
     let roleTableId = "#role-table";
     let rolePageUrl = "/role/role-page-data";
     let rpUrl = "/rolepermission/rp-save";
-    let rpSelectedUrl = "/rolepermission/rp-tre/";
+    let rpSelectedUrl = "/rolepermission/rp-tree/";
     //默认放columns前面，否则会注册不上
     window.operateEvents = {
         //修改

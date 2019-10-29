@@ -27,6 +27,18 @@ public class PermissionVO extends BaseVO {
      */
     private String name;
 
+
+    /**
+     * 菜单图标
+     */
+    private String icon;
+
+
+    /**
+     * 类型 0叶子，1 非叶子
+     */
+    private Integer type;
+
     /**
      * 权限描述
      */

@@ -34,10 +34,21 @@ $(document).ready(function () {
     };
     var columns = [
         {checkbox: true},
-        {field: 'id', title: 'ID', align: 'left' ,width: 300},
+        {field: 'id', title: 'ID', align: 'left' , visible:false},
         {field: 'code', title: '编码', align: 'center'},
         {field: 'name', title: '名称', align: 'center'},
         {field: 'description', title: '描述', align: 'center'},
+        {field: 'type', title: '类型', align: 'center',
+            formatter:function (value) {
+                if(value === 0){
+                    return '叶子';
+                }else if(value === 1){
+                    return '根';
+                }
+                return '未定义';
+            }
+        },
+        {field: 'icon', title: '图标', align: 'center'},
         {field: 'sort', title: '排序', align: 'center'},
         {
             field: 'option', title: '操作', align: 'center', width:200, events:window.operateEvents,

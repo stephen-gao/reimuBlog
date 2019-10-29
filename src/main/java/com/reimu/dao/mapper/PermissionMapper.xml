@@ -6,14 +6,16 @@
         <id column="id" property="id"/>
         <result column="code" property="code"/>
         <result column="name" property="name"/>
+        <result column="type" property="type"/>
         <result column="description" property="description"/>
         <result column="pid" property="pid"/>
+        <result column="icon" property="icon"/>
         <result column="sort" property="sort"/>
     </resultMap>
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-        p.id, p.code, p.name, p.description,p.pid,p.sort
+        p.id, p.code, p.name, p.type ,p.description,p.pid,p.sort,p.icon
     </sql>
 
     <select id="getListByUserId" parameterType="String" resultType="com.reimu.entity.Permission">
@@ -33,6 +35,7 @@
             t_permission p
         LEFT JOIN t_role_permission rp ON p.id = rp.permission_id
         LEFT JOIN t_role r ON r.id = rp.role_id
+        WHERE p.pid != 'root'
         GROUP BY p.id
     </select>
 </mapper>

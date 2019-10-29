@@ -34,9 +34,6 @@ public class RolePermissionController {
     @Autowired
     private IRolePermissionService rolePermissionService;
 
-    @Autowired
-    private IPermissionService permissionService;
-
     @PostMapping("rp-save")
     @ResponseBody
     public Result saveRolePermission(@RequestBody RolePermissionVO vo){
@@ -58,50 +55,12 @@ public class RolePermissionController {
         return Result.defaultSuccess();
     }
 
-    @GetMapping("rp-tre/{roleId}")
+    @GetMapping("rp-tree/{roleId}")
     @ResponseBody
     public Result getRPselected(@PathVariable("roleId") String roleId){
 
-        QueryWrapper selectWrapper = new QueryWrapper();
-        selectWrapper.eq("role_id",roleId);
-        List<RolePermission> selectedlist = rolePermissionService.list(selectWrapper);
-
-        List<PermissionVO> tree = new ArrayList<>();
-        QueryWrapper treeWrapper = new QueryWrapper();
-        treeWrapper.eq("pid","root");
-        treeWrapper.orderByAsc("sort");
-        List<Permission> allList = permissionService.list(treeWrapper);
-        allList.forEach(po -> {
-            PermissionVO vo = new PermissionVO();
-            BeanUtils.copyProperties(po,vo);
-            List<PermissionVO> subvos = new ArrayList<>();
-            QueryWrapper wrap = new QueryWrapper();
-            wrap.eq("pid",vo.getId());
-            wrap.orderByAsc("sort");
-            List<Permission> subs = permissionService.list(wrap);
-            subs.forEach(sub ->{
-                PermissionVO subVO = new PermissionVO();
-                BeanUtils.copyProperties(sub,subVO);
-                subVO.setChecked(isSelected(selectedlist,sub.getId()));
-                subvos.add(subVO);
-            });
-            vo.setList(subvos);
-            tree.add(vo);
-        });
-
+        List<PermissionVO> tree = rolePermissionService.initPermissionSelectTree(roleId);
         return Result.getSuccess(tree);
     }
 
-    private boolean isSelected(List<RolePermission> list,String pid){
-        boolean selected = false;
-        if(CollectionUtils.isEmpty(list)){
-           return selected;
-        }
-        for(RolePermission rp : list){
-            if(rp.getPermissionId().equals(pid)){
-                selected = true;
-            }
-        }
-        return selected;
-    }
 }
