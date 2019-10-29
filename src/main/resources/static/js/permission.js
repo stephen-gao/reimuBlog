@@ -1,8 +1,10 @@
 $(document).ready(function () {
-    var roleReq = {
+    var permissionReq = {
         id:'',
         code:'',
         name:'',
+        icon:'',
+        type:'',
         description:'',
         pid:'',
         sort:''
@@ -21,6 +23,8 @@ $(document).ready(function () {
             $("#permissionDescription").val(row.description);
             $("#permissionSort").val(row.sort);
             $("#permissionPid").val(row.pid);
+            $("#permissionType").val(row.type);
+            $("#permissionIcon").val(row.icon);
             $("#permissionModel").modal('show');
         },
 
@@ -35,15 +39,17 @@ $(document).ready(function () {
     var columns = [
         {checkbox: true},
         {field: 'id', title: 'ID', align: 'left' , visible:false},
-        {field: 'code', title: '编码', align: 'center'},
         {field: 'name', title: '名称', align: 'center'},
+        {field: 'code', title: '编码', align: 'center'},
         {field: 'description', title: '描述', align: 'center'},
         {field: 'type', title: '类型', align: 'center',
             formatter:function (value) {
                 if(value === 0){
-                    return '叶子';
+                    return '根菜单';
                 }else if(value === 1){
-                    return '根';
+                    return '子菜单';
+                }else if(value === 2){
+                    return '接口';
                 }
                 return '未定义';
             }
@@ -63,19 +69,21 @@ $(document).ready(function () {
     permissionTable.initTable(permissionTableId,url,columns);
     //add
     $("#permissionBtn").click(function () {
-        roleReq.id = $("#permissionId").val();
-        roleReq.name = $("#permissionName").val();
-        roleReq.code = $("#permissionCode").val();
-        roleReq.description = $("#permissionDescription").val();
-        roleReq.pid = $("#permissionPid").val();
-        roleReq.sort = $("#permissionSort").val();
-        var postUrl = roleReq.id !== ''&& roleReq.id !== null?'/permission/permission-edit':'/permission/permission-add';
-        console.log(roleReq.id);
+        permissionReq.id = $("#permissionId").val();
+        permissionReq.name = $("#permissionName").val();
+        permissionReq.code = $("#permissionCode").val();
+        permissionReq.description = $("#permissionDescription").val();
+        permissionReq.pid = $("#permissionPid").val();
+        permissionReq.sort = $("#permissionSort").val();
+        permissionReq.type = $("#permissionType").val();
+        permissionReq.icon = $("#permissionIcon").val();
+        var postUrl = permissionReq.id !== ''&& permissionReq.id !== null?'/permission/permission-edit':'/permission/permission-add';
+        console.log(permissionReq.id);
         $.ajax({
             type: 'POST',
             url: postUrl,
             contentType: 'application/json;charset=UTF-8',
-            data: JSON.stringify(roleReq),
+            data: JSON.stringify(permissionReq),
             dataType: 'json',
             success: function(res){
                 if(res.code === '0000'){
@@ -91,13 +99,30 @@ $(document).ready(function () {
         });
     });
 
+    $("#permissionCancel").click(function () {
+        clearForm();
+        $("#permissionModel").modal('hide');
+    });
+
     function clearForm(){
+        permissionReq = {
+            id:'',
+            code:'',
+            name:'',
+            icon:'',
+            type:'',
+            description:'',
+            pid:'',
+            sort:''
+        };
         $("#permissionId").val('');
         $("#permissionName").val('');
         $("#permissionCode").val('');
         $("#permissionDescription").val('');
         $("#permissionSort").val('');
         $("#permissionPid").val('root');
+        $("#permissionType").val('0');
+        $("#permissionIcon").val('');
     }
     //预加载数据
     $.get("/permission/permission-parent", function(res){

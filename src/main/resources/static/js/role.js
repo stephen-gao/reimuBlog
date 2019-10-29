@@ -118,6 +118,11 @@ $(document).ready(function () {
         clearRPForm();
     });
 
+    $("#roleCancelBtn").click(function () {
+        clearForm();
+        $("#roleModel").modal('hide');
+    });
+
     function clearForm() {
         roleReq = {
             id: '',

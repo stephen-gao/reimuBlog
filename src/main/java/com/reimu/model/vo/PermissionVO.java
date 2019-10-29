@@ -35,7 +35,7 @@ public class PermissionVO extends BaseVO {
 
 
     /**
-     * 类型 0叶子，1 非叶子
+     * 类型 0叶子，1 非叶子, 2 接口
      */
     private Integer type;
 

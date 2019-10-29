@@ -133,18 +133,18 @@
         <!--/*@thymesVar id="menuTree" type="java.util.List"*/-->
         <!--/*@thymesVar id="treeItem" type="com.reimu.model.tree.TreeItem"*/-->
         <li class="" th:each="treeItem : ${menuTree}">
-            <a href="#" th:class="${treeItem.type==1?'dropdown-toggle':'tabs_refresh_page'}" th:data="${treeItem.code}" th:name="${treeItem.name}">
+            <a href="#" th:class="${treeItem.type==0?'dropdown-toggle':'tabs_refresh_page'}" th:data="${treeItem.code}" th:name="${treeItem.name}">
                 <i th:class="${treeItem.icon}"></i>
                 <span class="menu-text" th:text="${treeItem.text}"> </span>
-                <b th:if="${treeItem.type == 1}" class="arrow fa fa-angle-down"></b>
+                <b th:if="${treeItem.type == 0}" class="arrow fa fa-angle-down"></b>
             </a>
             <b class="arrow"></b>
 
-            <ul class="submenu" th:if="${treeItem.type == 1}">
+            <ul class="submenu" th:if="${treeItem.type == 0}">
                 <li class="" th:each="child : ${treeItem.children}">
                     <a href="#" class="tabs_refresh_page" th:data="${child.code}" th:name="${child.name}">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        <span th:text="${treeItem.text}"></span>
+                        <span th:text="${child.text}"></span>
                     </a>
                     <b class="arrow"></b>
                 </li>

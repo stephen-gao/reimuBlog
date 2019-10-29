@@ -86,10 +86,10 @@ public class CustomWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter
         permissionList.forEach(p -> {
             if (!StringUtils.isEmpty(p.getRoleName())) {
                 registry.antMatchers(p.getCode()).hasAnyRole(p.getRoleName().split(","));
-                log.info("权限[{}]：角色[{}]", p.getCode(), ("ROLE_" + p.getRoleName()).replace(",", ",ROLE_"));
+                log.info("权限[{}]-[{}]：角色[{}]", p.getName(), p.getCode(), ("ROLE_" + p.getRoleName()).replace(",", ",ROLE_"));
             } else {
                 registry.antMatchers(p.getCode()).denyAll();
-                log.info("权限[{}]：禁止访问", p.getCode());
+                log.info("权限[{}]-[{}]：禁止访问", p.getName(), p.getCode());
             }
         });
         registry.anyRequest().authenticated();

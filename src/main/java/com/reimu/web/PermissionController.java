@@ -46,7 +46,10 @@ public class PermissionController {
     @ResponseBody
     public Result permissionPageData(@RequestBody PermissionVO vo) {
         IPage page = new Page(vo.getPageNumber(), vo.getPageSize());
-        page = permissionService.page(page);
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.orderByAsc("type");
+        wrapper.orderByAsc("sort");
+        page = permissionService.page(page,wrapper);
         return Result.getSuccess(page);
     }
 

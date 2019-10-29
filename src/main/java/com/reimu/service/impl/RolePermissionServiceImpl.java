@@ -45,6 +45,7 @@ public class RolePermissionServiceImpl extends ServiceImpl<RolePermissionMapper,
         // 查询所有的父节点
         QueryWrapper treeWrapper = new QueryWrapper();
         treeWrapper.eq("pid", "root");
+        treeWrapper.eq("type", 0);
         treeWrapper.orderByAsc("sort");
         List<Permission> pList = permissionMapper.selectList(treeWrapper);
         pList.forEach(po -> {
@@ -54,6 +55,7 @@ public class RolePermissionServiceImpl extends ServiceImpl<RolePermissionMapper,
             // 查询父节点下的子节点
             QueryWrapper wrap = new QueryWrapper();
             wrap.eq("pid", vo.getId());
+            wrap.orderByAsc("type");
             wrap.orderByAsc("sort");
             List<Permission> subs = permissionMapper.selectList(wrap);
             // 构建节点树
@@ -92,6 +94,7 @@ public class RolePermissionServiceImpl extends ServiceImpl<RolePermissionMapper,
             // 查询所有子节点
             QueryWrapper cWrapper = new QueryWrapper();
             cWrapper.eq("pid", p.getId());
+            cWrapper.eq("type", 1);
             cWrapper.orderByAsc("sort");
             List<Permission> cList = permissionMapper.selectList(cWrapper);
             // 构建树
@@ -108,7 +111,7 @@ public class RolePermissionServiceImpl extends ServiceImpl<RolePermissionMapper,
                     cTree.add(cItem);
                 }
             });
-            if(pItem.getType() == 1 && !CollectionUtils.isEmpty(cTree)){
+            if(pItem.getType() == 0 && !CollectionUtils.isEmpty(cTree)){
                 pItem.setChildren(cTree);
                 pTree.add(pItem);
             }
