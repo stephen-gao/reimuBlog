@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.reimu.dao.VistorLogMapper">
+
+	<resultMap id="BaseResultMap" type="com.reimu.entity.VistorLog">
+		<id column="id" property="id" />
+		<result column="type" property="type" />
+		<result column="content_id" property="contentId" />
+		<result column="vistor_url" property="vistorUrl" />
+		<result column="vistor_ip" property="vistorIp" />
+		<result column="vistor_time" property="vistorTime" />
+	</resultMap>
+
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
+        id, type, content_id AS contentId, vistor_url AS vistorUrl, vistor_ip AS vistorIp, vistor_time AS vistorTime
+    </sql>
+</mapper>

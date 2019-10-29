@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.reimu.dao.ArticleInfoMapper">
+
+	<resultMap id="BaseResultMap" type="com.reimu.entity.ArticleInfo">
+		<id column="id" property="id" />
+		<result column="author_id" property="authorId" />
+		<result column="title" property="title" />
+		<result column="keyword" property="keyword" />
+		<result column="description" property="description" />
+		<result column="views_num" property="viewsNum" />
+		<result column="comment_num" property="commentNum" />
+		<result column="star_num" property="starNum" />
+		<result column="status" property="status" />
+		<result column="create_time" property="createTime" />
+		<result column="update_time" property="updateTime" />
+	</resultMap>
+
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
+        id, author_id AS authorId, title, keyword, description, views_num AS viewsNum, comment_num AS commentNum, star_num AS starNum, status, create_time AS createTime, update_time AS updateTime
+    </sql>
+</mapper>

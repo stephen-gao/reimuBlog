@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @since 2019-10-28
  */
 @Controller
-@RequestMapping("/article")
-public class ArticleController {
+@RequestMapping("/articlecategory")
+public class ArticleCategoryController {
 	
 }

@@ -62,5 +62,10 @@ public class User implements Serializable {
 	 */
 	private String information;
 
+	/**
+	 * 状态 1正常，2冻结，9删除
+	 */
+	private Integer status;
+
 
 }

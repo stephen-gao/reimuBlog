@@ -47,4 +47,9 @@ public class UserVO extends BaseVO implements Serializable {
      * 简介
      */
     private String information;
+
+    /**
+     * 状态 1正常，2冻结，9删除
+     */
+    private Integer status;
 }

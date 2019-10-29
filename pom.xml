@@ -171,11 +171,12 @@
                         <superServiceClass>com.baomidou.mybatisplus.extension.service.IService</superServiceClass>
                         <!-- 要包含的表 与exclude 二选一配置-->
                         <include>
-                            <property>t_user</property>
-                            <property>t_user_role</property>
-                            <property>t_role</property>
-                            <property>t_permission</property>
-                            <property>t_role_permission</property>
+                            <property>t_article</property>
+                            <property>t_article_category</property>
+                            <property>t_article_info</property>
+                            <property>t_article_src</property>
+                            <property>t_category</property>
+                            <property>t_vistor_log</property>
                         </include>
                         <!-- 要排除的表 -->
                         <!--<exclude>-->
