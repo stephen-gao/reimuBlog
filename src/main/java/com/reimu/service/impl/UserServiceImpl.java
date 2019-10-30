@@ -7,6 +7,7 @@ import com.reimu.common.Result;
 import com.reimu.common.ResultEnums;
 import com.reimu.entity.User;
 import com.reimu.dao.UserMapper;
+import com.reimu.enums.UserStatusEnums;
 import com.reimu.model.vo.UserVO;
 import com.reimu.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -47,6 +48,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public IPage<User> userPage(UserVO vo) {
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.select("id","username","nickname","gender","email","photo","information");
+        wrapper.ne("status",9);
+        wrapper.ne("id",0);
         IPage<User> page = new Page(vo.getPageNumber(),vo.getPageSize());
         return this.page(page,wrapper);
     }
@@ -61,6 +64,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return Result.getResult(ResultEnums.FAILED,"用户名已存在");
         }
         User po = getUser(vo);
+        po.setStatus(UserStatusEnums.NORMAL.getStatus());
         po.setPassword(defaultPassword);
         po.setPassword(passwordEncoder.encode(po.getPassword()));
         baseMapper.insert(po);
@@ -80,6 +84,27 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return Result.getResult(ResultEnums.FAILED,"用户名已存在");
         }
         User po = getUser(vo);
+        baseMapper.updateById(po);
+        return Result.defaultSuccess();
+    }
+
+    @Override
+    public Result userDelete(String id) {
+        User po = new User();
+        po.setId(id);
+        po.setStatus(UserStatusEnums.DELETE.getStatus());
+        baseMapper.updateById(po);
+        return Result.defaultSuccess();
+    }
+
+    @Override
+    public Result passChange(UserVO vo) {
+        if(StringUtils.isEmpty(vo.getPassword())){
+            return Result.getResult(ResultEnums.FAILED,"密码不能为空");
+        }
+        User po = new User();
+        po.setPassword(vo.getPassword());
+        po.setId(vo.getId());
         baseMapper.updateById(po);
         return Result.defaultSuccess();
     }

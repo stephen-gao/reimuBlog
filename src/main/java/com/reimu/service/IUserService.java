@@ -23,4 +23,8 @@ public interface IUserService extends IService<User> {
     Result userAdd(UserVO vo);
 
     Result userEdit(UserVO vo);
+
+    Result userDelete(String id);
+
+    Result passChange(UserVO vo);
 }

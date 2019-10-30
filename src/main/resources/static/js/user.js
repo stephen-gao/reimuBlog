@@ -12,7 +12,7 @@ $(document).ready(function () {
     let pageUrl = "/user/user-page-data";
     let addUrl = "/user/user-add";
     let editUrl = "/user/user-edit";
-    let userDelUrl = "/user/user-edit";
+    let userDelUrl = "/user/user-delete/";
 
     //默认放columns前面，否则会注册不上
     window.operateEvents = {
@@ -59,7 +59,7 @@ $(document).ready(function () {
             field: 'option', title: '操作', align: 'center', width: 200,events: window.operateEvents,
             formatter: function (value, row, index) {
                 let d = '<button id="userEdit" type="button" class="btn btn-primary btn-sm"><i class="ace-icon fa fa-pencil bigger-100"></i>编辑</button>    ';
-                let f = '<button id="userDelete" type="button" class="btn btn-danger btn-sm"><i class="ace-icon fa fa-lock bigger-100"></i>冻结</button>';
+                let f = '<button id="userDelete" type="button" class="btn btn-danger btn-sm"><i class="ace-icon fa fa-trash-o bigger-100"></i>删除</button>';
                 return d + f;
             }
         }

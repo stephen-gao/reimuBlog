@@ -30,9 +30,7 @@ public class HTTPUtils {
 	 *  判断是否为ajax请求
 	 */
 	public static boolean isAjaxRequest(HttpServletRequest request) {
-		if (request.getHeader("accept").indexOf("application/json") > -1
-				|| (request.getHeader("X-Requested-With") != null && request.getHeader("X-Requested-With").equals(
-						"XMLHttpRequest"))) {
+		if (request.getHeader("accept")!= null && request.getHeader("accept").indexOf("application/json") > -1) {
 			return true;
 		}
 		return false;
