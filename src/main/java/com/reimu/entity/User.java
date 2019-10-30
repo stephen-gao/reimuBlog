@@ -53,7 +53,7 @@ public class User implements Serializable {
 	private String email;
 
 	/**
-	 * 性别
+	 * 性别 0男1女2保密
 	 */
 	private Integer gender;
 

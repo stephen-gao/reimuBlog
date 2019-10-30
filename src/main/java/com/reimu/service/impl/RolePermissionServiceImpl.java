@@ -41,36 +41,79 @@ public class RolePermissionServiceImpl extends ServiceImpl<RolePermissionMapper,
         QueryWrapper selectWrapper = new QueryWrapper();
         selectWrapper.eq("role_id", roleId);
         List<RolePermission> selectedlist = rolePermissionMapper.selectList(selectWrapper);
-
+        //构建菜单树
         // 查询所有的父节点
         QueryWrapper treeWrapper = new QueryWrapper();
         treeWrapper.eq("pid", "root");
         treeWrapper.eq("type", 0);
         treeWrapper.orderByAsc("sort");
         List<Permission> pList = permissionMapper.selectList(treeWrapper);
-        pList.forEach(po -> {
-            PermissionVO vo = new PermissionVO();
-            BeanUtils.copyProperties(po, vo);
-            List<PermissionVO> subvos = new ArrayList<>();
-            // 查询父节点下的子节点
-            QueryWrapper wrap = new QueryWrapper();
-            wrap.eq("pid", vo.getId());
-            wrap.orderByAsc("type");
-            wrap.orderByAsc("sort");
-            List<Permission> subs = permissionMapper.selectList(wrap);
-            // 构建节点树
-            subs.forEach(sub -> {
-                PermissionVO subVO = new PermissionVO();
-                BeanUtils.copyProperties(sub, subVO);
-                // 判断子节点是否被选中
-                subVO.setChecked(isSelected(selectedlist, sub.getId()));
-                subvos.add(subVO);
-            });
-            vo.setList(subvos);
-            tree.add(vo);
+        pList.forEach(p->{
+            buildTreeByParent(p,tree,selectedlist);
         });
+        //构建各级树
+        QueryWrapper<Permission> subwrapper = new QueryWrapper();
+        subwrapper.eq("type",1);
+        subwrapper.orderByAsc("sort");
+        List<Permission> subList = permissionMapper.selectList(subwrapper);
+        subList.forEach(sub ->{
+            buildTreeByParent(sub,tree,selectedlist);
+        });
+
         return tree;
     }
+
+    public void buildTreeByParent(Permission parent, List<PermissionVO> tree,List<RolePermission> selectedlist){
+        PermissionVO vo = new PermissionVO();
+        BeanUtils.copyProperties(parent, vo);
+        List<PermissionVO> subvos = new ArrayList<>();
+        // 查询父节点下的子节点
+        QueryWrapper wrap = new QueryWrapper();
+        wrap.eq("pid", vo.getId());
+        wrap.orderByAsc("type");
+        wrap.orderByAsc("sort");
+        List<Permission> subs = permissionMapper.selectList(wrap);
+        // 构建节点树
+        subs.forEach(sub -> {
+            PermissionVO subVO = new PermissionVO();
+            BeanUtils.copyProperties(sub, subVO);
+            // 判断子节点是否被选中
+            subVO.setChecked(isSelected(selectedlist, sub.getId()));
+            subvos.add(subVO);
+        });
+        vo.setList(subvos);
+        tree.add(vo);
+    }
+
+//    public void buildTreeByPid(String pid,Integer ptype,List<PermissionVO> tree,List<RolePermission> selectedlist){
+//        // 查询所有的父节点
+//        QueryWrapper treeWrapper = new QueryWrapper();
+//        treeWrapper.eq("pid", pid);
+//        treeWrapper.eq("type", ptype);
+//        treeWrapper.orderByAsc("sort");
+//        List<Permission> pList = permissionMapper.selectList(treeWrapper);
+//        pList.forEach(po -> {
+//            PermissionVO vo = new PermissionVO();
+//            BeanUtils.copyProperties(po, vo);
+//            List<PermissionVO> subvos = new ArrayList<>();
+//            // 查询父节点下的子节点
+//            QueryWrapper wrap = new QueryWrapper();
+//            wrap.eq("pid", vo.getId());
+//            wrap.orderByAsc("type");
+//            wrap.orderByAsc("sort");
+//            List<Permission> subs = permissionMapper.selectList(wrap);
+//            // 构建节点树
+//            subs.forEach(sub -> {
+//                PermissionVO subVO = new PermissionVO();
+//                BeanUtils.copyProperties(sub, subVO);
+//                // 判断子节点是否被选中
+//                subVO.setChecked(isSelected(selectedlist, sub.getId()));
+//                subvos.add(subVO);
+//            });
+//            vo.setList(subvos);
+//            tree.add(vo);
+//        });
+//    }
 
     @Override
     public List<TreeItem> initMenuTree(String userId) {

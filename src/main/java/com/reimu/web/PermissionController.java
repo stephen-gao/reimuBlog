@@ -59,6 +59,11 @@ public class PermissionController {
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.eq("pid","root");
         List<Permission> list = permissionService.list(wrapper);
+        QueryWrapper subWapper = new QueryWrapper();
+        subWapper.eq("type","1");
+        subWapper.orderByAsc("sort");
+        List subs = permissionService.list(subWapper);
+        list.addAll(subs);
         return Result.getSuccess(list);
     }
 

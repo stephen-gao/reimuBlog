@@ -11,7 +11,10 @@ $(document).ready(function () {
     };
     let roleTableId = "#role-table";
     let rolePageUrl = "/role/role-page-data";
-    let rpUrl = "/rolepermission/rp-save";
+    let roleAddUrl = '/role/role-add';
+    let roleEditUrl = '/role/role-edit';
+    let roleDelUrl = '/role/role-delete/';
+    let rpSaveUrl = "/rolepermission/rp-save";
     let rpSelectedUrl = "/rolepermission/rp-tree/";
     //默认放columns前面，否则会注册不上
     window.operateEvents = {
@@ -36,7 +39,7 @@ $(document).ready(function () {
             $("#rolePermissionModal").modal('show');
         },
         "click #roleDelete": function (e, value, row, index) {
-            $.get("/role/role-delete/" + row.id, function (res) {
+            REQUEST.get(roleDelUrl + row.id, function (res) {
                 if (res.code === '0000') {
                     roleTable.refresh(roleTableId)
                 }
@@ -69,53 +72,36 @@ $(document).ready(function () {
         roleReq.name = $("#roleName").val();
         roleReq.description = $("#roleDescription").val();
         roleReq.sort = $("#roleSort").val();
-        let postUrl = roleReq.id !== '' && roleReq.id !== null ? '/role/role-edit' : '/role/role-add';
-        console.log(roleReq.id);
-        $.ajax({
-            type: 'POST',
-            url: postUrl,
-            contentType: 'application/json;charset=UTF-8',
-            data: JSON.stringify(roleReq),
-            dataType: 'json',
-            success: function (res) {
-                if (res.code === '0000') {
-                    $("#roleModel").modal('hide');
-                    roleTable.refresh(roleTableId);
-                    clearForm();
-                    $.message({
-                        message: res.message,
-                        type: 'success'
-                    });
-                }
+        let postUrl = roleReq.id !== '' && roleReq.id !== null ? roleEditUrl : roleAddUrl;
+        REQUEST.post(postUrl,roleReq,function (res) {
+            if (res.code === '0000') {
+                $("#roleModel").modal('hide');
+                roleTable.refresh(roleTableId);
+                clearForm();
+                $.message({
+                    message: res.message,
+                    type: 'success'
+                });
             }
         });
     });
     $("#rolePermissionBtn").click(function () {
         //授权
-        let chk_value =[];
+        let chkValue =[];
         $('input[name="SelectPermission"]:checked').each(function(){
-            chk_value.push($(this).val());
+            chkValue.push($(this).val());
         });
-        rpReq.permissionIds = chk_value;
-        $.ajax({
-            type: 'POST',
-            url: rpUrl,
-            contentType: 'application/json;charset=UTF-8',
-            data: JSON.stringify(rpReq),
-            dataType: 'json',
-            success: function (res) {
-                if (res.code === '0000') {
-                    $("#rolePermissionModal").modal('hide');
-                    clearRPForm();
-                    $.message({
-                        message: res.message,
-                        type: 'success'
-                    });
-                }
+        rpReq.permissionIds = chkValue;
+        REQUEST.post(rpSaveUrl,rpReq,function (res) {
+            if (res.code === '0000') {
+                $("#rolePermissionModal").modal('hide');
+                clearRPForm();
+                $.message({
+                    message: res.message,
+                    type: 'success'
+                });
             }
         });
-        console.log(rpReq);
-        clearRPForm();
     });
 
     $("#roleCancelBtn").click(function () {
@@ -153,7 +139,7 @@ $(document).ready(function () {
         let inHtml = '';
         for (let i = 0; i < permissionTree.length; i++) {
             inHtml += '<div class="form-group select-rp-tree-group">';
-            inHtml += '<div class="col-sm-2"><label>'+permissionTree[i].name+'</label></div>';
+            inHtml += '<div class="col-sm-2"><label><b>'+permissionTree[i].name+' :</b></label></div>';
             let list = permissionTree[i].list;
             if(list !== null){
                 inHtml += '<div class="col-sm-10">';

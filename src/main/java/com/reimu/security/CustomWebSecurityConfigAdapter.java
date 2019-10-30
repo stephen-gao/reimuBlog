@@ -20,10 +20,15 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 
+/**
+ * CustomWebSecurityConfigAdapter
+ *
+ * @blame
+ */
 @Log4j2
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)  //  启用方法级别的权限认证
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class CustomWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -31,6 +36,12 @@ public class CustomWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter
 
     @Autowired
     private IPermissionService permissionService;
+
+    @Autowired
+    private CustomAccessDeniedHandler accessDeniedHandler;
+
+    @Autowired
+    private CustomAuthenticationEntryPoint authenticationEntryPoint;
 
 
     @Override
@@ -50,7 +61,16 @@ public class CustomWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter
                 .logoutSuccessUrl("/login").permitAll()
                 .and()
                 .exceptionHandling()
-                .accessDeniedPage("/error-403");
+
+                /**
+                 * 无权限处理
+                 */
+                .accessDeniedHandler(accessDeniedHandler)
+                /**
+                 * 未登录，登录超时处理
+                 */
+                .authenticationEntryPoint(authenticationEntryPoint);
+//                .accessDeniedPage("/error-403");
 
         // 关闭CSRF跨域
         http.csrf().disable();

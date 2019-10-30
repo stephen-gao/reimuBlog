@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var permissionReq = {
+    let permissionReq = {
         id:'',
         code:'',
         name:'',
@@ -9,9 +9,13 @@ $(document).ready(function () {
         pid:'',
         sort:''
     };
-    var permissionParents = [];
-    var permissionTableId = "#permission-table";
-    var url = "/permission/permission-page-data";
+    let permissionParents = [];
+    let permissionTableId = '#permission-table';
+    let pageUrl = '/permission/permission-page-data';
+    let permissionParentUrl = '/permission/permission-parent';
+    let permissionEditUrl = '/permission/permission-edit';
+    let permissionAddUrl = '/permission/permission-add';
+    let permissionDelUrl = '/permission/permission-delete/';
     //默认放columns前面，否则会注册不上
     window.operateEvents= {
         //修改
@@ -29,14 +33,14 @@ $(document).ready(function () {
         },
 
         "click #permissionDelete": function (e, value, row, index) {
-            $.get("/permission/permission-delete/"+row.id, function(res){
+            REQUEST.get(permissionDelUrl+row.id, function(res){
                 if(res.code === '0000'){
                     permissionTable.refresh(permissionTableId)
                 }
             });
         }
     };
-    var columns = [
+    let columns = [
         {checkbox: true},
         {field: 'id', title: 'ID', align: 'left' , visible:false},
         {field: 'name', title: '名称', align: 'center'},
@@ -65,8 +69,8 @@ $(document).ready(function () {
             }
         }
     ];
-    var permissionTable = ReimuTable(window);
-    permissionTable.initTable(permissionTableId,url,columns);
+    let permissionTable = ReimuTable(window);
+    permissionTable.initTable(permissionTableId,pageUrl,columns);
     //add
     $("#permissionBtn").click(function () {
         permissionReq.id = $("#permissionId").val();
@@ -77,24 +81,17 @@ $(document).ready(function () {
         permissionReq.sort = $("#permissionSort").val();
         permissionReq.type = $("#permissionType").val();
         permissionReq.icon = $("#permissionIcon").val();
-        var postUrl = permissionReq.id !== ''&& permissionReq.id !== null?'/permission/permission-edit':'/permission/permission-add';
-        console.log(permissionReq.id);
-        $.ajax({
-            type: 'POST',
-            url: postUrl,
-            contentType: 'application/json;charset=UTF-8',
-            data: JSON.stringify(permissionReq),
-            dataType: 'json',
-            success: function(res){
-                if(res.code === '0000'){
-                    $("#permissionModel").modal('hide');
-                    permissionTable.refresh(permissionTableId);
-                    clearForm();
-                    $.message({
-                        message:res.message,
-                        type:'success'
-                    });
-                }
+        let postUrl = permissionReq.id !== ''&& permissionReq.id !== null?permissionEditUrl:permissionAddUrl;
+
+        REQUEST.post(postUrl,permissionReq,function (res) {
+            if(res.code === '0000'){
+                $("#permissionModel").modal('hide');
+                permissionTable.refresh(permissionTableId);
+                clearForm();
+                $.message({
+                    message:res.message,
+                    type:'success'
+                });
             }
         });
     });
@@ -125,11 +122,11 @@ $(document).ready(function () {
         $("#permissionIcon").val('');
     }
     //预加载数据
-    $.get("/permission/permission-parent", function(res){
+    REQUEST.get(permissionParentUrl, function(res){
         if(res.code === '0000'){
             permissionParents = res.data;
             if(permissionParents.length > 0){
-                for(var i=0;i<permissionParents.length;i++){
+                for(let i=0;i<permissionParents.length;i++){
                     $("#permissionPid").append('<option value="'+ permissionParents[i].id +'">'+ permissionParents[i].name+'</option>')
                 }
             }

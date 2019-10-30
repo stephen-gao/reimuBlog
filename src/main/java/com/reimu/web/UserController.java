@@ -39,4 +39,16 @@ public class UserController {
         IPage page = userService.userPage(vo);
         return Result.getSuccess(page);
     }
+
+    @RequestMapping("user-add")
+    @ResponseBody
+    public Result userAdd(@RequestBody UserVO vo){
+        return userService.userAdd(vo);
+    }
+
+    @RequestMapping("user-edit")
+    @ResponseBody
+    public Result userEdit(@RequestBody UserVO vo){
+        return userService.userEdit(vo);
+    }
 }
