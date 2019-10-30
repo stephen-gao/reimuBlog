@@ -13,7 +13,8 @@ import java.util.Properties;
  * @author: GaoSheng
  * @since: 2019/10/28 11:33
  * @version: 1.0
- **/
+ * @blame GaoSheng
+ */
 public class MailUtil {
 
     /**
