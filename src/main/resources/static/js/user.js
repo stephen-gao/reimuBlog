@@ -6,13 +6,16 @@ $(document).ready(function () {
         email:'',
         gender:'',
         status:'',
-        information:''
+        information:'',
+        roleId:''
     };
+    let roleList = [];
     let userTableId = "#user-table";
     let pageUrl = "/user/user-page-data";
     let addUrl = "/user/user-add";
     let editUrl = "/user/user-edit";
     let userDelUrl = "/user/user-delete/";
+    let roleAllUrl = "/role/list/all";
 
     //默认放columns前面，否则会注册不上
     window.operateEvents = {
@@ -24,13 +27,12 @@ $(document).ready(function () {
             $("#userEmail").val(row.email);
             $("#userGender").val(row.gender);
             $("#userInformation").val(row.information);
+            $("#userRoleId").val(row.roleId);
             $("#userModal").modal('show');
         },
         "click #userDelete": function (e, value, row, index) {
             REQUEST.get(userDelUrl + row.id, function (res) {
-                if (res.code === '0000') {
-                    userTable.refresh(userTableId)
-                }
+                userTable.refresh(userTableId)
             });
         }
     };
@@ -76,17 +78,16 @@ $(document).ready(function () {
         userReq.email = $("#userEmail").val();
         userReq.gender = $("#userGender").val();
         userReq.information = $("#userInformation").val();
+        userReq.roleId = $("#userRoleId").val();
         let postUrl = userReq.id !=='' && userReq.id !== null ? editUrl: addUrl;
         REQUEST.post(postUrl,userReq,function (res) {
-            if (res.code === '0000') {
-                $("#userModal").modal('hide');
-                userTable.refresh(userTableId);
-                clearForm();
-                $.message({
-                    message: res.message,
-                    type: 'success'
-                });
-            }
+            $("#userModal").modal('hide');
+            userTable.refresh(userTableId);
+            clearForm();
+            $.message({
+                message: res.message,
+                type: 'success'
+            });
         });
     });
 
@@ -104,7 +105,8 @@ $(document).ready(function () {
             email:'',
             gender:'',
             status:'',
-            information:''
+            information:'',
+            roleId:''
         };
         $("#userId").val('');
         $("#userUsername").val('');
@@ -112,7 +114,17 @@ $(document).ready(function () {
         $("#userNickname").val('');
         $("#userEmail").val('');
         $("#userGender").val('2');
+        $("#userRoleId").val('');
         $("#userInformation").val('');
     }
+
+    REQUEST.get(roleAllUrl,function (res) {
+        roleList = res.data;
+        for(let i = 0;i<roleList.length;i++){
+            $("#userRoleId").append('<option value="'+ roleList[i].id +'">'+ roleList[i].name+'</option>')
+        }
+    })
+
+
 
 });

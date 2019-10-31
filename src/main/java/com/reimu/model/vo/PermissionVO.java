@@ -55,6 +55,12 @@ public class PermissionVO extends BaseVO {
     private Boolean checked;
 
     /**
+     * 父节点名称
+     */
+    private String pname;
+
+
+    /**
      * 子节点
      */
     private List<PermissionVO> list;

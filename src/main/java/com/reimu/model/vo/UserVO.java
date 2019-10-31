@@ -52,4 +52,6 @@ public class UserVO extends BaseVO implements Serializable {
      * 状态 1正常，2冻结，9删除
      */
     private Integer status;
+
+    private String roleId;
 }

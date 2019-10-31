@@ -54,7 +54,7 @@ public class CustomWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter
                 .formLogin()
                 .loginPage("/login")
                 // 设置登陆成功页
-                .defaultSuccessUrl("/manage-index", true)
+                .defaultSuccessUrl("/manage", true)
                 .failureUrl("/login-error").permitAll()
                 .and()
                 .logout()

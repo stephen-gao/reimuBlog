@@ -21,7 +21,7 @@ public class IndexController {
     @Autowired
     private SysUserService sysUserService;
 
-    @RequestMapping("/manage-index")
+    @RequestMapping("/manage")
     public ModelAndView indexPage(){
         ModelAndView mv = new ModelAndView();
         SysUser sysUser = sysUserService.getSysUser();

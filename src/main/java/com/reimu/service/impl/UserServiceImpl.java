@@ -5,8 +5,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.reimu.common.Result;
 import com.reimu.common.ResultEnums;
+import com.reimu.dao.UserRoleMapper;
 import com.reimu.entity.User;
 import com.reimu.dao.UserMapper;
+import com.reimu.entity.UserRole;
 import com.reimu.enums.UserStatusEnums;
 import com.reimu.model.vo.UserVO;
 import com.reimu.service.IUserService;
@@ -36,6 +38,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Value("${user.default.password}")
     private String defaultPassword;
+
+    @Autowired
+    private UserRoleMapper userRoleMapper;
 
     @Override
     public User getOneByName(String username) {
@@ -68,6 +73,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         po.setPassword(defaultPassword);
         po.setPassword(passwordEncoder.encode(po.getPassword()));
         baseMapper.insert(po);
+        UserRole ur = new UserRole();
+        ur.setUserId(po.getId());
+        ur.setRoleId(vo.getRoleId());
+        userRoleMapper.insert(ur);
         return Result.defaultSuccess();
     }
 
@@ -85,6 +94,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
         User po = getUser(vo);
         baseMapper.updateById(po);
+        QueryWrapper urWrapper = new QueryWrapper();
+        urWrapper.eq("user_id",po.getId());
+        UserRole ur = new UserRole();
+        ur.setRoleId(vo.getRoleId());
+        userRoleMapper.update(ur,urWrapper);
         return Result.defaultSuccess();
     }
 

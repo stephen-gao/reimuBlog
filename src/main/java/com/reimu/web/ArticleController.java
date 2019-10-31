@@ -2,6 +2,7 @@ package com.reimu.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * <p>
@@ -14,5 +15,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
-	
+
+
+    @RequestMapping("page")
+    public ModelAndView articlePage(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("manage/system/article");
+        return mv;
+    }
+
+    @RequestMapping("edit-page")
+    public ModelAndView articleEditPage(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("manage/system/article-edit");
+        return mv;
+    }
 }

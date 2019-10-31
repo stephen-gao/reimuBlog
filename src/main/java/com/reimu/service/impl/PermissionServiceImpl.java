@@ -1,7 +1,11 @@
 package com.reimu.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.reimu.entity.Permission;
 import com.reimu.dao.PermissionMapper;
+import com.reimu.model.vo.PermissionVO;
 import com.reimu.security.SysPermission;
 import com.reimu.service.IPermissionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -33,5 +37,12 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
     @Override
     public List<SysPermission> getAllPermAndRole() {
         return permissionMapper.getAllPermAndRole();
+    }
+
+    @Override
+    public IPage<PermissionVO> getList(IPage page) {
+        List list = permissionMapper.getList(page);
+        page.setRecords(list);
+        return page;
     }
 }

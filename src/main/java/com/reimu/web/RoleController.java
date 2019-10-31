@@ -1,5 +1,6 @@
 package com.reimu.web;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.reimu.common.Result;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * <p>
@@ -47,6 +50,15 @@ public class RoleController {
         IPage page = new Page(vo.getPageNumber(), vo.getPageSize());
         page = roleService.page(page);
         return Result.getSuccess(page);
+    }
+
+    @RequestMapping("list/all")
+    @ResponseBody
+    public Result listAll(){
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.ne("id",0);
+        List list = roleService.list(wrapper);
+        return Result.getSuccess(list);
     }
 
     @RequestMapping("role-add")

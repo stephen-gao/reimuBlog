@@ -38,4 +38,14 @@
         WHERE p.pid != 'root'
         GROUP BY p.id
     </select>
+
+    <select id="getList" parameterType="com.baomidou.mybatisplus.core.metadata.IPage" resultType="com.reimu.model.vo.PermissionVO">
+        SELECT
+        <include refid="Base_Column_List"/>
+            ,t.name AS pname
+        FROM
+            t_permission p
+        LEFT JOIN t_permission t ON p.pid = t.id
+        ORDER BY p.type,p.sort ASC
+    </select>
 </mapper>

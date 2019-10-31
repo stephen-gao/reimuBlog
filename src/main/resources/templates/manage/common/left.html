@@ -41,95 +41,12 @@
         <li class="">
             <a href="#" class="tabs_refresh_page" data="/manage-main" name="首页">
                 <i class="menu-icon fa fa-home"></i>
-                <span class="menu-text"> 回到首页 </span>
-            </a>
-
-            <b class="arrow"></b>
-        </li>
-        <li class="">
-            <a href="#" class="tabs_refresh_page" data="/user/user-page" name="用户管理">
-                <i class="menu-icon fa fa-user"></i>
-                <span class="menu-text"> 用户管理 </span>
+                <span class="menu-text"> 首页 </span>
             </a>
 
             <b class="arrow"></b>
         </li>
 
-        <li class="">
-            <a href="#" class="tabs_refresh_page" data="/user/user-page">
-                <i class="menu-icon fa fa-rss-square"></i>
-                博客管理
-            </a>
-
-            <b class="arrow"></b>
-        </li>
-
-        <li class="">
-            <a href="#" class="tabs_refresh_page" data="/user/user-page">
-                <i class="menu-icon fa fa-line-chart"></i>
-                网站统计
-            </a>
-
-            <b class="arrow"></b>
-        </li>
-
-        <li class="">
-            <a href="#" class="tabs_refresh_page" data="/user/user-page">
-                <i class="menu-icon fa coffee"></i>
-                广告管理
-            </a>
-
-            <b class="arrow"></b>
-        </li>
-
-        <li class="">
-            <a href="#" class="dropdown-toggle">
-                <i class="menu-icon fa fa-cog"></i>
-                <span class="menu-text"> 系统设置 </span>
-
-                <b class="arrow fa fa-angle-down"></b>
-            </a>
-
-            <b class="arrow"></b>
-
-            <ul class="submenu">
-                <li class="">
-                    <a href="#" class="tabs_refresh_page" data="/role/role-page" name="系统设置,角色管理">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        角色管理
-                    </a>
-
-                    <b class="arrow"></b>
-                </li>
-
-                <li class="">
-                    <a href="#" class="tabs_refresh_page" data="/permission/permission-page" name="系统设置,权限管理">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        权限管理
-                    </a>
-
-                    <b class="arrow"></b>
-                </li>
-
-                <li class="">
-                    <a href="#" class="tabs_refresh_page" data="/user/user-page">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        插件管理
-                    </a>
-
-                    <b class="arrow"></b>
-                </li>
-
-                <li class="">
-                    <a href="#" class="tabs_refresh_page" data="/user/user-page">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        皮肤管理
-                    </a>
-
-                    <b class="arrow"></b>
-                </li>
-            </ul>
-        </li>
         <!--/*@thymesVar id="menuTree" type="java.util.List"*/-->
         <!--/*@thymesVar id="treeItem" type="com.reimu.model.tree.TreeItem"*/-->
         <li class="" th:each="treeItem : ${menuTree}">

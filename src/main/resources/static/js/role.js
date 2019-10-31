@@ -32,17 +32,13 @@ $(document).ready(function () {
             rpReq.roleId = row.id;
             //获取权限树
             $.get(rpSelectedUrl + row.id, function (res) {
-                if (res.code === '0000') {
-                    buildPermissionTree(res.data);
-                }
+                buildPermissionTree(res.data);
             });
             $("#rolePermissionModal").modal('show');
         },
         "click #roleDelete": function (e, value, row, index) {
             REQUEST.get(roleDelUrl + row.id, function (res) {
-                if (res.code === '0000') {
-                    roleTable.refresh(roleTableId)
-                }
+                roleTable.refresh(roleTableId)
             });
         }
     };
@@ -74,15 +70,13 @@ $(document).ready(function () {
         roleReq.sort = $("#roleSort").val();
         let postUrl = roleReq.id !== '' && roleReq.id !== null ? roleEditUrl : roleAddUrl;
         REQUEST.post(postUrl,roleReq,function (res) {
-            if (res.code === '0000') {
-                $("#roleModel").modal('hide');
-                roleTable.refresh(roleTableId);
-                clearForm();
-                $.message({
-                    message: res.message,
-                    type: 'success'
-                });
-            }
+            $("#roleModel").modal('hide');
+            roleTable.refresh(roleTableId);
+            clearForm();
+            $.message({
+                message: res.message,
+                type: 'success'
+            });
         });
     });
     $("#rolePermissionBtn").click(function () {
@@ -93,14 +87,12 @@ $(document).ready(function () {
         });
         rpReq.permissionIds = chkValue;
         REQUEST.post(rpSaveUrl,rpReq,function (res) {
-            if (res.code === '0000') {
-                $("#rolePermissionModal").modal('hide');
-                clearRPForm();
-                $.message({
-                    message: res.message,
-                    type: 'success'
-                });
-            }
+            $("#rolePermissionModal").modal('hide');
+            clearRPForm();
+            $.message({
+                message: res.message,
+                type: 'success'
+            });
         });
     });
 

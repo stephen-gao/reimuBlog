@@ -34,9 +34,7 @@ $(document).ready(function () {
 
         "click #permissionDelete": function (e, value, row, index) {
             REQUEST.get(permissionDelUrl+row.id, function(res){
-                if(res.code === '0000'){
-                    permissionTable.refresh(permissionTableId)
-                }
+                permissionTable.refresh(permissionTableId)
             });
         }
     };
@@ -46,6 +44,7 @@ $(document).ready(function () {
         {field: 'name', title: '名称', align: 'center'},
         {field: 'code', title: '编码', align: 'center'},
         {field: 'description', title: '描述', align: 'center'},
+        {field: 'pname', title: '父节点名称', align: 'center'},
         {field: 'type', title: '类型', align: 'center',
             formatter:function (value) {
                 if(value === 0){
@@ -84,15 +83,13 @@ $(document).ready(function () {
         let postUrl = permissionReq.id !== ''&& permissionReq.id !== null?permissionEditUrl:permissionAddUrl;
 
         REQUEST.post(postUrl,permissionReq,function (res) {
-            if(res.code === '0000'){
-                $("#permissionModel").modal('hide');
-                permissionTable.refresh(permissionTableId);
-                clearForm();
-                $.message({
-                    message:res.message,
-                    type:'success'
-                });
-            }
+            $("#permissionModel").modal('hide');
+            permissionTable.refresh(permissionTableId);
+            clearForm();
+            $.message({
+                message:res.message,
+                type:'success'
+            });
         });
     });
 
@@ -123,12 +120,10 @@ $(document).ready(function () {
     }
     //预加载数据
     REQUEST.get(permissionParentUrl, function(res){
-        if(res.code === '0000'){
-            permissionParents = res.data;
-            if(permissionParents.length > 0){
-                for(let i=0;i<permissionParents.length;i++){
-                    $("#permissionPid").append('<option value="'+ permissionParents[i].id +'">'+ permissionParents[i].name+'</option>')
-                }
+        permissionParents = res.data;
+        if(permissionParents.length > 0){
+            for(let i=0;i<permissionParents.length;i++){
+                $("#permissionPid").append('<option value="'+ permissionParents[i].id +'">'+ permissionParents[i].name+'</option>')
             }
         }
     });

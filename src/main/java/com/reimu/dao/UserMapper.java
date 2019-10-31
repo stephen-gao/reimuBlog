@@ -1,7 +1,11 @@
 package com.reimu.dao;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.reimu.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.reimu.model.vo.UserVO;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +17,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface UserMapper extends BaseMapper<User> {
 
+    List<UserVO> pageList(IPage page);
 }
