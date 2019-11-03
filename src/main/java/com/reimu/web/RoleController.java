@@ -3,14 +3,10 @@ package com.reimu.web;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.reimu.common.Result;
-import com.reimu.entity.Permission;
+import com.reimu.common.http.HttpResponse;
 import com.reimu.entity.Role;
-import com.reimu.model.vo.PermissionVO;
 import com.reimu.model.vo.RoleVO;
-import com.reimu.model.vo.UserVO;
 import com.reimu.service.IRoleService;
-import com.reimu.service.IUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,43 +42,43 @@ public class RoleController {
 
     @RequestMapping("role-page-data")
     @ResponseBody
-    public Result rolePageData(@RequestBody RoleVO vo){
+    public HttpResponse rolePageData(@RequestBody RoleVO vo){
         IPage page = new Page(vo.getPageNumber(), vo.getPageSize());
         page = roleService.page(page);
-        return Result.getSuccess(page);
+        return HttpResponse.getSuccess(page);
     }
 
     @RequestMapping("list/all")
     @ResponseBody
-    public Result listAll(){
+    public HttpResponse listAll(){
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.ne("id",0);
         List list = roleService.list(wrapper);
-        return Result.getSuccess(list);
+        return HttpResponse.getSuccess(list);
     }
 
     @RequestMapping("role-add")
     @ResponseBody
-    public Result add(@RequestBody RoleVO vo){
+    public HttpResponse add(@RequestBody RoleVO vo){
         Role po = new Role();
         BeanUtils.copyProperties(vo,po);
         roleService.save(po);
-        return Result.defaultSuccess();
+        return HttpResponse.defaultSuccess();
     }
 
     @RequestMapping("role-edit")
     @ResponseBody
-    public Result edit(@RequestBody RoleVO vo){
+    public HttpResponse edit(@RequestBody RoleVO vo){
         Role po = new Role();
         BeanUtils.copyProperties(vo,po);
         roleService.updateById(po);
-        return Result.defaultSuccess();
+        return HttpResponse.defaultSuccess();
     }
 
     @RequestMapping("role-delete/{id}")
     @ResponseBody
-    public Result delete(@PathVariable("id") String id){
+    public HttpResponse delete(@PathVariable("id") String id){
         roleService.removeById(id);
-        return Result.defaultSuccess();
+        return HttpResponse.defaultSuccess();
     }
 }

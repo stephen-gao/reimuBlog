@@ -1,16 +1,11 @@
 package com.reimu.web;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.reimu.common.Result;
-import com.reimu.entity.Permission;
+import com.reimu.common.http.HttpResponse;
 import com.reimu.entity.RolePermission;
 import com.reimu.model.vo.PermissionVO;
 import com.reimu.model.vo.RolePermissionVO;
-import com.reimu.service.IPermissionService;
 import com.reimu.service.IRolePermissionService;
-import com.sun.org.apache.regexp.internal.RE;
-import lombok.Data;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -36,7 +31,7 @@ public class RolePermissionController {
 
     @PostMapping("rp-save")
     @ResponseBody
-    public Result saveRolePermission(@RequestBody RolePermissionVO vo){
+    public HttpResponse saveRolePermission(@RequestBody RolePermissionVO vo){
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.eq("role_id",vo.getRoleId());
         rolePermissionService.remove(wrapper);
@@ -52,15 +47,15 @@ public class RolePermissionController {
         if(!CollectionUtils.isEmpty(list)){
             rolePermissionService.saveBatch(list);
         }
-        return Result.defaultSuccess();
+        return HttpResponse.defaultSuccess();
     }
 
     @GetMapping("rp-tree/{roleId}")
     @ResponseBody
-    public Result getRPselected(@PathVariable("roleId") String roleId){
+    public HttpResponse getRPselected(@PathVariable("roleId") String roleId){
 
         List<PermissionVO> tree = rolePermissionService.initPermissionSelectTree(roleId);
-        return Result.getSuccess(tree);
+        return HttpResponse.getSuccess(tree);
     }
 
 }

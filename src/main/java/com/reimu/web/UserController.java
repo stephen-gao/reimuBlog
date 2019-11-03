@@ -1,9 +1,7 @@
 package com.reimu.web;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.reimu.common.Result;
-import com.reimu.entity.User;
+import com.reimu.common.http.HttpResponse;
 import com.reimu.model.vo.UserVO;
 import com.reimu.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,32 +36,32 @@ public class UserController {
 
     @RequestMapping("user-page-data")
     @ResponseBody
-    public Result userPageData(@RequestBody UserVO vo){
+    public HttpResponse userPageData(@RequestBody UserVO vo){
         IPage page = userService.userPage(vo);
-        return Result.getSuccess(page);
+        return HttpResponse.getSuccess(page);
     }
 
     @RequestMapping("user-add")
     @ResponseBody
-    public Result userAdd(@RequestBody UserVO vo){
+    public HttpResponse userAdd(@RequestBody UserVO vo){
         return userService.userAdd(vo);
     }
 
     @RequestMapping("user-edit")
     @ResponseBody
-    public Result userEdit(@RequestBody UserVO vo){
+    public HttpResponse userEdit(@RequestBody UserVO vo){
         return userService.userEdit(vo);
     }
 
     @RequestMapping("user-delete/{id}")
     @ResponseBody
-    public Result userEdit(@PathVariable("id") String id){
+    public HttpResponse userEdit(@PathVariable("id") String id){
         return userService.userDelete(id);
     }
 
     @RequestMapping("edit-password")
     @ResponseBody
-    public Result changePassword(@RequestBody UserVO vo){
+    public HttpResponse changePassword(@RequestBody UserVO vo){
         return userService.passChange(vo);
     }
 }

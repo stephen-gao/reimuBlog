@@ -1,9 +1,9 @@
 package com.reimu.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.reimu.common.Result;
-import com.reimu.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.reimu.common.http.HttpResponse;
+import com.reimu.entity.User;
 import com.reimu.model.vo.UserVO;
 
 /**
@@ -20,11 +20,11 @@ public interface IUserService extends IService<User> {
 
     IPage<User> userPage(UserVO vo);
 
-    Result userAdd(UserVO vo);
+    HttpResponse userAdd(UserVO vo);
 
-    Result userEdit(UserVO vo);
+    HttpResponse userEdit(UserVO vo);
 
-    Result userDelete(String id);
+    HttpResponse userDelete(String id);
 
-    Result passChange(UserVO vo);
+    HttpResponse passChange(UserVO vo);
 }

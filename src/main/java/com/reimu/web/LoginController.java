@@ -1,7 +1,7 @@
 package com.reimu.web;
 
-import com.reimu.common.Result;
-import com.reimu.common.ResultEnums;
+import com.reimu.common.biz.BizEnums;
+import com.reimu.common.http.HttpResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,9 +35,9 @@ public class LoginController {
      */
     @RequestMapping("/login-error")
     @ResponseBody
-    public Result loginError(){
+    public HttpResponse loginError(){
 
-        return Result.getResult(ResultEnums.NOT_LOGIN,"请前往登录");
+        return HttpResponse.getResponse(BizEnums.NOT_LOGIN,"请前往登录");
     }
 
 }

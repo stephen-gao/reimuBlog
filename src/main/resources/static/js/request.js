@@ -19,10 +19,9 @@ function Request(window) {
     }
 
     function resultHandler(res, success) {
-        console.log(res);
-        if (res.code === '0000') {
+        if (res.code === 10000) {
             success(res);
-        } else if (res.code === '9001') {
+        } else if (res.code === 40001) {
             window.location = '/login';
         } else {
             $.message({

@@ -14,8 +14,8 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://192.168.139.130:3306/reimublog?allowMultiQueries=true&useSSL=false&characterEncoding=UTF-8
-    url: jdbc:mysql://192.168.126.129:3306/reimublog?allowMultiQueries=true&useSSL=false&characterEncoding=UTF-8
+    url: jdbc:mysql://192.168.139.130:3306/reimublog?allowMultiQueries=true&useSSL=false&characterEncoding=UTF-8
+#    url: jdbc:mysql://192.168.126.129:3306/reimublog?allowMultiQueries=true&useSSL=false&characterEncoding=UTF-8
     username: root
     password: Root
     initialSize: 5
