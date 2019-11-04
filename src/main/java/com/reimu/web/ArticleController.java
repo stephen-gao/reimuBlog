@@ -1,5 +1,7 @@
 package com.reimu.web;
 
+import com.reimu.common.http.HttpResponse;
+import com.reimu.model.request.ArticleSaveUpdateRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,5 +31,11 @@ public class ArticleController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("manage/system/article-edit");
         return mv;
+    }
+
+    @RequestMapping("save")
+    public HttpResponse save(ArticleSaveUpdateRequest request){
+
+        return HttpResponse.defaultSuccess();
     }
 }

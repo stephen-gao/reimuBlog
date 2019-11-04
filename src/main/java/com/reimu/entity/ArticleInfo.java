@@ -66,7 +66,7 @@ public class ArticleInfo implements Serializable {
 	private Long starNum;
 
 	/**
-	 * 状态
+	 * 状态 0 草稿 1发布 2删除
 	 */
 	private Integer status;
 

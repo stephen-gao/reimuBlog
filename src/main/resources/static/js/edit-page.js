@@ -1,5 +1,13 @@
-$(function () {
-    let testEditormd = editormd("markdown-edit", {
+$(document).ready(function () {
+    var articleReq={
+        id:'',
+        title:'',
+        description:'',
+        keyword:'',
+        contentSrc:'',
+        content:''
+    };
+    let editorMarkdown = editormd("markdown-edit", {
         width: "100%",
         height: 740,
         path: '../lib/',
@@ -20,8 +28,20 @@ $(function () {
         imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
         imageUploadURL: "./php/upload.php",
         onload: function () {
-            console.log('onload', this);
 
         }
     });
+
+    $("#articleSave").click(function () {
+        articleReq.id = $("#articleId").val();
+        articleReq.title = $("#articleTitle").val();
+        articleReq.description = $("#articleDescription").val();
+        articleReq.keyword = $("#articleKeyword").val();
+        articleReq.contentSrc = editorMarkdown.getHTML();
+        articleReq.content = editorMarkdown.getMarkdown();
+
+        console.log(articleReq);
+    });
+
+
 });
