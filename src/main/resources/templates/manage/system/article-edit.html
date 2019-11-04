@@ -1,34 +1,79 @@
-<div style="height: 752px;width:100%;overflow: auto">
+<!--<div style="height: 752px;width:100%;overflow: auto;z-index: inherit">-->
+<div style="height: 800px;width:100%;overflow: auto;z-index: inherit">
     <div class="row" style="margin: -5px 0 0 -12px;">
-        <div class="col-sm-5">
+        <div class="col-sm-6">
             <input type="hidden" id="articleId"/>
             <input type="text" id="articleTitle" class="articleTitle" style="font-size: 30px;font-weight: bold;color: #1D2024"/>
-
-            <div class="">
-                <div class="widget-main no-padding">
-                    <textarea name="content" data-provide="markdown" data-iconlibrary="fa" rows="29"></textarea>
-                </div>
-                <div class="widget-toolbox padding-4 clearfix">
-                    <div class="btn-group pull-left">
-                        <button class="btn btn-sm btn-info">
-                            <i class="ace-icon fa fa-times bigger-125"></i>
-                            Cancel
-                        </button>
-                    </div>
-
-                    <div class="btn-group pull-right">
-                        <button class="btn btn-sm btn-purple">
-                            <i class="ace-icon fa fa-floppy-o bigger-125"></i>
-                            Save
-                        </button>
-                    </div>
-                </div>
-            </div>
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-6">
             <div style="background: gray;height: 100%;width: 100%;">
                 qqq
             </div>
+        </div>
+    </div>
+    <div class="row" style="margin: -5px 0 0 -12px;">
+        <div class="col-sm-12">
+            <div id="markdown-edit" class="widget-main no-padding" style="z-index: 10000"></div>
+        </div>
+    </div>
+    <div class="row" style="margin: -5px 0 0 -12px;">
+        <div class="col-sm-12">
+            <form class="form-horizontal" role="form">
+                <input type="text" class="form-control hidden" id="permissionId">
+                <div class="form-group">
+                    <label for="permissionName" class="col-sm-2 control-label">权限名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="permissionName" placeholder="请输入权限名称">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="permissionCode" class="col-sm-1 control-label">权限编码</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="permissionCode" placeholder="请输入权限编码">
+                    </div>
+                    <label for="permissionCode" class="col-sm-1 control-label">权限编码</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="permissionCode" placeholder="请输入权限编码">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="permissionDescription" class="col-sm-2 control-label">权限描述</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="permissionDescription" placeholder="请输入权限描述">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="permissionPid" class="col-sm-2 control-label">父节点</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="permissionPid" placeholder="请输入权限描述">
+                            <option value="root">顶级节点</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="permissionType" class="col-sm-2 control-label">权限类型</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="permissionType" placeholder="请输入权限描述">
+                            <option value="0">父菜单</option>
+                            <option value="1">子菜单</option>
+                            <option value="2">接口</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="permissionIcon" class="col-sm-2 control-label">菜单图标</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="permissionIcon" placeholder="请输入权限描述">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="permissionSort" class="col-sm-2 control-label">排序</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="permissionSort" placeholder="请输入权限描述">
+                    </div>
+                </div>
+            </form>
+            <br/><br/><br/>
         </div>
     </div>
 </div>

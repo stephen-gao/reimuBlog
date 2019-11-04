@@ -20,7 +20,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 //        registry.addViewController("/manage-head").setViewName("manage/common/head");
 //        registry.addViewController("/login").setViewName("manage/system/login");
         registry.addViewController("/403").setViewName("error/403");
-        registry.addViewController("/404").setViewName("manage/404");
+        registry.addViewController("/404").setViewName("error/404");
         registry.addViewController("/500").setViewName("error/500");
         registry.addRedirectViewController("/error-403","/403");
         registry.addRedirectViewController("/error-404","/404");
