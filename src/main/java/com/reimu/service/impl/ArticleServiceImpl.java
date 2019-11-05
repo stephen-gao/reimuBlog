@@ -9,6 +9,8 @@ import com.reimu.entity.ArticleSrc;
 import com.reimu.model.request.ArticleSaveUpdateRequest;
 import com.reimu.service.IArticleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.reimu.utils.ArticleIdUtil;
+import com.reimu.utils.DateUtil;
 import org.omg.CORBA.DATA_CONVERSION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +39,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Override
     public void save(ArticleSaveUpdateRequest request) {
-        Date date = new Date();
+        String date = DateUtil.convert(new Date());
         ArticleInfo info = new ArticleInfo();
         ArticleSrc src = new ArticleSrc();
         Article article = new Article();
@@ -50,6 +52,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         info.setStatus(0);
         info.setCreateTime(date);
         info.setUpdateTime(date);
+        //设置ID
+        info.setId(createId());
         //info
         articleInfoMapper.insert(info);
         src.setContentSrc(request.getContentSrc());
@@ -62,5 +66,19 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         article.setArticleId(info.getId());
         articleSrcMapper.insert(src);
         articleMapper.insert(article);
+    }
+
+    private String createId(){
+        String id = ArticleIdUtil.getArticleId();
+        boolean b = true;
+        while (b){
+            ArticleInfo info = articleInfoMapper.selectById(id);
+            if(info == null) {
+                b = false;
+            }else {
+                id = ArticleIdUtil.getArticleId();
+            }
+        }
+        return id;
     }
 }

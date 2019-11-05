@@ -1,9 +1,7 @@
 package com.reimu.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -23,7 +21,6 @@ public class ArticleInfo implements Serializable {
 	/**
 	 * 
 	 */
-	@TableId(type = IdType.UUID)
 	private String id;
 
 	/**
@@ -74,13 +71,13 @@ public class ArticleInfo implements Serializable {
 	 * 创建时间
 	 */
 	@TableField(value="create_time")
-	private Date createTime;
+	private String createTime;
 
 	/**
 	 * 编辑时间
 	 */
 	@TableField(value="update_time")
-	private Date updateTime;
+	private String updateTime;
 
 
 
@@ -156,20 +153,19 @@ public class ArticleInfo implements Serializable {
 		this.status = status;
 	}
 
-	public Date getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
 
-	public Date getUpdateTime() {
+	public String getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(Date updateTime) {
+	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
-
 }

@@ -62,8 +62,8 @@ $(document).ready(function () {
         {
             field: 'option', title: '操作', align: 'center', width:200, events:window.operateEvents,
             formatter: function (value, row, index) {
-                var d = '<button id="permissionEdit" type="button" class="btn btn-primary btn-sm"><i class="ace-icon fa fa-pencil bigger-100"></i>编辑</button>    ';
-                var f = '<button id="permissionDelete" type="button" class="btn btn-danger btn-sm"><i class="ace-icon fa fa-trash-o bigger-100"></i>删除</button>';
+                let d = '<button id="permissionEdit" type="button" class="btn btn-primary btn-sm"><i class="ace-icon fa fa-pencil bigger-100"></i>编辑</button>    ';
+                let f = '<button id="permissionDelete" type="button" class="btn btn-danger btn-sm"><i class="ace-icon fa fa-trash-o bigger-100"></i>删除</button>';
                 return d + f;
             }
         }

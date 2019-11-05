@@ -43,7 +43,7 @@ $(document).ready(function () {
         }
     };
     //默认放columns前面，否则会注册不上
-    var columns = [
+    let columns = [
         {checkbox: true},
         {field: 'id', title: 'ID', align: 'left', width: 300},
         {field: 'name', title: '名称', align: 'center'},
@@ -54,7 +54,12 @@ $(document).ready(function () {
             formatter: function (value, row, index) {
                 let edit = '<button type="button" id="roleEdit" class="btn btn-primary btn-sm"><i class="ace-icon fa fa-pencil bigger-100"></i>编辑</button>  ';
                 let rp = '<button type="button" id="rolePermission" class="btn btn-primary btn-sm"><i class="ace-icon fa fa-pencil bigger-100"></i>授权</button>  ';
-                let del = '<button type="button" id="roleDelete" class="btn btn-danger btn-sm"><i class="ace-icon fa fa-trash-o bigger-100"></i>删除</button>  ';
+                let del = '';
+                if(row.id === '0') {
+                    del = '<button type="button" id="roleNotUse" class="btn btn-default btn-sm" disabled><i class="ace-icon fa fa-trash-o bigger-100"></i>删除</button>  ';
+                }else {
+                    del = '<button type="button" id="roleDelete" class="btn btn-danger btn-sm"><i class="ace-icon fa fa-trash-o bigger-100"></i>删除</button>  ';
+                }
                 return edit + rp + del;
             }
         }

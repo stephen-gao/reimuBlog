@@ -13,7 +13,7 @@ import java.util.UUID;
  * @version: 1.0
  **/
 @Log4j2
-public class AtricleIdUtil {
+public class ArticleIdUtil {
     /**
      * 得到8位的UUID-(码)
      */

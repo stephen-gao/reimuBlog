@@ -69,9 +69,10 @@ public class CustomWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter
                 /**
                  * 未登录，登录超时处理
                  */
-                .authenticationEntryPoint(authenticationEntryPoint);
+                .authenticationEntryPoint(authenticationEntryPoint)
 //                .accessDeniedPage("/error-403");
-
+                .and()
+                .headers().frameOptions().sameOrigin();
         // 关闭CSRF跨域
         http.csrf().disable();
     }

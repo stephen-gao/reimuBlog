@@ -41,13 +41,13 @@ public class Article implements Serializable {
 	 * 创建时间
 	 */
 	@TableField(value="create_time")
-	private Date createTime;
+	private String createTime;
 
 	/**
 	 * 更新时间
 	 */
 	@TableField(value="update_time")
-	private Date updateTime;
+	private String updateTime;
 
 
 
@@ -75,20 +75,19 @@ public class Article implements Serializable {
 		this.content = content;
 	}
 
-	public Date getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
 
-	public Date getUpdateTime() {
+	public String getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(Date updateTime) {
+	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
-
 }

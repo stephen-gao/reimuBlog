@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    var articleReq={
+    let articleSaveUrl = 'article/save';
+    let articleReq={
         id:'',
         title:'',
         description:'',
@@ -26,7 +27,7 @@ $(document).ready(function () {
 
         imageUpload: true,
         imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-        imageUploadURL: "./php/upload.php",
+        imageUploadURL: "/file/upload/image",
         onload: function () {
 
         }
@@ -37,10 +38,15 @@ $(document).ready(function () {
         articleReq.title = $("#articleTitle").val();
         articleReq.description = $("#articleDescription").val();
         articleReq.keyword = $("#articleKeyword").val();
-        articleReq.contentSrc = editorMarkdown.getHTML();
-        articleReq.content = editorMarkdown.getMarkdown();
-
+        articleReq.contentSrc = editorMarkdown.getMarkdown();
+        articleReq.content = editorMarkdown.getHTML();
         console.log(articleReq);
+        REQUEST.post(articleSaveUrl,articleReq,function (res) {
+            $.message({
+                message: res.message,
+                type: 'success'
+            });
+        });
     });
 
 
