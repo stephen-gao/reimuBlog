@@ -12,10 +12,7 @@ $(document).ready(function () {
     window.operateEvents = {
         //修改
         "click #articleEdit": function (e, value, row, index) {
-            console.log(row);
-            $("#articleId").val(row.id);
-            $("#articleName").val(row.name);
-            $("#articleDescription").val(row.description);
+            loadPage("/article/edit-page/"+row.id,"文章编辑");
         },
 
         "click #articleDelete": function (e, value, row, index) {

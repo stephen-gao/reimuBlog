@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    let articleSaveUrl = 'article/save';
-    let articlePublishUrl = 'article/publish';
+    let articleEditSaveUrl = 'article/update';
+    let articleEditPublishUrl = 'article/updpublish';
     let articleReq={
         id:'',
         title:'',
@@ -35,11 +35,10 @@ $(document).ready(function () {
     });
 
     $("#articleSave").click(function () {
-        saveOrPublish(articleSaveUrl);
+        saveOrPublish(articleEditSaveUrl);
     });
-
     $("#articlePublish").click(function () {
-        saveOrPublish(articlePublishUrl);
+        saveOrPublish(articleEditPublishUrl);
     });
 
     function saveOrPublish(url) {
@@ -58,5 +57,6 @@ $(document).ready(function () {
             loadPage("/article/page","文章管理");
         });
     }
+
 
 });
