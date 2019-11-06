@@ -1,19 +1,14 @@
-package com.reimu.model.request;
+package com.reimu.model.vo;
 
 import lombok.Data;
 
 @Data
-public class ArticleSaveUpdateRequest {
+public class ArticleVO {
 
     /**
      *
      */
     private String id;
-
-    /**
-     * 作者ID
-     */
-    private String authorId;
 
     /**
      * 标题ID
@@ -31,17 +26,7 @@ public class ArticleSaveUpdateRequest {
     private String description;
 
     /**
-     * 文章内容
-     */
-    private String content;
-
-    /**
      * 原始内容
      */
     private String contentSrc;
-    /**
-     * 状态 0 草稿 1发布 2删除
-     */
-    private Integer status;
-
 }

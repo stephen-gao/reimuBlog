@@ -6,6 +6,7 @@ import com.reimu.common.http.HttpResponse;
 import com.reimu.entity.ArticleInfo;
 import com.reimu.model.page.ArticlePage;
 import com.reimu.model.request.ArticleSaveUpdateRequest;
+import com.reimu.model.vo.ArticleVO;
 import com.reimu.service.IArticleInfoService;
 import com.reimu.service.IArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,15 +52,42 @@ public class ArticleController {
 
     @RequestMapping("edit-page/{id}")
     public ModelAndView editPage(@PathVariable("id")String id){
+        ArticleVO vo = articleService.getOneById(id);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("manage/system/article-edit");
+        mv.addObject("articleVO",vo);
         return mv;
     }
 
     @RequestMapping("save")
     @ResponseBody
     public HttpResponse save(@RequestBody ArticleSaveUpdateRequest request){
+        request.setStatus(0);
         articleService.save(request);
+        return HttpResponse.defaultSuccess();
+    }
+
+    @RequestMapping("publish")
+    @ResponseBody
+    public HttpResponse saveAndPublish(@RequestBody ArticleSaveUpdateRequest request){
+        request.setStatus(1);
+        articleService.save(request);
+        return HttpResponse.defaultSuccess();
+    }
+
+    @RequestMapping("update")
+    @ResponseBody
+    public HttpResponse update(@RequestBody ArticleSaveUpdateRequest request){
+        request.setStatus(0);
+        articleService.update(request);
+        return HttpResponse.defaultSuccess();
+    }
+
+    @RequestMapping("updpublish")
+    @ResponseBody
+    public HttpResponse updateAndPublish(@RequestBody ArticleSaveUpdateRequest request){
+        request.setStatus(1);
+        articleService.update(request);
         return HttpResponse.defaultSuccess();
     }
 

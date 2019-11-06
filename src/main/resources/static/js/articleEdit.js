@@ -1,7 +1,6 @@
 $(document).ready(function () {
-    let articleSaveUrl = 'article/save';
-    let articlePublishUrl = 'article/publish';
-    let categoryAllUrl = 'category/all';
+    let articleEditSaveUrl = 'article/update';
+    let articleEditPublishUrl = 'article/updpublish';
     let articleReq={
         id:'',
         title:'',
@@ -36,11 +35,10 @@ $(document).ready(function () {
     });
 
     $("#articleSave").click(function () {
-        saveOrPublish(articleSaveUrl);
+        saveOrPublish(articleEditSaveUrl);
     });
-
     $("#articlePublish").click(function () {
-        saveOrPublish(articlePublishUrl);
+        saveOrPublish(articleEditPublishUrl);
     });
 
     function saveOrPublish(url) {
@@ -59,14 +57,6 @@ $(document).ready(function () {
             loadPage("/article/page","文章管理");
         });
     }
-    });
-
-    REQUEST.get(categoryAllUrl,function (res) {
-        let categorys = res.data;
-        for(let i = 0;i<categorys.length;i++){
-            $("#articleCategory").append('<option value="'+ categorys[i].id +'">'+ categorys[i].name+'</option>')
-        }
-    })
 
 
 });

@@ -1,5 +1,7 @@
 package com.reimu.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.reimu.dao.ArticleInfoMapper;
 import com.reimu.dao.ArticleSrcMapper;
 import com.reimu.entity.Article;
@@ -7,6 +9,7 @@ import com.reimu.dao.ArticleMapper;
 import com.reimu.entity.ArticleInfo;
 import com.reimu.entity.ArticleSrc;
 import com.reimu.model.request.ArticleSaveUpdateRequest;
+import com.reimu.model.vo.ArticleVO;
 import com.reimu.service.IArticleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.reimu.utils.ArticleIdUtil;
@@ -46,10 +49,10 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         info.setTitle(request.getTitle());
         info.setDescription(request.getDescription());
         info.setKeyword(request.getKeyword());
+        info.setStatus(request.getStatus());
         info.setStarNum(0L);
         info.setViewsNum(0L);
         info.setCommentNum(0L);
-        info.setStatus(0);
         info.setCreateTime(date);
         info.setUpdateTime(date);
         //设置ID
@@ -66,6 +69,54 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         article.setArticleId(info.getId());
         articleSrcMapper.insert(src);
         articleMapper.insert(article);
+    }
+
+    @Override
+    public void update(ArticleSaveUpdateRequest request) {
+        String date = DateUtil.convert(new Date());
+        ArticleInfo info = new ArticleInfo();
+        ArticleSrc src = new ArticleSrc();
+        Article article = new Article();
+        info.setTitle(request.getTitle());
+        info.setDescription(request.getDescription());
+        info.setKeyword(request.getKeyword());
+        info.setStatus(request.getStatus());
+        info.setStarNum(0L);
+        info.setViewsNum(0L);
+        info.setCommentNum(0L);
+        info.setCreateTime(date);
+        info.setUpdateTime(date);
+        //id
+        info.setId(request.getId());
+        //info
+        articleInfoMapper.updateById(info);
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("article_id",info.getId());
+        src.setContentSrc(request.getContentSrc());
+        src.setCreateTime(date);
+        src.setUpdateTime(date);
+        src.setArticleId(info.getId());
+        article.setContent(request.getContent());
+        article.setCreateTime(date);
+        article.setUpdateTime(date);
+        article.setArticleId(info.getId());
+        articleSrcMapper.update(src,wrapper);
+        articleMapper.update(article,wrapper);
+    }
+
+    @Override
+    public ArticleVO getOneById(String id) {
+        ArticleInfo info = articleInfoMapper.selectById(id);
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("article_id",id);
+        ArticleSrc src = articleSrcMapper.selectOne(wrapper);
+        ArticleVO vo = new ArticleVO();
+        vo.setId(info.getId());
+        vo.setDescription(info.getDescription());
+        vo.setKeyword(info.getKeyword());
+        vo.setTitle(info.getTitle());
+        vo.setContentSrc(src.getContentSrc());
+        return vo;
     }
 
     private String createId(){
