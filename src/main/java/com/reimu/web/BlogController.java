@@ -10,15 +10,16 @@ import org.springframework.web.servlet.ModelAndView;
  * @author GaoSheng
  * @version 1.0
  * @blame GaoSheng
- * @since 2019/11/06 19:51
+ * @since 2019/11/06 19:50
  **/
 @Controller
-public class IndexController {
+@RequestMapping("a")
+public class BlogController {
 
-    @RequestMapping("index")
-    public ModelAndView index(){
-        ModelAndView mv  = new ModelAndView();
-        mv.setViewName("blog/index");
+    @RequestMapping("list")
+    public ModelAndView list(){
+        ModelAndView mv = new ModelAndView();
+
         return mv;
     }
 }
