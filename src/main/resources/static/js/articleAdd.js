@@ -59,7 +59,6 @@ $(document).ready(function () {
             loadPage("/article/page","文章管理");
         });
     }
-    });
 
     REQUEST.get(categoryAllUrl,function (res) {
         let categorys = res.data;
