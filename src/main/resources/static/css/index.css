@@ -1,0 +1,50 @@
+.back-red{
+    background-color: red;
+}
+.back-blue{
+    background-color: blue;
+}
+/*   nav  start  */
+nav ul{
+    height: 20px;
+}
+nav li{
+    margin-left: 20px;
+    display: inline;
+}
+nav li a{
+    text-decoration:none;
+    color: #0ea6b2;
+}
+nav li a span{
+    font-size: 18px;
+}
+.nav-body{
+    padding-top: 7px;
+    text-align: left;
+}
+.nav-brand{
+    margin-left: 5px;
+    float: left;
+}
+.brand-img{
+    width: 35px;
+    height: 35px;
+}
+.brand-label{
+    margin-left: 5px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #0ea6b2;
+}
+.nav-navbar{
+    margin-top: -10px;
+    float: right;
+}
+/*   nav  end  */
+/*   body  start  */
+.banner{
+    width: 100%;
+    height: 50px;
+}
+/*   body  end  */
