@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.reimu.common.biz.BizEnums;
 import com.reimu.common.http.HttpResponse;
 import com.reimu.utils.DateUtil;
+import com.reimu.utils.QiniuOSSUtil;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 
 /**
@@ -29,8 +31,8 @@ import java.util.Date;
 @RequestMapping("file/upload")
 public class FileUploadController {
 
-    @Value("${default.file.path}")
-    private String defaultFilePath;
+    @Value("${oss.file.path}")
+    private String ossFilePath;
 
     /**
      * description
@@ -44,17 +46,10 @@ public class FileUploadController {
     @RequestMapping("image")
     public String imageUpload(@RequestParam("editormd-image-file") MultipartFile file, HttpServletResponse response) {
         JSONObject result = new JSONObject();
-        String filename = file.getOriginalFilename();
-        String time = DateUtil.convert(new Date(), "yyyyMMdd");
-        String path = defaultFilePath+time;
-        //目录不存在，创建目录
-        File filePath = new File(path);
-        if (!filePath.exists()) {
-            filePath.mkdirs();
-        }
-        File dest = new File(path+"/"+filename);
+        String filename;
         try {
-            file.transferTo(dest);
+            InputStream inputStream = file.getInputStream();
+            filename = QiniuOSSUtil.upload(inputStream);
         } catch (IOException e) {
             log.error("上传图片失败",e.getMessage());
             result.put("success",0);
@@ -63,7 +58,7 @@ public class FileUploadController {
             return result.toJSONString();
         }
         result.put("success",1);
-        result.put("url",path+"/"+filename);
+        result.put("url",ossFilePath+filename);
         return result.toJSONString();
     }
 }

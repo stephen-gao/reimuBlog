@@ -1,5 +1,6 @@
 $(document).ready(function () {
     let articleSaveUrl = 'article/save';
+    let categoryAllUrl = 'category/all';
     let articleReq={
         id:'',
         title:'',
@@ -48,6 +49,13 @@ $(document).ready(function () {
             });
         });
     });
+
+    REQUEST.get(categoryAllUrl,function (res) {
+        let categorys = res.data;
+        for(let i = 0;i<categorys.length;i++){
+            $("#articleCategory").append('<option value="'+ categorys[i].id +'">'+ categorys[i].name+'</option>')
+        }
+    })
 
 
 });
