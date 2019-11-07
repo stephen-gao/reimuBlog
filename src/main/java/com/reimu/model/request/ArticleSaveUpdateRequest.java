@@ -36,6 +36,11 @@ public class ArticleSaveUpdateRequest {
     private String content;
 
     /**
+     * 分类
+     */
+    private String categoryId;
+
+    /**
      * 原始内容
      */
     private String contentSrc;

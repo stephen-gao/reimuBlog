@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 开发本地docker-192.168.126.129
-Source Server Version : 80018
-Source Host           : 192.168.126.129:3306
+Source Server         : mysql
+Source Server Version : 80016
+Source Host           : 192.168.139.130:3306
 Source Database       : reimublog
 
 Target Server Type    : MYSQL
-Target Server Version : 80018
+Target Server Version : 80016
 File Encoding         : 65001
 
-Date: 2019-11-07 20:57:51
+Date: 2019-11-08 00:10:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,24 +32,13 @@ CREATE TABLE `t_article` (
 -- Records of t_article
 -- ----------------------------
 INSERT INTO `t_article` VALUES ('14a4fc0c023523ede5459750c725d657', '1911srXIM35e', '<p>vvvvvvvvv</p>\n', '2019-11-05 20:24:39', '2019-11-05 20:24:39');
+INSERT INTO `t_article` VALUES ('58154a91adc814743f9bc93fbb3f62cd', '1911zAnShYlV', '<p>aaaa</p>\n', '2019-11-07 23:34:29', '2019-11-07 23:34:29');
 INSERT INTO `t_article` VALUES ('892e946e4521612ffcca09f6229e6da5', '1911lG1TdjMz', '<p>aaaa</p>\n', '2019-11-05 12:21:53', '2019-11-05 12:21:53');
+INSERT INTO `t_article` VALUES ('9411f6391c8b2c3cdb52f92e48d6a1f5', '1911JV8e7NGF', '<p>asdasdasdasdas</p>\n', '2019-11-07 23:26:28', '2019-11-07 23:26:28');
+INSERT INTO `t_article` VALUES ('b73f9e9feef7649848c3447aaefe61e9', '1911UlZpshIj', '<p>qweqweqweqwe</p>\n', '2019-11-07 23:28:45', '2019-11-07 23:28:45');
 INSERT INTO `t_article` VALUES ('c685382a4a3b04d055a3e80914434ce9', '1911T1nQ3MZz', '<p>asadasfvfdvdfv</p>\n', '2019-11-05 12:19:33', '2019-11-05 12:19:33');
 INSERT INTO `t_article` VALUES ('dbd4c684646c4447322ef2c76b49e5b9', '191169XV1IGh', '<p>nmnmnm</p>\n', '2019-11-05 12:10:56', '2019-11-05 12:10:56');
-
--- ----------------------------
--- Table structure for t_article_category
--- ----------------------------
-DROP TABLE IF EXISTS `t_article_category`;
-CREATE TABLE `t_article_category` (
-  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `article_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '文章ID',
-  `category_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '分类ID',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- ----------------------------
--- Records of t_article_category
--- ----------------------------
+INSERT INTO `t_article` VALUES ('fa82f421a05d30a9aebfd5cb65aefe35', '1911JkCADQOE', '<p>asdas</p>\n', '2019-11-07 23:36:48', '2019-11-07 23:36:48');
 
 -- ----------------------------
 -- Table structure for t_article_info
@@ -61,6 +50,8 @@ CREATE TABLE `t_article_info` (
   `title` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '标题ID',
   `keyword` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '关键字',
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '描述',
+  `category_id` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '分类ID',
+  `url` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '访问地址',
   `views_num` bigint(16) DEFAULT NULL COMMENT '浏览量',
   `comment_num` bigint(16) DEFAULT NULL COMMENT '评论数',
   `star_num` bigint(16) DEFAULT NULL COMMENT '点赞数',
@@ -73,10 +64,14 @@ CREATE TABLE `t_article_info` (
 -- ----------------------------
 -- Records of t_article_info
 -- ----------------------------
-INSERT INTO `t_article_info` VALUES ('191169XV1IGh', null, 'mnmnmnmnm', 'nmnm', 'nmnm', '0', '0', '0', '0', '2019-10-10 12:00:00', '2019-10-10 12:00:00');
-INSERT INTO `t_article_info` VALUES ('1911lG1TdjMz', null, 'aaaaa', 'aaaaa', 'aaa', '0', '0', '0', '0', '2019-11-05 20:21:53', '2019-11-05 20:21:53');
-INSERT INTO `t_article_info` VALUES ('1911srXIM35e', null, 'vvvvvv', 'vvvvvvvvvv', 'vvvvvvvvvvvv', '0', '0', '0', '0', '2019-11-05 20:24:39', '2019-11-05 20:24:39');
-INSERT INTO `t_article_info` VALUES ('1911T1nQ3MZz', null, 'dfvdfvdfv', 'dfvdfv', 'dfvdfvd', '0', '0', '0', '0', '2019-11-05 12:21:53', '2019-11-05 12:21:53');
+INSERT INTO `t_article_info` VALUES ('191169XV1IGh', null, 'mnmnmnmnm', 'nmnm', 'nmnm', null, null, '10', '0', '5', '0', '2019-10-10 12:00:00', '2019-10-10 12:00:00');
+INSERT INTO `t_article_info` VALUES ('1911JkCADQOE', '0', 'asas', 'asd', 'asd', '012a7375bf36dfa27c2b1c3dc058f28c', 'localhost:8080/a/1911JkCADQOE', '0', '0', '0', '0', '2019-11-07 23:36:48', '2019-11-07 23:36:48');
+INSERT INTO `t_article_info` VALUES ('1911JV8e7NGF', null, 'asdasd asdasdas', 'asdasdas', 'asdasdas', null, 'default.url1911JV8e7NGF', '0', '0', '0', '0', '2019-11-07 23:26:28', '2019-11-07 23:26:28');
+INSERT INTO `t_article_info` VALUES ('1911lG1TdjMz', null, 'aaaaa', 'aaaaa', 'aaa', null, null, '10', '0', '5', '0', '2019-11-05 20:21:53', '2019-11-05 20:21:53');
+INSERT INTO `t_article_info` VALUES ('1911srXIM35e', null, 'vvvvvv', 'vvvvvvvvvv', 'vvvvvvvvvvvv', null, null, '10', '0', '5', '0', '2019-11-05 20:24:39', '2019-11-05 20:24:39');
+INSERT INTO `t_article_info` VALUES ('1911T1nQ3MZz', null, 'dfvdfvdfv', 'dfvdfv', 'dfvdfvd', null, null, '10', '0', '5', '0', '2019-11-05 12:21:53', '2019-11-05 12:21:53');
+INSERT INTO `t_article_info` VALUES ('1911UlZpshIj', null, 'qweqweqw', 'qweqw', 'qweqw', '012a7375bf36dfa27c2b1c3dc058f28c', 'localhost:8080/a/1911UlZpshIj', '0', '0', '0', '0', '2019-11-07 23:28:45', '2019-11-07 23:28:45');
+INSERT INTO `t_article_info` VALUES ('1911zAnShYlV', null, 'aaaa', 'a', 'a', '012a7375bf36dfa27c2b1c3dc058f28c', 'localhost:8080/a/1911zAnShYlV', '0', '0', '0', '0', '2019-11-07 23:34:29', '2019-11-07 23:34:29');
 
 -- ----------------------------
 -- Table structure for t_article_src
@@ -95,9 +90,13 @@ CREATE TABLE `t_article_src` (
 -- Records of t_article_src
 -- ----------------------------
 INSERT INTO `t_article_src` VALUES ('07add05392447675b166812ba7aea7c0', '1911T1nQ3MZz', 'asadasfvfdvdfv', '2019-11-05 12:19:33', '2019-11-05 12:19:33');
+INSERT INTO `t_article_src` VALUES ('096a998ff996eb20a4a24c344f4c826d', '1911UlZpshIj', 'qweqweqweqwe', '2019-11-07 23:28:45', '2019-11-07 23:28:45');
 INSERT INTO `t_article_src` VALUES ('412e0ab145822eb34e0e11dd2ab5dc79', '1911srXIM35e', 'vvvvvvvvv', '2019-11-05 20:24:39', '2019-11-05 20:24:39');
+INSERT INTO `t_article_src` VALUES ('61730f582cde9963e5a1747dd7ed4943', '1911JV8e7NGF', 'asdasdasdasdas', '2019-11-07 23:26:28', '2019-11-07 23:26:28');
 INSERT INTO `t_article_src` VALUES ('7e6061811aa504e5c078008d1f54a4e2', '1911lG1TdjMz', 'aaaa', '2019-11-05 12:21:53', '2019-11-05 12:21:53');
+INSERT INTO `t_article_src` VALUES ('8654e1ca0bef1e4eeabe41bae59f8ea0', '1911JkCADQOE', 'asdas', '2019-11-07 23:36:48', '2019-11-07 23:36:48');
 INSERT INTO `t_article_src` VALUES ('8bc3e1e87f6e5c1c4798f9ed6a576626', '191169XV1IGh', 'nmnmnm', '2019-11-05 12:10:56', '2019-11-05 12:10:56');
+INSERT INTO `t_article_src` VALUES ('934bd3fb8bf10609c0a83771143bfc39', '1911zAnShYlV', 'aaaa', '2019-11-07 23:34:29', '2019-11-07 23:34:29');
 
 -- ----------------------------
 -- Table structure for t_category
@@ -175,14 +174,14 @@ CREATE TABLE `t_role` (
   `gmt_create` timestamp NULL DEFAULT NULL,
   `gmt_update` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='角色表';
 
 -- ----------------------------
 -- Records of t_role
 -- ----------------------------
-INSERT INTO `t_role` VALUES ('0', 'SUPER', '超级管理员', '0', '2019-11-04 10:50:28', '2019-11-04 10:50:32');
-INSERT INTO `t_role` VALUES ('1', 'ADMIN', '管理员', '1', '2019-11-04 10:50:40', '2019-11-04 10:50:43');
+INSERT INTO `t_role` VALUES ('0', 'ADMIN', '管理员', '1', '2019-11-04 10:50:40', '2019-11-04 10:50:43');
 INSERT INTO `t_role` VALUES ('2', 'USER', '普通用户', '2', '2019-11-04 10:50:34', '2019-11-04 10:50:36');
+INSERT INTO `t_role` VALUES ('8', 'SUPER', '超级管理员', '0', '2019-11-04 10:50:28', '2019-11-04 10:50:32');
 
 -- ----------------------------
 -- Table structure for t_role_permission

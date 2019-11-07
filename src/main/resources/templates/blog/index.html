@@ -23,10 +23,10 @@
         <div class="nav-title">
             <ul class="nav-navbar-left">
                 <li class="nav-li">
-                    <a href="#"><span>博客</span></a>
+                    <a href="http://localhost:8080/index"><span>首页</span></a>
                 </li>
-                <li class="nav-li">
-                    <a href="#">java</a>
+                <li class="nav-li" th:each="category : ${categorys}">
+                    <a href="#" th:text="${category.getName()}"></a>
                 </li>
             </ul>
             <ul class="nav-navbar-right">
@@ -45,7 +45,7 @@
             </div>
             <div class="content left-content">
                 <ul class="list-ul">
-                    <li class="list-li">
+                    <li class="list-li" th:each="article : ${articles}">
                         <div class="left-li-body">
                             <a class="cat " href="#">
                                 <span>
@@ -54,19 +54,15 @@
                                 <i></i>
                             </a>
                             <a href="#" class="left-list-title">
-                                    <span class="left-li-a">
-                                    我是热门文章
-                                    </span>
+                                    <span class="left-li-a" th:text="${article.title}"></span>
                             </a>
                             <br>
-                            <span class="left-li-b">作者</span>
-                            <span class="left-li-b">2019-01-01</span>
-                            <span class="left-li-b">阅读(1000)</span>
-                            <span class="left-li-c">点赞(1000)</span>
+                            <span class="left-li-b" th:text="${article.authorId}"></span>
+                            <span class="left-li-b" th:text="${article.createTime}"></span>
+                            <span class="left-li-b">阅读([[${article.viewsNum}]])</span>
+                            <span class="left-li-c">点赞([[${article.starNum}]])</span>
                             <br>
-                            <p class="left-li-d">
-                                摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要摘要
-                            </p>
+                            <p class="left-li-d" th:text="${article.description}"></p>
                         </div>
                     </li>
                     <li class="list-li">
@@ -240,7 +236,12 @@
                 </ul>
             </div>
             <div class="left-foot">
-                <span>更多内容</span>
+                <a th:href="${preUrl}">
+                    <span class="pre-page">上一页</span>
+                </a>
+                <a th:href="${nextUrl}">
+                    <span class="next-page">下一页</span>
+                </a>
             </div>
         </div>
         <div class="content-right">

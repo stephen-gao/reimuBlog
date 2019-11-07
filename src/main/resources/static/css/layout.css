@@ -180,20 +180,40 @@ footer a:hover{
 }
 .left-foot{
     margin-top: 15px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    font-size: 14px;
-    text-align: center;
-    color: #999;
+    padding-top: 10px;
+    height: 32px;
     background-color: #e6e6e6;
 }
 .left-foot:hover{
     margin-top: 15px;
-    padding-top: 8px;
-    font-size: 14px;
-    text-align: center;
-    color: #777;
+    padding-top: 10px;
     background-color: #e1e1e1;
+}
+.pre-page{
+    margin-left: 30px;
+    font-size: 16px;
+    color: #999;
+    float: left;
+}
+.pre-page:hover{
+    margin-left: 30px;
+    font-size: 16px;
+    color: #2CDB87;
+    background-color: #888;
+    float: left;
+}
+.next-page{
+    margin-right: 30px;
+    font-size: 16px;
+    color: #999;
+    float: right;
+}
+.next-page:hover{
+    margin-right: 30px;
+    font-size: 16px;
+    color: #2CDB87;
+    background-color: #888;
+    float: right;
 }
 /*   body end  */
 /*   left start  */
@@ -243,7 +263,6 @@ footer a:hover{
 /*foot start*/
 .footer-content{
     margin-top: 40px;
-    margin-left: 250px;
     min-height: 60px;
     text-align: center;
     font-size: 14px;

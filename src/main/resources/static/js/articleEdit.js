@@ -7,7 +7,8 @@ $(document).ready(function () {
         description:'',
         keyword:'',
         contentSrc:'',
-        content:''
+        content:'',
+        categoryId:''
     };
     let editorMarkdown = editormd("markdown-edit", {
         width: "100%",
@@ -46,6 +47,7 @@ $(document).ready(function () {
         articleReq.title = $("#articleTitle").val();
         articleReq.description = $("#articleDescription").val();
         articleReq.keyword = $("#articleKeyword").val();
+        articleReq.categoryId = $("#articleCategory").val();
         articleReq.contentSrc = editorMarkdown.getMarkdown();
         articleReq.content = editorMarkdown.getHTML();
         console.log(articleReq);

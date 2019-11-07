@@ -43,6 +43,16 @@ public class ArticleInfo implements Serializable {
 	 * 描述
 	 */
 	private String description;
+	/**
+	 * 分类ID
+	 */
+	@TableField(value = "category_id")
+	private String categoryId;
+
+	/**
+	 * 访问路径
+	 */
+	private String url;
 
 	/**
 	 * 浏览量
@@ -80,6 +90,21 @@ public class ArticleInfo implements Serializable {
 	private String updateTime;
 
 
+	public String getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
 	public String getId() {
 		return id;
