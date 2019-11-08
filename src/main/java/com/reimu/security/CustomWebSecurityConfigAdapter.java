@@ -96,7 +96,7 @@ public class CustomWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter
 
     private HttpSecurity addAntMatchers(HttpSecurity http) throws Exception {
         List<SysPermission> permissionList = permissionService.getAllPermAndRole();
-        String[] writeList = {"/", "/index", "/a/*", "/login", "/login-error", "/404", "/403", "/500"};
+        String[] writeList = {"/", "/index","/p/**" ,"/a/**", "/login", "/login-error", "/404", "/403", "/500"};
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http.authorizeRequests();
         log.info("注册中心配置信息：");
         // 如果有允许匿名的url，填在下面

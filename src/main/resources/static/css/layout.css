@@ -55,7 +55,7 @@ ul li{
 }
 .left-content{
     margin-top: 5px;
-    min-height: 800px;
+    min-height: 600px;
     height: auto;
 }
 .right-content{
@@ -268,7 +268,16 @@ footer a:hover{
     font-size: 14px;
 }
 /*foot end*/
-
+/*文章页 start*/
+.article-title{
+    text-align: center;
+}
+.article-body{
+    margin-left: 40px;
+    margin-right: 50px;
+    color: #404040;
+}
+/*文章页 end*/
 
 
 .cat{

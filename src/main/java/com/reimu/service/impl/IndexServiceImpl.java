@@ -30,7 +30,7 @@ public class IndexServiceImpl implements IndexService {
     public IndexVO getIndexVO(Integer pageNo) {
         IndexVO vo = new IndexVO();
         List<Category> categories = categoryMapper.selectList(null);
-        IPage<ArticleInfo> page = new Page<>(pageNo,10);
+        IPage<ArticleInfo> page = new Page<>(pageNo,3);
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.eq("status",0);
         page = articleInfoMapper.selectPage(page,wrapper);

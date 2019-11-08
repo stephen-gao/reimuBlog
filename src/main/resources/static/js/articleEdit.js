@@ -14,6 +14,8 @@ $(document).ready(function () {
         width: "100%",
         height: 740,
         path: '../lib/',
+        theme : "dark",
+        previewTheme : "dark",
         editorTheme: "pastel-on-dark",
         markdown: '',
         codeFold: true,
@@ -49,7 +51,7 @@ $(document).ready(function () {
         articleReq.keyword = $("#articleKeyword").val();
         articleReq.categoryId = $("#articleCategory").val();
         articleReq.contentSrc = editorMarkdown.getMarkdown();
-        articleReq.content = editorMarkdown.getHTML();
+        articleReq.content = $(".editormd-preview").html();
         console.log(articleReq);
         REQUEST.post(url,articleReq,function (res) {
             $.message({

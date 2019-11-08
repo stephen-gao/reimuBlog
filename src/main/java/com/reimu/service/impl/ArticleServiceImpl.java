@@ -132,6 +132,21 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         return vo;
     }
 
+    @Override
+    public ArticleVO getOneShowById(String id) {
+        ArticleInfo info = articleInfoMapper.selectById(id);
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("article_id",id);
+        Article article = articleMapper.selectOne(wrapper);
+        ArticleVO vo = new ArticleVO();
+        vo.setId(info.getId());
+        vo.setDescription(info.getDescription());
+        vo.setKeyword(info.getKeyword());
+        vo.setTitle(info.getTitle());
+        vo.setContent(article.getContent());
+        return vo;
+    }
+
     private String createId(){
         String id = ArticleIdUtil.getArticleId();
         boolean b = true;

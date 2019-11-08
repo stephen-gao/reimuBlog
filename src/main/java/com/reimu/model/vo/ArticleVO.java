@@ -29,4 +29,9 @@ public class ArticleVO {
      * 原始内容
      */
     private String contentSrc;
+
+    /**
+     * 原始内容
+     */
+    private String content;
 }

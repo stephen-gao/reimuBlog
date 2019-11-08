@@ -20,4 +20,6 @@ public interface IArticleService extends IService<Article> {
     void update(ArticleSaveUpdateRequest request);
 
     ArticleVO getOneById(String id);
+
+    ArticleVO getOneShowById(String id);
 }

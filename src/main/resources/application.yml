@@ -57,4 +57,4 @@ user:
   default:
     password: 123456
 default:
-  url: localhost:8080/a/
+  url: http://localhost:8080/a/
