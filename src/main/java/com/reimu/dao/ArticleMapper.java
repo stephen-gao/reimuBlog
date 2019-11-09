@@ -1,7 +1,9 @@
 package com.reimu.dao;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.reimu.entity.Article;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.reimu.model.vo.ArticleVO;
 
 /**
  * <p>
@@ -13,4 +15,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface ArticleMapper extends BaseMapper<Article> {
 
+    ArticleVO selectOneByAId(String articleId);
+
+    IPage<ArticleVO> selectAPage(IPage page);
 }

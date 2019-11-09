@@ -4,15 +4,15 @@ $(document).ready(function () {
         name: '',
         description: '',
     };
-    let articleTableId = '#article-table';
-    let pageUrl = '/article/list';
-    let articleEditUrl = '/article/update';
-    let articleDelUrl = '/article/delete/';
+    let articleTableId = '#common-table';
+    let pageUrl = '/common/list';
+    let articleEditUrl = '/common/update';
+    let articleDelUrl = '/common/delete/';
     //默认放columns前面，否则会注册不上
     window.operateEvents = {
         //修改
         "click #articleEdit": function (e, value, row, index) {
-            loadPage("/article/edit-page/"+row.id,"文章编辑");
+            loadPage("/common/edit-page/"+row.id,"文章编辑");
         },
 
         "click #articleDelete": function (e, value, row, index) {

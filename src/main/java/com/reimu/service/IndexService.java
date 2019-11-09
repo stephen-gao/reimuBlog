@@ -1,8 +1,12 @@
 package com.reimu.service;
 
-import com.reimu.model.vo.IndexVO;
+import com.reimu.model.vo.ShowVO;
 
 public interface IndexService {
 
-    IndexVO getIndexVO(Integer pageNo);
+    ShowVO getIndexVO();
+
+    ShowVO getPage(Integer pageNo);
+
+    ShowVO getOneShowById(String id);
 }

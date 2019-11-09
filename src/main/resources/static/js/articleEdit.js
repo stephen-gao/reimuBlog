@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    let articleEditSaveUrl = 'article/update';
-    let articleEditPublishUrl = 'article/updpublish';
+    let articleEditSaveUrl = 'common/update';
+    let articleEditPublishUrl = 'common/updpublish';
     let articleReq={
         id:'',
         title:'',
@@ -58,7 +58,7 @@ $(document).ready(function () {
                 message: res.message,
                 type: 'success'
             });
-            loadPage("/article/page","文章管理");
+            loadPage("/common/page","文章管理");
         });
     }
 

@@ -138,7 +138,7 @@ CREATE TABLE `t_permission` (
 -- ----------------------------
 INSERT INTO `t_permission` VALUES ('00afe8f2689424796a0a45f431f548ec', '9b3bfb46abeaa6d7bb7bee44466079bf', '/role/role-add', '角色添加', '2', '', '角色添加', '522');
 INSERT INTO `t_permission` VALUES ('0e43438893f3b401c360fe7e82b4a3fa', '42337d91507df7cb8e6f926ca22df265', '/user/user-page-data', '用户列表', '2', '', '用户列表', '511');
-INSERT INTO `t_permission` VALUES ('0fe4353e5ed416347684d32547c5c8a9', 'a707e27f38323471f3e452357287801b', '/article/page', '文章管理', '1', '', '文章管理', '220');
+INSERT INTO `t_permission` VALUES ('0fe4353e5ed416347684d32547c5c8a9', 'a707e27f38323471f3e452357287801b', '/common/page', '文章管理', '1', '', '文章管理', '220');
 INSERT INTO `t_permission` VALUES ('1cf4f6eeff19a6fab6eb7fbcaeb1fb46', 'b5f51641bb5d82900f0bbd55acdb8d2a', '/user/user-page', '皮肤管理', '1', '', '皮肤管理', '550');
 INSERT INTO `t_permission` VALUES ('2de9951792266c1bd1b2de3926ea2558', 'b5f51641bb5d82900f0bbd55acdb8d2a', '/user/user-page', '插件管理', '1', '', '插件管理', '540');
 INSERT INTO `t_permission` VALUES ('2ec1c4b866955645baee8e3076b932b2', 'root', 'coffee', '广告', '0', 'menu-icon fa fa-coffee', '广告', '300');
@@ -153,7 +153,7 @@ INSERT INTO `t_permission` VALUES ('7ccf03954968a566ec349aca74901267', 'root', '
 INSERT INTO `t_permission` VALUES ('7f37a751181aa8cd019b4663e197a11d', 'de81bd38bcfb555406326377c076b3c6', '/permission/permission-edit', '权限编辑', '2', '', '权限编辑', '533');
 INSERT INTO `t_permission` VALUES ('9b3bfb46abeaa6d7bb7bee44466079bf', 'b5f51641bb5d82900f0bbd55acdb8d2a', '/role/role-page', '角色管理', '1', '', '角色管理', '520');
 INSERT INTO `t_permission` VALUES ('9df9a5e5795450a82a944a7da5e58d0e', '9b3bfb46abeaa6d7bb7bee44466079bf', '/rolepermission/rp-save', '角色授权接口', '2', '', '角色授权接口', '525');
-INSERT INTO `t_permission` VALUES ('9e97e39161f4ddc595b4bbbe57d7b740', 'a707e27f38323471f3e452357287801b', '/article/add-page', '文章新建', '1', '', '文章新建', '210');
+INSERT INTO `t_permission` VALUES ('9e97e39161f4ddc595b4bbbe57d7b740', 'a707e27f38323471f3e452357287801b', '/common/add-page', '文章新建', '1', '', '文章新建', '210');
 INSERT INTO `t_permission` VALUES ('a707e27f38323471f3e452357287801b', 'root', 'blog', '博客', '0', 'menu-icon fa fa-rss-square', '博客', '200');
 INSERT INTO `t_permission` VALUES ('b09fe0458a5f652100c8a1083a1928dd', 'de81bd38bcfb555406326377c076b3c6', '/permission/permission-parent', '权限父节点查询', '2', '', '权限父节点查询', '535');
 INSERT INTO `t_permission` VALUES ('b5f51641bb5d82900f0bbd55acdb8d2a', 'root', 'systemSetting', '系统', '0', 'menu-icon fa fa-cog', '系统', '500');

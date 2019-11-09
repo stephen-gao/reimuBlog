@@ -46,6 +46,6 @@
   MT("pThenArticle",
      "[tag&bracket <][tag p][tag&bracket >]",
      "  foo",
-     "[tag&bracket <][tag article][tag&bracket >]bar");
+     "[tag&bracket <][tag common][tag&bracket >]bar");
 
 })();

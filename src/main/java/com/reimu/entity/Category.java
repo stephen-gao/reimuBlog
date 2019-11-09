@@ -35,6 +35,16 @@ public class Category implements Serializable {
 	 */
 	private String description;
 
+	/**
+	 * 描述
+	 */
+	private String url;
+
+	/**
+	 * 描述
+	 */
+	private Integer sort;
+
 
 
 	public String getId() {
@@ -61,4 +71,19 @@ public class Category implements Serializable {
 		this.description = description;
 	}
 
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
 }

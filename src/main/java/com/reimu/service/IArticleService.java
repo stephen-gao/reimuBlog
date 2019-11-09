@@ -21,5 +21,4 @@ public interface IArticleService extends IService<Article> {
 
     ArticleVO getOneById(String id);
 
-    ArticleVO getOneShowById(String id);
 }

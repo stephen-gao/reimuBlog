@@ -6,10 +6,12 @@
 		<id column="id" property="id" />
 		<result column="name" property="name" />
 		<result column="description" property="description" />
+		<result column="url" property="url" />
+		<result column="sort" property="sort" />
 	</resultMap>
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-        id, name, description
+        id, name, description,url,sort
     </sql>
 </mapper>

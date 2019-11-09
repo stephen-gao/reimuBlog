@@ -10,8 +10,71 @@
 		<result column="update_time" property="updateTime" />
 	</resultMap>
 
+	<resultMap id="VOBaseResultMap" type="com.reimu.model.vo.ArticleVO">
+		<id column="id" property="id" />
+		<result column="author" property="author" />
+		<result column="author_id" property="authorId" />
+		<result column="title" property="title" />
+		<result column="keyword" property="keyword" />
+		<result column="description" property="description" />
+		<result column="views_num" property="viewsNum" />
+		<result column="comment_num" property="commentNum" />
+		<result column="star_num" property="starNum" />
+		<result column="status" property="status" />
+		<result column="create_time" property="createTime" />
+		<result column="content" property="content" />
+		<result column="category" property="category" />
+		<result column="url" property="url" />
+	</resultMap>
+
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
         id, article_id AS articleId, content, create_time AS createTime, update_time AS updateTime
     </sql>
+
+	<select id="selectOneByAId" parameterType="string" resultMap="VOBaseResultMap">
+		SELECT
+			ai.id,
+			ai.author_id,
+			ai.title,
+			ai.keyword,
+			ai.description,
+			ai.views_num,
+			ai.comment_num,
+			ai.star_num,
+			ai.status,
+			ai.url,
+			ai.create_time,
+			a.content,
+			u.nickname AS author,
+			c.name AS category
+		FROM
+			t_article_info ai
+		LEFT JOIN t_article a ON ai.id = a.article_id
+		LEFT JOIN t_user u ON ai.author_id = u.id
+		LEFT JOIN t_category c ON ai.category_id = c.id
+		WHERE ai.id = #{articleId}
+	</select>
+
+	<select id="selectAPage" resultMap="VOBaseResultMap">
+		SELECT
+			ai.id,
+			ai.author_id,
+			ai.title,
+			ai.keyword,
+			ai.description,
+			ai.views_num,
+			ai.comment_num,
+			ai.star_num,
+			ai.status,
+			ai.url,
+			ai.create_time,
+			u.nickname AS author,
+			c.name AS category
+		FROM
+			t_article_info ai
+		LEFT JOIN t_user u ON ai.author_id = u.id
+		LEFT JOIN t_category c ON ai.category_id = c.id
+		where ai.status = 0
+	</select>
 </mapper>

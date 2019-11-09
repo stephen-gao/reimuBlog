@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>灵梦博客-首页</title>
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="/css/layout.css"/>
+    <!--    <link rel="stylesheet" href="/css/index.css"/>-->
+    <link rel="stylesheet" href="/css/editormd.css"/>
+</head>
+<body>
+<nav>
+    <div class="com-container nav-body" th:include="blog/common/common::nav"></div>
+</nav>
+<section>
+    <div class="com-container">
+        <div class="content-left">
+            <div class="banner">
+                <img src="http://localhost:8080/images/xihu.jpg">
+            </div>
+            <div class="content left-content">
+                <div class="content-article">
+                    <div class="article-title">
+                        <h1 th:text="${article.title}"></h1>
+                    </div>
+                    <div class="article-body markdown-body">
+                        <div th:utext="${article.content}">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-right" th:include="blog/common/common::right">
+
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="com-container footer-content text-colorb" th:include="blog/common/common::footer"></div>
+</footer>
+<div class="back-top">
+    <img class="back-top-icon" src="https://static.oschina.net/new-osc/img/icon/back-to-top.svg" alt="返回顶部">
+</div>
+<!-- basic scripts -->
+<!--[if !IE]> -->
+<script src="/assets/js/jquery-2.1.4.min.js"></script>
+<!-- <![endif]-->
+<!--[if IE]>
+<script src="/assets/js/jquery-1.11.3.min.js"></script>
+<![endif]-->
+<!--<script type="text/javascript">-->
+<!--    if ('ontouchstart' in document.documentElement) document.write("<script src='js/jquery.mobile.custom.min.js'>" + "<" + "/script>");-->
+<!--</script>-->
+<script src="/js/blog.js"></script>
+</body>
+</html>

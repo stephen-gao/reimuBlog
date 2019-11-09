@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    let articleSaveUrl = 'article/save';
-    let articlePublishUrl = 'article/publish';
+    let articleSaveUrl = 'common/save';
+    let articlePublishUrl = 'common/publish';
     let categoryAllUrl = 'category/all';
     let articleReq={
         id:'',
@@ -60,7 +60,7 @@ $(document).ready(function () {
                 message: res.message,
                 type: 'success'
             });
-            loadPage("/article/page","文章管理");
+            loadPage("/common/page","文章管理");
         });
     }
 

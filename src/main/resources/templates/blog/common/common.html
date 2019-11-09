@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="right">
+    <div class="content right-content hot-content">
+        <div class="rignt-brand-body">
+            <span class="rignt-brand text-color6">热门文章</span>
+        </div>
+        <div class="right-list">
+            <ul class="list-ul">
+                <li class="list-li" th:each="hot:${hots}">
+                    <div class="right-li-body">
+                        <a href="#">
+                            <span class="right-li-a" th:text="${hot.title}"></span>
+                        </a>
+                        <br>
+                        <span class="right-li-b" th:text="${hot.createTime}"></span>
+                        <span class="right-li-b" th:text="${hot.viewsNum}"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="content right-content new-content">
+        <div class="rignt-brand-body">
+            <span class="rignt-brand text-color6">最新文章</span>
+        </div>
+        <div class="right-list">
+            <ul class="list-ul">
+                <li class="list-li" th:each="nwe : ${news}">
+                    <div class="right-li-body">
+                        <a href="#">
+                            <span class="right-li-a" th:text="${nwe.title}"></span>
+                        </a>
+                        <br>
+                        <span class="right-li-b" th:text="${nwe.createTime}"></span>
+                        <span class="right-li-b" th:text="${nwe.viewsNum}"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="nav">
+    <div class="nav-brand">
+        <a href="http://localhost:8080/index">
+            <img class="brand-img" src="/images/brand.webp"/>
+        </a>
+    </div>
+    <div class="nav-brand">
+        <a href="http://localhost:8080/index">
+            <span class="brand-label">幻想乡</span>
+        </a>
+    </div>
+    <div class="nav-title">
+        <ul class="nav-navbar-left">
+            <li class="nav-li">
+                <a href="http://localhost:8080/index"><span>首页</span></a>
+            </li>
+            <li class="nav-li" th:each="category : ${categorys}">
+                <a href="#">
+                    <span th:text="${category.getName()}"></span>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav-navbar-right">
+            <li class="nav-li">
+                <a href="#"><span>关于本站</span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div th:fragment="footer">
+    <ul>
+        <li>
+            ©2019
+            <a href="http://localhost:8080/index">幻想乡</a>
+        </li>
+        <li>
+            |
+        </li>
+        <li>
+            某ICP备xxxxxxx号-x
+        </li>
+    </ul>
+</div>
+</body>
+</html>

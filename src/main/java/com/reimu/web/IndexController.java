@@ -1,7 +1,6 @@
 package com.reimu.web;
 
-import com.reimu.model.vo.ArticleVO;
-import com.reimu.model.vo.IndexVO;
+import com.reimu.model.vo.ShowVO;
 import com.reimu.service.IArticleService;
 import com.reimu.service.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +23,13 @@ public class IndexController {
     @Autowired
     private IndexService indexService;
 
-    @Autowired
-    private IArticleService articleService;
 
     @RequestMapping("index")
     public ModelAndView index() {
         ModelAndView mv = new ModelAndView();
-        IndexVO vo = indexService.getIndexVO(1);
-        setIndexData(mv, vo);
+        ShowVO vo = indexService.getIndexVO();
+        setCommonData(mv, vo);
+        setPageData(mv, vo);
         mv.setViewName("blog/index");
         return mv;
     }
@@ -41,8 +39,9 @@ public class IndexController {
     @RequestMapping("p/list/{pageNo}")
     public ModelAndView All(@PathVariable("pageNo") Integer pageNo) {
         ModelAndView mv = new ModelAndView();
-        IndexVO vo = indexService.getIndexVO(pageNo);
-        setIndexData(mv, vo);
+        ShowVO vo = indexService.getPage(pageNo);
+        setCommonData(mv, vo);
+        setPageData(mv, vo);
         mv.setViewName("blog/index");
         return mv;
     }
@@ -50,15 +49,21 @@ public class IndexController {
     @RequestMapping("a/{articleId}")
     public ModelAndView article(@PathVariable("articleId") String aeticleId){
         ModelAndView mv = new ModelAndView();
-        ArticleVO vo = articleService.getOneShowById(aeticleId);
-        mv.addObject("article",vo);
-        mv.setViewName("blog/article/article");
+        ShowVO vo = indexService.getOneShowById(aeticleId);
+        setCommonData(mv, vo);
+        mv.addObject("article",vo.getArticleVO());
+        mv.setViewName("blog/article");
         return mv;
     }
 
 
-    private void setIndexData(ModelAndView mv, IndexVO vo) {
+    private void setCommonData(ModelAndView mv, ShowVO vo) {
         mv.addObject("categorys", vo.getCategories());
+        mv.addObject("hots",vo.getHots());
+        mv.addObject("news",vo.getNews());
+    }
+
+    private void setPageData(ModelAndView mv, ShowVO vo) {
         mv.addObject("articles", vo.getPage().getRecords());
         long current = vo.getPage().getCurrent();
         long pages = vo.getPage().getPages();
