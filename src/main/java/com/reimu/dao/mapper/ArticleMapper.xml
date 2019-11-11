@@ -76,5 +76,9 @@
 		LEFT JOIN t_user u ON ai.author_id = u.id
 		LEFT JOIN t_category c ON ai.category_id = c.id
 		where ai.status = 0
+		<if test="categoryId != null and categoryId != ''">
+			and ai.category_id = #{categoryId}
+		</if>
+		order by ai.create_time desc
 	</select>
 </mapper>

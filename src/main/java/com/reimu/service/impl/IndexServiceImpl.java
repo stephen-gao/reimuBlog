@@ -9,6 +9,7 @@ import com.reimu.dao.CategoryMapper;
 import com.reimu.entity.Article;
 import com.reimu.entity.ArticleInfo;
 import com.reimu.entity.Category;
+import com.reimu.model.QueryArticle;
 import com.reimu.model.vo.ArticleVO;
 import com.reimu.model.vo.ShowVO;
 import com.reimu.service.IndexService;
@@ -36,7 +37,7 @@ public class IndexServiceImpl implements IndexService {
     public ShowVO getIndexVO() {
         ShowVO vo = new ShowVO();
         //查询首页数据
-        IPage<ArticleVO> page = getArticleInfoIPage(1);
+        IPage<ArticleVO> page = getArticleInfoIPage(1, null);
         //查询导航分类
         List<Category> categories = getCategorys();
         //查询热门文章
@@ -55,7 +56,7 @@ public class IndexServiceImpl implements IndexService {
     public ShowVO getPage(Integer pageNo) {
         ShowVO vo = new ShowVO();
         //查询首页数据
-        IPage<ArticleVO> page = getArticleInfoIPage(pageNo);
+        IPage<ArticleVO> page = getArticleInfoIPage(pageNo, null);
         //查询导航分类
         List<Category> categories = getCategorys();
         //查询热门文章
@@ -69,9 +70,27 @@ public class IndexServiceImpl implements IndexService {
         return vo;
     }
 
-    private IPage<ArticleVO> getArticleInfoIPage(int i) {
+    @Override
+    public ShowVO getCategoryPage(Integer pageNo,String categoryId) {
+        ShowVO vo = new ShowVO();
+        //查询首页数据
+        IPage<ArticleVO> page = getArticleInfoIPage(pageNo,categoryId);
+        //查询导航分类
+        List<Category> categories = getCategorys();
+        //查询热门文章
+        List<ArticleInfo> hots = getHotArticles();
+        //查询最新文章
+        List<ArticleInfo> news = getNewArticles();
+        vo.setCategories(categories);
+//        vo.setPage(page);
+        vo.setHots(hots);
+        vo.setNews(news);
+        return vo;
+    }
+
+    private IPage<ArticleVO> getArticleInfoIPage(int i, String categoryId) {
         IPage<ArticleVO> page = new Page<>(i, 10);
-        page = articleMapper.selectAPage(page);
+        page = articleMapper.selectAPage(page,categoryId);
         return page;
     }
 
@@ -95,24 +114,24 @@ public class IndexServiceImpl implements IndexService {
         return vo;
     }
 
-    private ArticleVO getArticle(String id){
+    private ArticleVO getArticle(String id) {
         ArticleVO articleVO = articleMapper.selectOneByAId(id);
         return articleVO;
     }
 
 
-    private List<Category> getCategorys(){
+    private List<Category> getCategorys() {
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.orderByAsc("sort");
         List<Category> categories = categoryMapper.selectList(wrapper);
         return categories;
     }
 
-    private List<ArticleInfo> getHotArticles(){
+    private List<ArticleInfo> getHotArticles() {
         return getArticleInfos("views_num");
     }
 
-    private List<ArticleInfo> getNewArticles(){
+    private List<ArticleInfo> getNewArticles() {
         return getArticleInfos("create_time");
     }
 

@@ -59,8 +59,8 @@
                 <a href="http://localhost:8080/index"><span>首页</span></a>
             </li>
             <li class="nav-li" th:each="category : ${categorys}">
-                <a href="#">
-                    <span th:text="${category.getName()}"></span>
+                <a th:href="${category.url +'/1'}">
+                    <span th:text="${category.name}"></span>
                 </a>
             </li>
         </ul>

@@ -3,6 +3,7 @@ $(document).ready(function () {
         id:'',
         name:'',
         description:'',
+        sort:''
     };
     let categoryTableId = '#category-table';
     let pageUrl = '/category/list';
@@ -17,6 +18,7 @@ $(document).ready(function () {
             $("#categoryId").val(row.id);
             $("#categoryName").val(row.name);
             $("#categoryDescription").val(row.description);
+            $("#categorySort").val(row.sort);
             $("#categoryModel").modal('show');
         },
 
@@ -31,6 +33,8 @@ $(document).ready(function () {
         {field: 'id', title: 'ID', align: 'left' , visible:false},
         {field: 'name', title: '名称', align: 'center'},
         {field: 'description', title: '描述', align: 'center'},
+        {field: 'url', title: '地址', align: 'center'},
+        {field: 'sort', title: '排序', align: 'center'},
         {
             field: 'option', title: '操作', align: 'center', width:200, events:window.operateEvents,
             formatter: function (value, row, index) {
@@ -47,6 +51,7 @@ $(document).ready(function () {
         categoryReq.id = $("#categoryId").val();
         categoryReq.name = $("#categoryName").val();
         categoryReq.description = $("#categoryDescription").val();
+        categoryReq.sort = $("#categorySort").val();
         let postUrl = categoryReq.id !== ''&& categoryReq.id !== null?categoryEditUrl:categoryAddUrl;
 
         REQUEST.post(postUrl,categoryReq,function (res) {

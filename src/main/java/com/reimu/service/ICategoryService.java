@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2019-10-28
  */
 public interface ICategoryService extends IService<Category> {
-	
+	void add(Category category);
 }

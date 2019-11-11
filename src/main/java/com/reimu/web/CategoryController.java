@@ -6,7 +6,9 @@ import com.reimu.common.http.HttpResponse;
 import com.reimu.entity.Category;
 import com.reimu.model.page.CategoryPage;
 import com.reimu.service.ICategoryService;
+import com.reimu.utils.ShortIdUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,7 +58,7 @@ public class CategoryController {
     @RequestMapping("add")
     @ResponseBody
     public HttpResponse save(@RequestBody Category category){
-        categoryService.save(category);
+        categoryService.add(category);
         return HttpResponse.defaultSuccess();
     }
 

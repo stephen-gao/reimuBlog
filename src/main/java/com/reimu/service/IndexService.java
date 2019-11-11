@@ -8,5 +8,7 @@ public interface IndexService {
 
     ShowVO getPage(Integer pageNo);
 
+    ShowVO getCategoryPage(Integer pageNo,String categoryId);
+
     ShowVO getOneShowById(String id);
 }

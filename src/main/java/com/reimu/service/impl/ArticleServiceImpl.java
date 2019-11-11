@@ -1,6 +1,5 @@
 package com.reimu.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.reimu.dao.ArticleInfoMapper;
 import com.reimu.dao.ArticleSrcMapper;
@@ -13,10 +12,9 @@ import com.reimu.model.vo.ArticleVO;
 import com.reimu.security.SysUser;
 import com.reimu.service.IArticleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.reimu.utils.ArticleIdUtil;
+import com.reimu.utils.ShortIdUtil;
 import com.reimu.utils.DateUtil;
 import com.reimu.utils.UserUtil;
-import org.omg.CORBA.DATA_CONVERSION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -46,6 +44,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     @Value("${default.url}")
     private String defaultUrl;
 
+    @Value("${default.article}")
+    private String articleUrl;
+
     @Override
     public void save(ArticleSaveUpdateRequest request) {
 
@@ -67,7 +68,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         info.setCategoryId(request.getCategoryId());
         //设置ID
         info.setId(createId());
-        info.setUrl(defaultUrl+info.getId());
+        info.setUrl(defaultUrl+articleUrl+info.getId());
         info.setAuthorId(user.getId());
         //info
         articleInfoMapper.insert(info);
@@ -133,14 +134,14 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     }
 
     private String createId(){
-        String id = ArticleIdUtil.getArticleId();
+        String id = ShortIdUtil.getShortId();
         boolean b = true;
         while (b){
             ArticleInfo info = articleInfoMapper.selectById(id);
             if(info == null) {
                 b = false;
             }else {
-                id = ArticleIdUtil.getArticleId();
+                id = ShortIdUtil.getShortId();
             }
         }
         return id;

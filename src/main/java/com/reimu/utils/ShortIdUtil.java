@@ -13,7 +13,7 @@ import java.util.UUID;
  * @version: 1.0
  **/
 @Log4j2
-public class ArticleIdUtil {
+public class ShortIdUtil {
     /**
      * 得到8位的UUID-(码)
      */
@@ -22,7 +22,7 @@ public class ArticleIdUtil {
             "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
             "U", "V", "W", "X", "Y", "Z" };
 
-    private static String getUUID_8() {
+    public static String getUUID_8() {
         StringBuffer shortBuffer = new StringBuffer();
         String uuid = UUID.randomUUID().toString().replace("-", "");
         for (int i = 0; i < 8; i++) {
@@ -33,12 +33,12 @@ public class ArticleIdUtil {
         return shortBuffer.toString();
     }
 
-    public static String getArticleId(){
+    public static String getShortId(){
         return DateUtil.convert(new Date(), "yyMM")+getUUID_8();
     }
 
     public static void main(String[] args) {
-        log.info(getArticleId());
+        log.info(getShortId());
 
     }
 }

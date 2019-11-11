@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.websocket.server.PathParam;
+
 /**
  * ...
  *
@@ -35,7 +37,6 @@ public class IndexController {
     }
 
 
-
     @RequestMapping("p/list/{pageNo}")
     public ModelAndView All(@PathVariable("pageNo") Integer pageNo) {
         ModelAndView mv = new ModelAndView();
@@ -46,12 +47,22 @@ public class IndexController {
         return mv;
     }
 
+    @RequestMapping("c/{categoryId}/{pageNo}")
+    public ModelAndView categoryAll(@PathVariable("categoryId") String categoryId, @PathVariable("pageNo") Integer pageNo) {
+        ModelAndView mv = new ModelAndView();
+        ShowVO vo = indexService.getCategoryPage(pageNo, categoryId);
+        setCommonData(mv, vo);
+        setPageData(mv, vo);
+        mv.setViewName("blog/index");
+        return mv;
+    }
+
     @RequestMapping("a/{articleId}")
-    public ModelAndView article(@PathVariable("articleId") String aeticleId){
+    public ModelAndView article(@PathVariable("articleId") String aeticleId) {
         ModelAndView mv = new ModelAndView();
         ShowVO vo = indexService.getOneShowById(aeticleId);
         setCommonData(mv, vo);
-        mv.addObject("article",vo.getArticleVO());
+        mv.addObject("article", vo.getArticleVO());
         mv.setViewName("blog/article");
         return mv;
     }
@@ -59,8 +70,8 @@ public class IndexController {
 
     private void setCommonData(ModelAndView mv, ShowVO vo) {
         mv.addObject("categorys", vo.getCategories());
-        mv.addObject("hots",vo.getHots());
-        mv.addObject("news",vo.getNews());
+        mv.addObject("hots", vo.getHots());
+        mv.addObject("news", vo.getNews());
     }
 
     private void setPageData(ModelAndView mv, ShowVO vo) {

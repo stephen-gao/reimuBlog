@@ -9,4 +9,5 @@ package com.reimu.model.page;
  * @blame: GaoSheng
  **/
 public class CategoryPage extends BasePage {
+
 }

@@ -22,7 +22,6 @@ public class Category implements Serializable {
 	/**
 	 * 
 	 */
-	@TableId(type = IdType.UUID)
 	private String id;
 
 	/**
