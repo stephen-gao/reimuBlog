@@ -20,4 +20,8 @@
     <sql id="Base_Column_List">
         id, author_id AS authorId, title, keyword, description, views_num AS viewsNum, comment_num AS commentNum, star_num AS starNum, status, create_time AS createTime, update_time AS updateTime
     </sql>
+
+	<update id="viewsNumAdd" parameterType="string">
+		UPDATE t_article_info SET views_num=views_num+1 WHERE id  = #{articleId}
+	</update>
 </mapper>

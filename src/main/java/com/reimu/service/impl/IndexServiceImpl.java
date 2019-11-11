@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.reimu.dao.ArticleInfoMapper;
 import com.reimu.dao.ArticleMapper;
 import com.reimu.dao.CategoryMapper;
+import com.reimu.dao.VistorLogMapper;
 import com.reimu.entity.Article;
 import com.reimu.entity.ArticleInfo;
 import com.reimu.entity.Category;
@@ -32,6 +33,9 @@ public class IndexServiceImpl implements IndexService {
     @Autowired
     private ArticleMapper articleMapper;
 
+    @Autowired
+    VistorLogMapper vistorLogMapper;
+
 
     @Override
     public ShowVO getIndexVO() {
@@ -49,6 +53,8 @@ public class IndexServiceImpl implements IndexService {
         vo.setPage(page);
         vo.setHots(hots);
         vo.setNews(news);
+        vo.setAllCount(allCount());
+        vo.setIpCount(ipCount());
         return vo;
     }
 
@@ -67,6 +73,8 @@ public class IndexServiceImpl implements IndexService {
         vo.setPage(page);
         vo.setHots(hots);
         vo.setNews(news);
+        vo.setAllCount(allCount());
+        vo.setIpCount(ipCount());
         return vo;
     }
 
@@ -82,9 +90,11 @@ public class IndexServiceImpl implements IndexService {
         //查询最新文章
         List<ArticleInfo> news = getNewArticles();
         vo.setCategories(categories);
-//        vo.setPage(page);
+        vo.setPage(page);
         vo.setHots(hots);
         vo.setNews(news);
+        vo.setAllCount(allCount());
+        vo.setIpCount(ipCount());
         return vo;
     }
 
@@ -111,6 +121,8 @@ public class IndexServiceImpl implements IndexService {
         vo.setCategories(categories);
         vo.setHots(hots);
         vo.setNews(news);
+        vo.setAllCount(allCount());
+        vo.setIpCount(ipCount());
         return vo;
     }
 
@@ -143,5 +155,15 @@ public class IndexServiceImpl implements IndexService {
         page = articleInfoMapper.selectPage(page, wrapper);
         List<ArticleInfo> hots = page.getRecords();
         return hots;
+    }
+
+    private Integer allCount(){
+        Integer allvistor = vistorLogMapper.countAllvistor();
+        return allvistor;
+    }
+
+    private Integer ipCount(){
+        Integer countIp = vistorLogMapper.countIp();
+        return countIp;
     }
 }

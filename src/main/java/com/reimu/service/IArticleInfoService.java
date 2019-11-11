@@ -12,5 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2019-10-28
  */
 public interface IArticleInfoService extends IService<ArticleInfo> {
-	
+
+    void viewsNumAdd(String articleId);
 }

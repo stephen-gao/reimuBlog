@@ -12,5 +12,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2019-10-28
  */
 public interface VistorLogMapper extends BaseMapper<VistorLog> {
+    Integer countAllvistor();
 
+    Integer countIp();
 }

@@ -4,10 +4,10 @@ $(document).ready(function () {
         name: '',
         description: '',
     };
-    let articleTableId = '#common-table';
-    let pageUrl = '/common/list';
-    let articleEditUrl = '/common/update';
-    let articleDelUrl = '/common/delete/';
+    let articleTableId = '#article-table';
+    let pageUrl = '/article/list';
+    let articleEditUrl = '/article/update';
+    let articleDelUrl = '/article/delete/';
     //默认放columns前面，否则会注册不上
     window.operateEvents = {
         //修改

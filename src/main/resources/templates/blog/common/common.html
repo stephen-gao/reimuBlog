@@ -10,7 +10,7 @@
             <ul class="list-ul">
                 <li class="list-li" th:each="hot:${hots}">
                     <div class="right-li-body">
-                        <a href="#">
+                        <a th:href="${hot.url}">
                             <span class="right-li-a" th:text="${hot.title}"></span>
                         </a>
                         <br>
@@ -29,7 +29,7 @@
             <ul class="list-ul">
                 <li class="list-li" th:each="nwe : ${news}">
                     <div class="right-li-body">
-                        <a href="#">
+                        <a th:href="${nwe.url}">
                             <span class="right-li-a" th:text="${nwe.title}"></span>
                         </a>
                         <br>
@@ -66,7 +66,7 @@
         </ul>
         <ul class="nav-navbar-right">
             <li class="nav-li">
-                <a href="#"><span>关于本站</span></a>
+<!--                <a href="#"><span>关于本站</span></a>-->
             </li>
         </ul>
     </div>
@@ -83,6 +83,18 @@
         </li>
         <li>
             某ICP备xxxxxxx号-x
+        </li>
+        <li>
+            |
+        </li>
+        <li>
+            总访问:[[${allCount}]]
+        </li>
+        <li>
+            |
+        </li>
+        <li>
+            访问IP:[[${ipCount}]]
         </li>
     </ul>
 </div>

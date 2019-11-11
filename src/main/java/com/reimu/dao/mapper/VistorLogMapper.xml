@@ -15,4 +15,12 @@
     <sql id="Base_Column_List">
         id, type, content_id AS contentId, vistor_url AS vistorUrl, vistor_ip AS vistorIp, vistor_time AS vistorTime
     </sql>
+
+	<select id="countAllvistor" resultType="int">
+		select COUNT(*) as total from t_vistor_log where to_days(vistor_time) = to_days(now());
+	</select>
+
+	<select id="countIp" resultType="int">
+		SELECT COUNT(*)FROM(select vistor_ip from t_vistor_log where to_days(vistor_time) = to_days(now()) GROUP BY vistor_ip) t
+	</select>
 </mapper>
