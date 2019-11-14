@@ -27,7 +27,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
             response.sendRedirect("/login-error");
         } else if (!response.isCommitted()) {
             // 非AJAX请求，跳转系统默认的403错误界面，在web.xml中配置
-            response.sendRedirect("/login");
+            response.sendRedirect("/manage/login");
         }
     }
 }

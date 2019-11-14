@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @since 2019-10-22
  */
 @Controller
-@RequestMapping("/user")
+@RequestMapping("manage/user")
 public class UserController {
 
     @Autowired

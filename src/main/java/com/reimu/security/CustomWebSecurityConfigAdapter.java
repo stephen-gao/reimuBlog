@@ -52,13 +52,13 @@ public class CustomWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter
                 .and()
                 // 设置登陆页
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/manage/login")
                 // 设置登陆成功页
                 .defaultSuccessUrl("/manage", true)
                 .failureUrl("/login-error").permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login").permitAll()
+                .logoutSuccessUrl("/manage/login").permitAll()
                 .and()
                 .exceptionHandling()
 
@@ -96,13 +96,9 @@ public class CustomWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter
 
     private HttpSecurity addAntMatchers(HttpSecurity http) throws Exception {
         List<SysPermission> permissionList = permissionService.getAllPermAndRole();
-        String[] writeList = {"/", "/index", "/p/**", "/a/**", "/c/**", "/login", "/login-error", "/404", "/403", "/500"};
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http.authorizeRequests();
         log.info("注册中心配置信息：");
-        // 如果有允许匿名的url，填在下面
-        registry.antMatchers(writeList).permitAll();
-        log.info("权限白名单：{}", CollectionUtils.arrayToList(writeList));
-//        registry.antMatchers("/test/b").hasRole("B");
+        registry.antMatchers("/manage/**").authenticated();
         // 设置接口权限
         permissionList.forEach(p -> {
             if (!StringUtils.isEmpty(p.getRoleName())) {
@@ -113,7 +109,7 @@ public class CustomWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter
                 log.info("权限[{}]-[{}]：禁止访问", p.getName(), p.getCode());
             }
         });
-        registry.anyRequest().authenticated();
+        registry.anyRequest().permitAll();
         return http;
     }
 

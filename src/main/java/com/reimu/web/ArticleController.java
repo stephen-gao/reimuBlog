@@ -4,11 +4,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.reimu.common.http.HttpResponse;
 import com.reimu.entity.ArticleInfo;
+import com.reimu.entity.Category;
 import com.reimu.model.page.ArticlePage;
 import com.reimu.model.request.ArticleSaveUpdateRequest;
 import com.reimu.model.vo.ArticleVO;
 import com.reimu.service.IArticleInfoService;
 import com.reimu.service.IArticleService;
+import com.reimu.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * <p>
@@ -26,7 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @since 2019-10-28
  */
 @Controller
-@RequestMapping("/article")
+@RequestMapping("manage/article")
 public class ArticleController {
 
     @Autowired
@@ -34,6 +38,9 @@ public class ArticleController {
 
     @Autowired
     private IArticleInfoService articleInfoService;
+
+    @Autowired
+    private ICategoryService categoryService;
 
 
     @RequestMapping("page")
@@ -53,9 +60,11 @@ public class ArticleController {
     @RequestMapping("edit-page/{id}")
     public ModelAndView editPage(@PathVariable("id")String id){
         ArticleVO vo = articleService.getOneById(id);
+        List<Category> categories = categoryService.list();
         ModelAndView mv = new ModelAndView();
         mv.setViewName("manage/system/article-edit");
         mv.addObject("articleVO",vo);
+        mv.addObject("categories",categories);
         return mv;
     }
 

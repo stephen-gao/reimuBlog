@@ -11,11 +11,11 @@ $(document).ready(function () {
     };
     let permissionParents = [];
     let permissionTableId = '#permission-table';
-    let pageUrl = '/permission/permission-page-data';
-    let permissionParentUrl = '/permission/permission-parent';
-    let permissionEditUrl = '/permission/permission-edit';
-    let permissionAddUrl = '/permission/permission-add';
-    let permissionDelUrl = '/permission/permission-delete/';
+    let pageUrl = '/manage/permission/permission-page-data';
+    let permissionParentUrl = '/manage/permission/permission-parent';
+    let permissionEditUrl = '/manage/permission/permission-edit';
+    let permissionAddUrl = '/manage/permission/permission-add';
+    let permissionDelUrl = '/manage/permission/permission-delete/';
     //默认放columns前面，否则会注册不上
     window.operateEvents= {
         //修改

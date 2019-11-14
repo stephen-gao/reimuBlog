@@ -34,8 +34,9 @@
     <script src="/assets/js/respond.min.js"></script>
     <![endif]-->
     <script>
-        if(window.location.pathname !== '/login'){
-            window.location.href = '/login'
+        if(window.location.pathname !== '/manage/login'){
+            console.log(window.location.pathname)
+            window.location.href = '/manage/login'
         }
     </script>
 
@@ -66,7 +67,7 @@
 
                                     <div class="space-6"></div>
 
-                                    <form action="/login" method="post">
+                                    <form action="/manage/login" method="post">
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">

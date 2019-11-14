@@ -10,12 +10,12 @@ $(document).ready(function () {
         permissionIds:[]
     };
     let roleTableId = "#role-table";
-    let rolePageUrl = "/role/role-page-data";
-    let roleAddUrl = '/role/role-add';
-    let roleEditUrl = '/role/role-edit';
-    let roleDelUrl = '/role/role-delete/';
-    let rpSaveUrl = "/rolepermission/rp-save";
-    let rpSelectedUrl = "/rolepermission/rp-tree/";
+    let rolePageUrl = "/manage/role/role-page-data";
+    let roleAddUrl = '/manage/role/role-add';
+    let roleEditUrl = '/manage/role/role-edit';
+    let roleDelUrl = '/manage/role/role-delete/';
+    let rpSaveUrl = "/manage/rolepermission/rp-save";
+    let rpSelectedUrl = "/manage/rolepermission/rp-tree/";
     //默认放columns前面，否则会注册不上
     window.operateEvents = {
         //修改

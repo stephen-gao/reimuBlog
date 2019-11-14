@@ -1,6 +1,7 @@
 $(document).ready(function () {
-    let articleEditSaveUrl = 'common/update';
-    let articleEditPublishUrl = 'common/updpublish';
+    let articleEditSaveUrl = '/manage/article/update';
+    let articleEditPublishUrl = '/manage/article/updpublish';
+    let categoryAllUrl = '/manage/category/all';
     let articleReq={
         id:'',
         title:'',
@@ -58,9 +59,15 @@ $(document).ready(function () {
                 message: res.message,
                 type: 'success'
             });
-            loadPage("/common/page","文章管理");
+            loadPage("/manage/article/page","文章管理");
         });
     }
 
+    // REQUEST.get(categoryAllUrl,function (res) {
+    //     let categorys = res.data;
+    //     for(let i = 0;i<categorys.length;i++){
+    //         $("#articleCategory").append('<option value="'+ categorys[i].id +'">'+ categorys[i].name+'</option>')
+    //     }
+    // })
 
 });

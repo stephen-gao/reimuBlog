@@ -11,11 +11,11 @@ $(document).ready(function () {
     };
     let roleList = [];
     let userTableId = "#user-table";
-    let pageUrl = "/user/user-page-data";
-    let addUrl = "/user/user-add";
-    let editUrl = "/user/user-edit";
-    let userDelUrl = "/user/user-delete/";
-    let roleAllUrl = "/role/list/all";
+    let pageUrl = "/manage/user/user-page-data";
+    let addUrl = "/manage/user/user-add";
+    let editUrl = "/manage/user/user-edit";
+    let userDelUrl = "/manage/user/user-delete/";
+    let roleAllUrl = "/manage/role/list/all";
 
     //默认放columns前面，否则会注册不上
     window.operateEvents = {

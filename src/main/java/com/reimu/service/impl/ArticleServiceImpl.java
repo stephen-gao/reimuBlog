@@ -129,6 +129,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         vo.setDescription(info.getDescription());
         vo.setKeyword(info.getKeyword());
         vo.setTitle(info.getTitle());
+        vo.setCategory(info.getCategoryId());
         vo.setContentSrc(src.getContentSrc());
         return vo;
     }

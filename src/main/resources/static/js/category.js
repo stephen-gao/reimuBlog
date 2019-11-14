@@ -6,10 +6,10 @@ $(document).ready(function () {
         sort:''
     };
     let categoryTableId = '#category-table';
-    let pageUrl = '/category/list';
-    let categoryEditUrl = '/category/update';
-    let categoryAddUrl = '/category/add';
-    let categoryDelUrl = '/category/delete/';
+    let pageUrl = '/manage/category/list';
+    let categoryEditUrl = '/manage/category/update';
+    let categoryAddUrl = '/manage/category/add';
+    let categoryDelUrl = '/manage/category/delete/';
     //默认放columns前面，否则会注册不上
     window.operateEvents= {
         //修改

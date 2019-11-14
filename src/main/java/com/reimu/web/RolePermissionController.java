@@ -23,7 +23,7 @@ import java.util.List;
  * @since 2019-10-22
  */
 @Controller
-@RequestMapping("/rolepermission")
+@RequestMapping("manage/rolepermission")
 public class RolePermissionController {
 
     @Autowired

@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    let articleSaveUrl = 'common/save';
-    let articlePublishUrl = 'common/publish';
-    let categoryAllUrl = 'category/all';
+    let articleSaveUrl = '/manage/article/save';
+    let articlePublishUrl = '/manage/article/publish';
+    let categoryAllUrl = '/manage/category/all';
     let articleReq={
         id:'',
         title:'',
@@ -60,7 +60,7 @@ $(document).ready(function () {
                 message: res.message,
                 type: 'success'
             });
-            loadPage("/common/page","文章管理");
+            loadPage("/manage/article/page","文章管理");
         });
     }
 
