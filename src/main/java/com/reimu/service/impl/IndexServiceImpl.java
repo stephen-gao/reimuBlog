@@ -82,7 +82,7 @@ public class IndexServiceImpl implements IndexService {
         //查询最新文章
         List<ArticleInfo> news = getNewArticles();
         vo.setCategories(categories);
-//        vo.setPage(page);
+        vo.setPage(page);
         vo.setHots(hots);
         vo.setNews(news);
         return vo;
