@@ -27,4 +27,8 @@ public class ShowVO {
     private List<ArticleInfo> news;
 
     private IPage<ArticleVO> page;
+
+    private Integer allCount;
+
+    private Integer ipCount;
 }

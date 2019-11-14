@@ -4,6 +4,7 @@ import com.reimu.entity.ArticleInfo;
 import com.reimu.dao.ArticleInfoMapper;
 import com.reimu.service.IArticleInfoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +17,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ArticleInfoServiceImpl extends ServiceImpl<ArticleInfoMapper, ArticleInfo> implements IArticleInfoService {
-	
+
+    @Autowired
+    private ArticleInfoMapper articleInfoMapper;
+
+    @Override
+    public void viewsNumAdd(String articleId){
+        articleInfoMapper.viewsNumAdd(articleId);
+    }
 }

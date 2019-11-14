@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2019-10-28
  */
 public interface ArticleInfoMapper extends BaseMapper<ArticleInfo> {
-
+    void viewsNumAdd(String articleId);
 }
