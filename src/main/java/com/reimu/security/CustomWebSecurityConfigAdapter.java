@@ -52,13 +52,13 @@ public class CustomWebSecurityConfigAdapter extends WebSecurityConfigurerAdapter
                 .and()
                 // 设置登陆页
                 .formLogin()
-                .loginPage("/manage/login")
+                .loginPage("/login")
                 // 设置登陆成功页
                 .defaultSuccessUrl("/manage", true)
                 .failureUrl("/login-error").permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/manage/login").permitAll()
+                .logoutSuccessUrl("/login").permitAll()
                 .and()
                 .exceptionHandling()
 

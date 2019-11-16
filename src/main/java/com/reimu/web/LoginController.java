@@ -18,10 +18,10 @@ public class LoginController {
      * @since: 2019/10/30
      * @return: org.springframework.web.servlet.ModelAndView
      */
-    @RequestMapping("/manage/login")
+    @RequestMapping("/login")
     public ModelAndView login(){
         ModelAndView mv= new ModelAndView();
-        mv.setViewName("/manage/system/login");
+        mv.setViewName("manage/system/login");
         return mv;
     }
 

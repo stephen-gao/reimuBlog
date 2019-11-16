@@ -65,14 +65,14 @@
         </a>
     </div>
     <div class="nav-brand">
-        <a href="http://localhost:8080/index">
+        <a th:href="${defaultUrl}">
             <span class="brand-label">幻想乡</span>
         </a>
     </div>
     <div class="nav-title">
         <ul class="nav-navbar-left">
             <li class="nav-li">
-                <a href="http://localhost:8080/index"><span>首页</span></a>
+                <a th:href="${defaultUrl}"><span>首页</span></a>
             </li>
             <li class="nav-li" th:each="category : ${categories}">
                 <a th:href="${category.url +'/1'}">

@@ -43,16 +43,19 @@ public class IndexController {
     @VisteLog
     @RequestMapping("/")
     public ModelAndView index1() {
+        log.info("进入首页");
         return getIndex();
     }
 
     @VisteLog
     @RequestMapping("index")
     public ModelAndView index2() {
+        log.info("进入首页");
         return getIndex();
     }
 
     private ModelAndView getIndex() {
+        log.info("查询首页数据");
         ModelAndView mv = new ModelAndView();
         IPage<ArticleVO> page = indexService.getIndexVO();
         setCommonData(mv);
