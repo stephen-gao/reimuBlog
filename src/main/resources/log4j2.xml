@@ -3,7 +3,7 @@
 
     <Properties>
         <Property name="pattern">%highlight{%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L -%m%n}{FATAL=red, ERROR=red, WARN=yellow, INFO=cyan, TRACE=blue}</Property>
-        <Property name="filepath">d:/logs/reimuBlog</Property>
+        <Property name="filepath">${sys:log.path}</Property>
     </Properties>
     <appenders>
         <!--  输出控制台的配置 -->
@@ -15,7 +15,7 @@
         </Console>
 
         <!--配置自定义日志，按天输出-->
-        <RollingFile name="RollingFileInfo" fileName="${filepath}/shop-user.log" filePattern="${filepath}/shop-user-%d{yyyy-MM-dd}.log" >
+        <RollingFile name="RollingFileInfo" fileName="${filepath}/gensukyo.log" filePattern="${filepath}/gensukyo-%d{yyyy-MM-dd}.log" >
             <Filters>
                 <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
                 <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
@@ -28,8 +28,8 @@
         </RollingFile>
 
         <!-- 把系统所有的error全部打到这个文件里  -->
-        <RollingFile name="RollingFileError" fileName="${filepath}/shop-user_error.log"
-                     filePattern="${filepath}/$${date:yyyy-MM}/shop-user_error-%d{yyyy-MM-dd}-%i.log">
+        <RollingFile name="RollingFileError" fileName="${filepath}/sgensukyo_error.log"
+                     filePattern="${filepath}/$${date:yyyy-MM}/gensukyo_error-%d{yyyy-MM-dd}-%i.log">
             <ThresholdFilter level="ERROR"/>
             <PatternLayout pattern="${pattern}"/>
             <Policies>
