@@ -2,6 +2,7 @@ $(document).ready(function () {
     let articleSaveUrl = '/manage/article/save';
     let articlePublishUrl = '/manage/article/publish';
     let categoryAllUrl = '/manage/category/all';
+    let specialAllUrl = '/manage/special/all';
     let articleReq={
         id:'',
         title:'',
@@ -9,7 +10,8 @@ $(document).ready(function () {
         keyword:'',
         contentSrc:'',
         content:'',
-        categoryId:''
+        categoryId:'',
+        specials:[]
     };
     let editorMarkdown = editormd("markdown-edit", {
         width: "100%",
@@ -47,6 +49,12 @@ $(document).ready(function () {
     });
 
     function saveOrPublish(url) {
+        // 专题
+        let chkValue =[];
+        $('input[name="SelectSpecial"]:checked').each(function(){
+            chkValue.push($(this).val());
+        });
+        articleReq.specials = chkValue;
         articleReq.id = $("#articleId").val();
         articleReq.title = $("#articleTitle").val();
         articleReq.description = $("#articleDescription").val();
@@ -69,6 +77,22 @@ $(document).ready(function () {
         for(let i = 0;i<categorys.length;i++){
             $("#articleCategory").append('<option value="'+ categorys[i].id +'">'+ categorys[i].name+'</option>')
         }
+    })
+
+    REQUEST.get(specialAllUrl,function (res) {
+        let list = res.data;
+        let inHtml = '<div class="row">';
+        for(let i = 0;i<list.length;i++){
+            if(i!== 0  && i%3 === 0){
+                inHtml += '</div></div><div class="row">';
+            }
+            inHtml += '<div class="col-sm-4">';
+            inHtml += '<input type="checkbox" name="SelectSpecial" value="'+list[i].id+'" class="ace ace-checkbox-2" />';
+            inHtml += '<span class="lbl">'+list[i].name+'</span>';
+            inHtml += '</div>';
+        }
+        inHtml += '</div>';
+        $("#articleSpecialDiv").append(inHtml);
     })
 
 

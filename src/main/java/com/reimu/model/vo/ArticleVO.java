@@ -68,4 +68,6 @@ public class ArticleVO {
      * 分类
      */
     private String category;
+
+    private String categoryUrl;
 }

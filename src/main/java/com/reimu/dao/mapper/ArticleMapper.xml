@@ -24,6 +24,7 @@
 		<result column="create_time" property="createTime" />
 		<result column="content" property="content" />
 		<result column="category" property="category" />
+		<result column="category_url" property="categoryUrl" />
 		<result column="url" property="url" />
 	</resultMap>
 
@@ -70,7 +71,8 @@
 			ai.url,
 			ai.create_time,
 			u.nickname AS author,
-			c.name AS category
+			c.name AS category,
+			c.url AS category_url
 		FROM
 			t_article_info ai
 		LEFT JOIN t_user u ON ai.author_id = u.id
@@ -78,6 +80,34 @@
 		where ai.status = 0
 		<if test="categoryId != null and categoryId != ''">
 			and ai.category_id = #{categoryId}
+		</if>
+		order by ai.create_time desc
+	</select>
+
+	<select id="selectSAPage" resultMap="VOBaseResultMap">
+		SELECT
+			ai.id,
+			ai.author_id,
+			ai.title,
+			ai.keyword,
+			ai.description,
+			ai.views_num,
+			ai.comment_num,
+			ai.star_num,
+			ai.status,
+			ai.url,
+			ai.create_time,
+			u.nickname AS author,
+			c.name AS category,
+			c.url AS category_url
+		FROM
+			t_article_info ai
+		LEFT JOIN t_user u ON ai.author_id = u.id
+		LEFT JOIN t_category c ON ai.category_id = c.id
+		LEFT JOIN t_special_article sa ON ai.id = sa.article_id
+		where ai.status = 0
+		<if test="specialId != null and specialId != ''">
+			and sa.special_id = #{specialId}
 		</if>
 		order by ai.create_time desc
 	</select>

@@ -3,13 +3,11 @@ package com.reimu.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.reimu.dao.ArticleInfoMapper;
-import com.reimu.dao.ArticleMapper;
-import com.reimu.dao.CategoryMapper;
-import com.reimu.dao.VistorLogMapper;
+import com.reimu.dao.*;
 import com.reimu.entity.Article;
 import com.reimu.entity.ArticleInfo;
 import com.reimu.entity.Category;
+import com.reimu.entity.Special;
 import com.reimu.model.QueryArticle;
 import com.reimu.model.vo.ArticleVO;
 import com.reimu.model.vo.ShowVO;
@@ -36,66 +34,29 @@ public class IndexServiceImpl implements IndexService {
     @Autowired
     VistorLogMapper vistorLogMapper;
 
+    @Autowired
+    private SpecialMapper specialMapper;
+
 
     @Override
-    public ShowVO getIndexVO() {
-        ShowVO vo = new ShowVO();
+    public IPage<ArticleVO> getIndexVO() {
         //查询首页数据
         IPage<ArticleVO> page = getArticleInfoIPage(1, null);
-        //查询导航分类
-        List<Category> categories = getCategorys();
-        //查询热门文章
-        List<ArticleInfo> hots = getHotArticles();
-        //查询最新文章
-        List<ArticleInfo> news = getNewArticles();
-
-        vo.setCategories(categories);
-        vo.setPage(page);
-        vo.setHots(hots);
-        vo.setNews(news);
-        vo.setAllCount(allCount());
-        vo.setIpCount(ipCount());
-        return vo;
+        return page;
     }
 
     @Override
-    public ShowVO getPage(Integer pageNo) {
-        ShowVO vo = new ShowVO();
+    public IPage<ArticleVO> getPage(Integer pageNo) {
         //查询首页数据
         IPage<ArticleVO> page = getArticleInfoIPage(pageNo, null);
-        //查询导航分类
-        List<Category> categories = getCategorys();
-        //查询热门文章
-        List<ArticleInfo> hots = getHotArticles();
-        //查询最新文章
-        List<ArticleInfo> news = getNewArticles();
-        vo.setCategories(categories);
-        vo.setPage(page);
-        vo.setHots(hots);
-        vo.setNews(news);
-        vo.setAllCount(allCount());
-        vo.setIpCount(ipCount());
-        return vo;
+        return page;
     }
 
     @Override
-    public ShowVO getCategoryPage(Integer pageNo,String categoryId) {
-        ShowVO vo = new ShowVO();
+    public IPage<ArticleVO> getCategoryPage(Integer pageNo,String categoryId) {
         //查询首页数据
         IPage<ArticleVO> page = getArticleInfoIPage(pageNo,categoryId);
-        //查询导航分类
-        List<Category> categories = getCategorys();
-        //查询热门文章
-        List<ArticleInfo> hots = getHotArticles();
-        //查询最新文章
-        List<ArticleInfo> news = getNewArticles();
-        vo.setCategories(categories);
-        vo.setPage(page);
-        vo.setHots(hots);
-        vo.setNews(news);
-        vo.setAllCount(allCount());
-        vo.setIpCount(ipCount());
-        return vo;
+        return page;
     }
 
     private IPage<ArticleVO> getArticleInfoIPage(int i, String categoryId) {
@@ -104,46 +65,49 @@ public class IndexServiceImpl implements IndexService {
         return page;
     }
 
+    @Override
+    public IPage<ArticleVO> getSpecialPage(Integer pageNo, String specialId) {
+        IPage<ArticleVO> page = new Page<>(pageNo, 10);
+        page = articleMapper.selectSAPage(page,specialId);
+        return page;
+    }
+
 
     @Override
-    public ShowVO getOneShowById(String id) {
-        ShowVO vo = new ShowVO();
+    public ArticleVO getOneShowById(String id) {
         //查询文章
         ArticleVO article = getArticle(id);
-        //查询导航分类
-        List<Category> categories = getCategorys();
-        //查询热门文章
-        List<ArticleInfo> hots = getHotArticles();
-        //查询最新文章
-        List<ArticleInfo> news = getNewArticles();
-
-        vo.setArticleVO(article);
-        vo.setCategories(categories);
-        vo.setHots(hots);
-        vo.setNews(news);
-        vo.setAllCount(allCount());
-        vo.setIpCount(ipCount());
-        return vo;
+        return article;
     }
+
 
     private ArticleVO getArticle(String id) {
         ArticleVO articleVO = articleMapper.selectOneByAId(id);
         return articleVO;
     }
 
+    @Override
+    public List<Special> getSpecials() {
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.orderByAsc("sort");
+        return specialMapper.selectList(wrapper);
+    }
 
-    private List<Category> getCategorys() {
+    @Override
+    public List<Category> getCategorys() {
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.orderByAsc("sort");
         List<Category> categories = categoryMapper.selectList(wrapper);
         return categories;
     }
 
-    private List<ArticleInfo> getHotArticles() {
+    @Override
+    public List<ArticleInfo> getHotArticles() {
         return getArticleInfos("views_num");
     }
 
-    private List<ArticleInfo> getNewArticles() {
+    @Override
+    public List<ArticleInfo> getNewArticles() {
         return getArticleInfos("create_time");
     }
 
@@ -157,12 +121,14 @@ public class IndexServiceImpl implements IndexService {
         return hots;
     }
 
-    private Integer allCount(){
+    @Override
+    public Integer allCount(){
         Integer allvistor = vistorLogMapper.countAllvistor();
         return allvistor;
     }
 
-    private Integer ipCount(){
+    @Override
+    public Integer ipCount(){
         Integer countIp = vistorLogMapper.countIp();
         return countIp;
     }

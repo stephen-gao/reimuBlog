@@ -3,10 +3,12 @@ package com.reimu.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.reimu.dao.ArticleInfoMapper;
 import com.reimu.dao.ArticleSrcMapper;
+import com.reimu.dao.SpecialArticleMapper;
 import com.reimu.entity.Article;
 import com.reimu.dao.ArticleMapper;
 import com.reimu.entity.ArticleInfo;
 import com.reimu.entity.ArticleSrc;
+import com.reimu.entity.SpecialArticle;
 import com.reimu.model.request.ArticleSaveUpdateRequest;
 import com.reimu.model.vo.ArticleVO;
 import com.reimu.security.SysUser;
@@ -18,8 +20,10 @@ import com.reimu.utils.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -40,6 +44,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Autowired
     private ArticleSrcMapper articleSrcMapper;
+
+    @Autowired
+    private SpecialArticleMapper specialArticleMapper;
 
     @Value("${default.url}")
     private String defaultUrl;
@@ -82,6 +89,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         article.setArticleId(info.getId());
         articleSrcMapper.insert(src);
         articleMapper.insert(article);
+        //保存专题
+        saveSA(request.getSpecials(),info.getId());
     }
 
     @Override
@@ -116,6 +125,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         article.setArticleId(info.getId());
         articleSrcMapper.update(src,wrapper);
         articleMapper.update(article,wrapper);
+        //保存专题
+        deleteSAByAid(info.getId());
+        saveSA(request.getSpecials(),info.getId());
     }
 
     @Override
@@ -146,5 +158,22 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             }
         }
         return id;
+    }
+
+    private void deleteSAByAid(String articleId){
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("article_id",articleId);
+        specialArticleMapper.delete(wrapper);
+    }
+
+    private void saveSA(List<String> specialIds ,String articleId){
+        if(!CollectionUtils.isEmpty(specialIds)) {
+            specialIds.forEach(s -> {
+                SpecialArticle specialArticle = new SpecialArticle();
+                specialArticle.setSpecialId(s);
+                specialArticle.setArticleId(articleId);
+                specialArticleMapper.insert(specialArticle);
+            });
+        }
     }
 }

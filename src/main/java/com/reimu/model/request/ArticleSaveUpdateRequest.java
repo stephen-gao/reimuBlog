@@ -2,6 +2,8 @@ package com.reimu.model.request;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class ArticleSaveUpdateRequest {
 
@@ -48,5 +50,10 @@ public class ArticleSaveUpdateRequest {
      * 状态 0 草稿 1发布 2删除
      */
     private Integer status;
+
+    /**
+     * 专题
+     */
+    private List<String> specials;
 
 }

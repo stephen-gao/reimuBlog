@@ -1,7 +1,6 @@
 $(document).ready(function () {
     let articleEditSaveUrl = '/manage/article/update';
     let articleEditPublishUrl = '/manage/article/updpublish';
-    let categoryAllUrl = '/manage/category/all';
     let articleReq={
         id:'',
         title:'',
@@ -9,7 +8,8 @@ $(document).ready(function () {
         keyword:'',
         contentSrc:'',
         content:'',
-        categoryId:''
+        categoryId:'',
+        specials:[]
     };
     let editorMarkdown = editormd("markdown-edit", {
         width: "100%",
@@ -46,6 +46,12 @@ $(document).ready(function () {
     });
 
     function saveOrPublish(url) {
+        // 专题
+        let chkValue =[];
+        $('input[name="SelectSpecial"]:checked').each(function(){
+            chkValue.push($(this).val());
+        });
+        articleReq.specials = chkValue;
         articleReq.id = $("#articleId").val();
         articleReq.title = $("#articleTitle").val();
         articleReq.description = $("#articleDescription").val();
@@ -62,12 +68,5 @@ $(document).ready(function () {
             loadPage("/manage/article/page","文章管理");
         });
     }
-
-    // REQUEST.get(categoryAllUrl,function (res) {
-    //     let categorys = res.data;
-    //     for(let i = 0;i<categorys.length;i++){
-    //         $("#articleCategory").append('<option value="'+ categorys[i].id +'">'+ categorys[i].name+'</option>')
-    //     }
-    // })
 
 });

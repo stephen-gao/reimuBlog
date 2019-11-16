@@ -1,14 +1,35 @@
 package com.reimu.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.reimu.entity.ArticleInfo;
+import com.reimu.entity.Category;
+import com.reimu.entity.Special;
+import com.reimu.model.vo.ArticleVO;
 import com.reimu.model.vo.ShowVO;
+
+import java.util.List;
 
 public interface IndexService {
 
-    ShowVO getIndexVO();
+    IPage<ArticleVO> getIndexVO();
 
-    ShowVO getPage(Integer pageNo);
+    IPage<ArticleVO> getPage(Integer pageNo);
 
-    ShowVO getCategoryPage(Integer pageNo,String categoryId);
+    IPage<ArticleVO> getCategoryPage(Integer pageNo, String categoryId);
 
-    ShowVO getOneShowById(String id);
+    IPage<ArticleVO> getSpecialPage(Integer pageNo, String specialId);
+
+    ArticleVO getOneShowById(String id);
+
+    List<Special> getSpecials();
+
+    List<Category> getCategorys();
+
+    List<ArticleInfo> getHotArticles();
+
+    List<ArticleInfo> getNewArticles();
+
+    Integer allCount();
+
+    Integer ipCount();
 }

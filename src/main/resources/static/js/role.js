@@ -142,7 +142,7 @@ $(document).ready(function () {
                 inHtml += '<div class="col-sm-10">';
                 inHtml += '<div class="row">';
                 for(let j = 0;j<list.length;j++){
-                    if(j != 0 && j%4 == 0){
+                    if(j !== 0 && j%4 === 0){
                         inHtml += '</div>';
                         inHtml += '<div class="row">';
                     }

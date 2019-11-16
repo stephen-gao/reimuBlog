@@ -50,9 +50,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public IPage<User> userPage(UserVO vo) {
         QueryWrapper wrapper = new QueryWrapper();
-        wrapper.select("id","username","nickname","gender","email","photo","information");
+        wrapper.select("id","username","nickname","gender","email","photo","information","status");
         wrapper.ne("status",9);
-        wrapper.ne("id",0);
+        wrapper.ne("id","0");
         IPage<User> page = new Page(vo.getPageNumber(),vo.getPageSize());
         return this.page(page,wrapper);
     }

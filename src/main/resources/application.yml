@@ -58,5 +58,7 @@ user:
     password: 123456
 default:
   url: http://localhost:8080/
+  index: p/
   article: a/
   category: c/
+  special: s/

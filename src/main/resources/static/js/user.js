@@ -55,7 +55,17 @@ $(document).ready(function () {
                 return '保密';
             }
         },
-        {field: 'status', title: '状态', align: 'center'},
+        {field: 'status', title: '状态', align: 'center',formatter: function (value) {
+                if(value === 1){
+                    return "正常";
+                }else if(value === 2){
+                    return "冻结";
+                }else if(value === 3){
+                    return "删除";
+                }
+                return "-";
+            }
+        },
         {field: 'information', title: '状态', align: 'center',visible: false},
         {
             field: 'option', title: '操作', align: 'center', width: 200,events: window.operateEvents,

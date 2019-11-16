@@ -19,4 +19,6 @@ public interface ArticleMapper extends BaseMapper<Article> {
     ArticleVO selectOneByAId(String articleId);
 
     IPage<ArticleVO> selectAPage(IPage page,String categoryId);
+
+    IPage<ArticleVO> selectSAPage(IPage page,String specialId);
 }

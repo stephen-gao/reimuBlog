@@ -161,7 +161,7 @@
                     <!-- 数据源配置，( **必配** ) -->
                     <dataSource>
                         <driverName>com.mysql.cj.jdbc.Driver</driverName>
-                        <url>jdbc:mysql://192.168.139.130:3306/reimublog?allowMultiQueries=true&amp;useSSL=false&amp;characterEncoding=UTF-8</url>
+                        <url>jdbc:mysql://192.168.126.129:3306/reimublog?allowMultiQueries=true&amp;useSSL=false&amp;characterEncoding=UTF-8</url>
                         <username>root</username>
                         <password>Root</password>
                     </dataSource>
@@ -182,8 +182,8 @@
                         <superServiceClass>com.baomidou.mybatisplus.extension.service.IService</superServiceClass>
                         <!-- 要包含的表 与exclude 二选一配置-->
                         <include>
-                            <property>t_role</property>
-                            <property>t_permission</property>
+                            <property>t_special</property>
+                            <property>t_special_article</property>
                         </include>
                         <!-- 要排除的表 -->
                         <!--<exclude>-->

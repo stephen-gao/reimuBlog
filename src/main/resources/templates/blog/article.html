@@ -2,11 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>灵梦博客-首页</title>
+    <title th:text="${article.title}"></title>
+    <meta name="robots" content="index,follow"/>
+    <meta name="googlebot" content="index,follow"/>
+
+    <meta name="keywords" th:content="${article.keyword}"/>
+    <meta name="description" th:content="${article.description}"/>
+
+    <meta property="og:site_name" content="幻想乡"/>
+    <meta property="og:title" th:content="${article.title}"/>
+    <meta property="og:keywords" th:content="${article.keyword}"/>
+    <meta property="og:description" th:content="${article.description}"/>
     <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="/css/layout.css"/>
+    <link rel="stylesheet" th:href="${defaultUrl}+'css/layout.css'"/>
     <!--    <link rel="stylesheet" href="/css/index.css"/>-->
-    <link rel="stylesheet" href="/css/editormd.css"/>
+    <link rel="stylesheet" th:href="${defaultUrl}+'css/editormd.css'"/>
 </head>
 <body>
 <nav>
@@ -44,14 +54,14 @@
 </div>
 <!-- basic scripts -->
 <!--[if !IE]> -->
-<script src="/assets/js/jquery-2.1.4.min.js"></script>
+<script th:src="${defaultUrl}+'assets/js/jquery-2.1.4.min.js'"></script>
 <!-- <![endif]-->
 <!--[if IE]>
-<script src="/assets/js/jquery-1.11.3.min.js"></script>
+<script th:src="${defaultUrl}+'assets/js/jquery-1.11.3.min.js'"></script>
 <![endif]-->
 <!--<script type="text/javascript">-->
 <!--    if ('ontouchstart' in document.documentElement) document.write("<script src='js/jquery.mobile.custom.min.js'>" + "<" + "/script>");-->
 <!--</script>-->
-<script src="/js/blog.js"></script>
+<script th:src="${defaultUrl}+'js/blog.js'"></script>
 </body>
 </html>
