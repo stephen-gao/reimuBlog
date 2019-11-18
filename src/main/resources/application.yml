@@ -51,13 +51,16 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
 oss:
+  bucket: xxx
+  accessKey: xxx
+  secretKey: xxx
   file:
     path: http://q0j9dl3x3.bkt.clouddn.com/
 user:
   default:
     password: 123456
 default:
-  url: http://localhost:8080/
+  url: http://39.100.9.148:8080/
   index: p/
   article: a/
   category: c/

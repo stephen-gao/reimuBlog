@@ -6,6 +6,7 @@ import com.reimu.common.http.HttpResponse;
 import com.reimu.utils.DateUtil;
 import com.reimu.utils.QiniuOSSUtil;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +35,8 @@ public class FileUploadController {
     @Value("${oss.file.path}")
     private String ossFilePath;
 
+    @Autowired
+    QiniuOSSUtil qiniuOSSUtil;
     /**
      * description
      *
@@ -49,7 +52,7 @@ public class FileUploadController {
         String filename;
         try {
             InputStream inputStream = file.getInputStream();
-            filename = QiniuOSSUtil.upload(inputStream);
+            filename = qiniuOSSUtil.upload(inputStream);
         } catch (IOException e) {
             log.error("上传图片失败",e.getMessage());
             result.put("success",0);

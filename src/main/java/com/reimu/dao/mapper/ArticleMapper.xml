@@ -77,7 +77,7 @@
 			t_article_info ai
 		LEFT JOIN t_user u ON ai.author_id = u.id
 		LEFT JOIN t_category c ON ai.category_id = c.id
-		where ai.status = 0
+		where ai.status = 1
 		<if test="categoryId != null and categoryId != ''">
 			and ai.category_id = #{categoryId}
 		</if>
@@ -105,7 +105,7 @@
 		LEFT JOIN t_user u ON ai.author_id = u.id
 		LEFT JOIN t_category c ON ai.category_id = c.id
 		LEFT JOIN t_special_article sa ON ai.id = sa.article_id
-		where ai.status = 0
+		where ai.status = 1
 		<if test="specialId != null and specialId != ''">
 			and sa.special_id = #{specialId}
 		</if>
