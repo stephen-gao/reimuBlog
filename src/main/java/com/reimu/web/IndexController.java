@@ -40,6 +40,9 @@ public class IndexController {
     @Value("${default.special}")
     private String specialUrl;
 
+    @Value("${default.banner}")
+    private String defaultBanner;
+
     @VisteLog
     @RequestMapping("/")
     public ModelAndView index1() {
@@ -111,6 +114,7 @@ public class IndexController {
 
     private void setCommonData(ModelAndView mv) {
         mv.addObject("defaultUrl", defaultUrl);
+        mv.addObject("defaultBanner", defaultBanner);
         //专题分类
         mv.addObject("specials", indexService.getSpecials());
         //查询导航分类

@@ -33,24 +33,15 @@ public class VistorLogAspect {
     public void doBefore(JoinPoint joinPoint) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-
-        System.out.println("==================Start=================");
-        System.out.println("URL：" + request.getRequestURL().toString());
-        System.out.println("Method：" + request.getMethod().toString());
-        System.out.println("URI：" + request.getRequestURI());
-        System.out.println("URL：" + request.getRequestURL());
-
-        //打印controller全路径及method
-        System.out.println("Class Method：" + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
-        System.out.println("客户端IP：" + getRemoteAddress(request));
-
         String method = joinPoint.getSignature().getName();
+        String ua = request.getHeader("User-Agent");
 
         VistorLog vistorLog = new VistorLog();
 
         vistorLog.setVistorIp(getRemoteAddress(request));
         vistorLog.setVistorUrl(request.getRequestURL().toString());
         vistorLog.setVistorTime(new Date());
+        vistorLog.setUserAgent(ua);
         //访问文章
         if ("article".equals(method)){
             String articleId = (String)joinPoint.getArgs()[0];

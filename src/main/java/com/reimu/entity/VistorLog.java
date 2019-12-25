@@ -55,6 +55,9 @@ public class VistorLog implements Serializable {
 	@TableField(value="vistor_time")
 	private Date vistorTime;
 
+	@TableField(value = "user_agent")
+	private String userAgent;
+
 
 
 	public String getId() {
@@ -105,4 +108,11 @@ public class VistorLog implements Serializable {
 		this.vistorTime = vistorTime;
 	}
 
+	public String getUserAgent() {
+		return userAgent;
+	}
+
+	public void setUserAgent(String userAgent) {
+		this.userAgent = userAgent;
+	}
 }
