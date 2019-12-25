@@ -15,6 +15,7 @@ nav {
 section {
     padding-top: 10px;
     min-height: 100%;
+    font-family: "Meiryo UI", "Microsoft YaHei", "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, "Monaco", monospace, Tahoma, STXihei, STHeiti, "Helvetica Neue", "Droid Sans", "wenquanyi micro hei", FreeSans, Arimo, Arial, SimSun,  Heiti,  sans-serif;
 }
 
 footer {
@@ -322,6 +323,9 @@ footer a:hover {
     min-height: 60px;
     text-align: center;
     font-size: 14px;
+}
+.foot-stock{
+    display: inline;
 }
 
 /*foot end*/

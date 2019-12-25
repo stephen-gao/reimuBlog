@@ -103,9 +103,6 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         info.setDescription(request.getDescription());
         info.setKeyword(request.getKeyword());
         info.setStatus(request.getStatus());
-        info.setStarNum(0L);
-        info.setViewsNum(0L);
-        info.setCommentNum(0L);
         info.setCreateTime(date);
         info.setUpdateTime(date);
         info.setCategoryId(request.getCategoryId());

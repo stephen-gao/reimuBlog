@@ -21,7 +21,7 @@
   position: relative;
   margin-bottom: 15px;
   border: 1px solid #ddd;
-  font-family: "Meiryo UI", "Microsoft YaHei", "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, "Monaco", monospace, Tahoma, STXihei, "åŽæ–‡ç»†é»‘", STHeiti, "Helvetica Neue", "Droid Sans", "wenquanyi micro hei", FreeSans, Arimo, Arial, SimSun, "å®‹ä½“", Heiti, "é»‘ä½“", sans-serif;
+  font-family: "Meiryo UI", "Microsoft YaHei", "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, "Monaco", monospace, Tahoma, STXihei, STHeiti, "Helvetica Neue", "Droid Sans", "wenquanyi micro hei", FreeSans, Arimo, Arial, SimSun,  Heiti,  sans-serif;
 }
 .editormd *, .editormd *:before, .editormd *:after {
   -webkit-box-sizing: border-box;

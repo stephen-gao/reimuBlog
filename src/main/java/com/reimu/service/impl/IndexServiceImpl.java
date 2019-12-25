@@ -114,7 +114,7 @@ public class IndexServiceImpl implements IndexService {
     private List<ArticleInfo> getArticleInfos(String sort) {
         IPage<ArticleInfo> page = new Page<>(1, 5);
         QueryWrapper wrapper = new QueryWrapper();
-        wrapper.eq("status", 0);
+        wrapper.eq("status", 1);
         wrapper.orderByDesc(sort);
         page = articleInfoMapper.selectPage(page, wrapper);
         List<ArticleInfo> hots = page.getRecords();

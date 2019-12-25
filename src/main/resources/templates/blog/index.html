@@ -14,7 +14,7 @@
     <meta property="og:keywords" content="幻想乡"/>
     <meta property="og:description" content="程序员的幻想乡"/>
     <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" th:href="${defaultUrl}+'css/layout.css'"/>
+    <link rel="stylesheet" th:href="${defaultUrl}+'/css/layout.css'"/>
 </head>
 <body>
 <nav>
@@ -24,7 +24,7 @@
     <div class="com-container">
         <div class="content-left">
             <div class="banner">
-                <img src="http://q0j9dl3x3.bkt.clouddn.com/xihu.jpg">
+                <img src="http://qn.image.gensukyo.com/xihu.jpg">
             </div>
             <div class="content left-content">
                 <ul class="list-ul">
@@ -66,18 +66,18 @@
     <div class="com-container footer-content text-colorb" th:include="blog/common/common::footer"></div>
 </footer>
 <div class="back-top">
-    <img class="back-top-icon" src="http://q0j9dl3x3.bkt.clouddn.com/back-to-top.svg" alt="返回顶部">
+    <img class="back-top-icon" src="http://qn.image.gensukyo.com/back-to-top.svg" alt="返回顶部">
 </div>
 <!-- basic scripts -->
 <!--[if !IE]> -->
-<script th:src="${defaultUrl}+'assets/js/jquery-2.1.4.min.js'"></script>
+<script th:src="${defaultUrl}+'/assets/js/jquery-2.1.4.min.js'"></script>
 <!-- <![endif]-->
 <!--[if IE]>
-<script th:src="${defaultUrl}+'assets/js/jquery-1.11.3.min.js'"></script>
+<script th:src="${defaultUrl}+'/assets/js/jquery-1.11.3.min.js'"></script>
 <![endif]-->
 <!--<script type="text/javascript">-->
 <!--    if ('ontouchstart' in document.documentElement) document.write("<script src='js/jquery.mobile.custom.min.js'>" + "<" + "/script>");-->
 <!--</script>-->
-<script th:src="${defaultUrl}+'js/blog.js'"></script>
+<script th:src="${defaultUrl}+'/js/blog.js'"></script>
 </body>
 </html>

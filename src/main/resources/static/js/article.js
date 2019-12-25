@@ -33,11 +33,11 @@ $(document).ready(function () {
             field: 'status', title: '状态', align: 'center',
             formatter: function (value) {
                 if (value === 0) {
-                    return '草稿';
+                    return '<span class="label">草稿</span>';
                 } else if (value === 1) {
-                    return '发布';
+                    return '<span class="label label-success">已发布</span>';
                 } else if (value === 2) {
-                    return '删除';
+                    return '<span class="label label-danger">已删除</span>';
                 }
                 return '';
             }

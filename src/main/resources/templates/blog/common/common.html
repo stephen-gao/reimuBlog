@@ -15,7 +15,7 @@
                         </a>
                         <br>
                         <span class="right-li-b" th:text="${hot.createTime}"></span>
-                        <span class="right-li-b" th:text="${hot.viewsNum}"></span>
+                        <span class="right-li-b">阅读([[${hot.viewsNum}]])</span>
                     </div>
                 </li>
             </ul>
@@ -34,7 +34,7 @@
                         </a>
                         <br>
                         <span class="right-li-b" th:text="${nwe.createTime}"></span>
-                        <span class="right-li-b" th:text="${nwe.viewsNum}"></span>
+                        <span class="right-li-b">阅读([[${nwe.viewsNum}]])</span>
                     </div>
                 </li>
             </ul>
@@ -61,7 +61,7 @@
 <div th:fragment="nav">
     <div class="nav-brand">
         <a th:href="${defaultUrl}">
-            <img class="brand-img" src="/images/brand.webp"/>
+            <img class="brand-img" src="/images/brand.png"/>
         </a>
     </div>
     <div class="nav-brand">
@@ -98,7 +98,15 @@
             |
         </li>
         <li>
-            某ICP备xxxxxxx号-x
+            <a href="http://www.beian.miit.gov.cn/">豫ICP备19043044号-1</a>
+        </li>
+        <li>
+            |
+        </li>
+        <li>
+            <div class="foot-stock">
+                <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41168102000054"><img src="/images/police.png" style="width: 16px;height: 16px;margin-right: 3px;"/>豫公网安备 41168102000054号</a>
+            </div>
         </li>
         <li>
             |
