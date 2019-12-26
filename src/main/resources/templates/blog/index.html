@@ -16,6 +16,16 @@
     <meta property="og:description" content="程序员的幻想乡"/>
     <!-- bootstrap & fontawesome -->
     <link rel="stylesheet" th:href="${defaultUrl}+'/css/layout.css'"/>
+    <script>
+        //百度统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?1b73c551da72d159b566f60559d5c20f";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 </head>
 <body>
 <nav>
@@ -67,7 +77,7 @@
     <div class="com-container footer-content text-colorb" th:include="blog/common/common::footer"></div>
 </footer>
 <div class="back-top">
-    <img class="back-top-icon" src="http://qn.image.gensukyo.com/back-to-top.svg" alt="返回顶部">
+    <img class="back-top-icon" src="http://qn.image.gensukyo.com/back-to-top.svg" alt="返回顶部"/>
 </div>
 <!-- basic scripts -->
 <!--[if !IE]> -->

@@ -3,14 +3,13 @@ package com.reimu.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.reimu.cache.CacheKeys;
+import com.reimu.cache.CacheService;
 import com.reimu.dao.*;
-import com.reimu.entity.Article;
 import com.reimu.entity.ArticleInfo;
 import com.reimu.entity.Category;
 import com.reimu.entity.Special;
-import com.reimu.model.QueryArticle;
 import com.reimu.model.vo.ArticleVO;
-import com.reimu.model.vo.ShowVO;
 import com.reimu.service.IndexService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +35,9 @@ public class IndexServiceImpl implements IndexService {
 
     @Autowired
     private SpecialMapper specialMapper;
+
+    @Autowired
+    private CacheService cacheService;
 
 
     @Override
@@ -88,27 +90,50 @@ public class IndexServiceImpl implements IndexService {
 
     @Override
     public List<Special> getSpecials() {
-        QueryWrapper wrapper = new QueryWrapper();
-        wrapper.orderByAsc("sort");
-        return specialMapper.selectList(wrapper);
+        Object o =  cacheService.get(CacheKeys.SPECIAL_CACHE);
+        if(o == null) {
+            QueryWrapper wrapper = new QueryWrapper();
+            wrapper.orderByAsc("sort");
+            List list = specialMapper.selectList(wrapper);
+            cacheService.put(CacheKeys.SPECIAL_CACHE,list,CacheService.halfHour);
+            return list;
+        }
+        return (List)o;
     }
 
     @Override
     public List<Category> getCategorys() {
-        QueryWrapper wrapper = new QueryWrapper();
-        wrapper.orderByAsc("sort");
-        List<Category> categories = categoryMapper.selectList(wrapper);
-        return categories;
+        Object o = cacheService.get(CacheKeys.CATEGORY_CACHE);
+        if(o == null){
+            QueryWrapper wrapper = new QueryWrapper();
+            wrapper.orderByAsc("sort");
+            List<Category> categories = categoryMapper.selectList(wrapper);
+            cacheService.put(CacheKeys.CATEGORY_CACHE,categories,CacheService.halfHour);
+            return categories;
+        }
+        return (List)o;
     }
 
     @Override
     public List<ArticleInfo> getHotArticles() {
-        return getArticleInfos("views_num");
+        Object o = cacheService.get(CacheKeys.HOT_ARTICLE_CACHE);
+        if(o == null) {
+            List<ArticleInfo> list = getArticleInfos("views_num");
+            cacheService.put(CacheKeys.HOT_ARTICLE_CACHE,list,CacheService.halfHour);
+            return list;
+        }
+        return (List)o;
     }
 
     @Override
     public List<ArticleInfo> getNewArticles() {
-        return getArticleInfos("create_time");
+        Object o = cacheService.get(CacheKeys.NEW_ARTICLE_CACHE);
+        if(o == null) {
+            List<ArticleInfo> list = getArticleInfos("create_time");
+            cacheService.put(CacheKeys.NEW_ARTICLE_CACHE,list,CacheService.halfHour);
+            return list;
+        }
+        return (List)o;
     }
 
     private List<ArticleInfo> getArticleInfos(String sort) {
@@ -123,13 +148,23 @@ public class IndexServiceImpl implements IndexService {
 
     @Override
     public Integer allCount(){
-        Integer allvistor = vistorLogMapper.countAllvistor();
-        return allvistor;
+        Object o = cacheService.get(CacheKeys.ALL_COUNT_CACHE);
+        if(o == null) {
+            Integer allvistor = vistorLogMapper.countAllvistor();
+            cacheService.put(CacheKeys.ALL_COUNT_CACHE,allvistor,CacheService.halfHour);
+            return allvistor;
+        }
+        return (Integer) o;
     }
 
     @Override
     public Integer ipCount(){
-        Integer countIp = vistorLogMapper.countIp();
-        return countIp;
+        Object o = cacheService.get(CacheKeys.IP_COUNT_CACHE);
+        if(o == null) {
+            Integer countIp = vistorLogMapper.countIp();
+            cacheService.put(CacheKeys.IP_COUNT_CACHE,countIp,CacheService.halfHour);
+            return countIp;
+        }
+        return (Integer) o;
     }
 }
