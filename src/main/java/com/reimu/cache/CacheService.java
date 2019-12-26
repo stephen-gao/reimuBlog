@@ -24,6 +24,10 @@ public class CacheService {
 
     public static Long halfHour = 30 * oneMin;
 
+    public static Long oneHour = 60 * oneMin;
+
+    public static Long oneDay = 24 * oneHour;
+
     public Object get(String key){
         CacheEntity entity = cache.get(key);
         if(entity != null){

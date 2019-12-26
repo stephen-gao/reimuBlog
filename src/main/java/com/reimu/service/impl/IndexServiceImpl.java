@@ -95,7 +95,7 @@ public class IndexServiceImpl implements IndexService {
             QueryWrapper wrapper = new QueryWrapper();
             wrapper.orderByAsc("sort");
             List list = specialMapper.selectList(wrapper);
-            cacheService.put(CacheKeys.SPECIAL_CACHE,list,CacheService.halfHour);
+            cacheService.put(CacheKeys.SPECIAL_CACHE,list,CacheService.oneDay);
             return list;
         }
         return (List)o;
@@ -108,7 +108,7 @@ public class IndexServiceImpl implements IndexService {
             QueryWrapper wrapper = new QueryWrapper();
             wrapper.orderByAsc("sort");
             List<Category> categories = categoryMapper.selectList(wrapper);
-            cacheService.put(CacheKeys.CATEGORY_CACHE,categories,CacheService.halfHour);
+            cacheService.put(CacheKeys.CATEGORY_CACHE,categories,CacheService.oneDay);
             return categories;
         }
         return (List)o;
@@ -119,7 +119,7 @@ public class IndexServiceImpl implements IndexService {
         Object o = cacheService.get(CacheKeys.HOT_ARTICLE_CACHE);
         if(o == null) {
             List<ArticleInfo> list = getArticleInfos("views_num");
-            cacheService.put(CacheKeys.HOT_ARTICLE_CACHE,list,CacheService.halfHour);
+            cacheService.put(CacheKeys.HOT_ARTICLE_CACHE,list,CacheService.oneDay);
             return list;
         }
         return (List)o;
@@ -130,7 +130,7 @@ public class IndexServiceImpl implements IndexService {
         Object o = cacheService.get(CacheKeys.NEW_ARTICLE_CACHE);
         if(o == null) {
             List<ArticleInfo> list = getArticleInfos("create_time");
-            cacheService.put(CacheKeys.NEW_ARTICLE_CACHE,list,CacheService.halfHour);
+            cacheService.put(CacheKeys.NEW_ARTICLE_CACHE,list,CacheService.oneDay);
             return list;
         }
         return (List)o;
@@ -151,7 +151,7 @@ public class IndexServiceImpl implements IndexService {
         Object o = cacheService.get(CacheKeys.ALL_COUNT_CACHE);
         if(o == null) {
             Integer allvistor = vistorLogMapper.countAllvistor();
-            cacheService.put(CacheKeys.ALL_COUNT_CACHE,allvistor,CacheService.halfHour);
+            cacheService.put(CacheKeys.ALL_COUNT_CACHE,allvistor,CacheService.oneDay);
             return allvistor;
         }
         return (Integer) o;
@@ -162,7 +162,7 @@ public class IndexServiceImpl implements IndexService {
         Object o = cacheService.get(CacheKeys.IP_COUNT_CACHE);
         if(o == null) {
             Integer countIp = vistorLogMapper.countIp();
-            cacheService.put(CacheKeys.IP_COUNT_CACHE,countIp,CacheService.halfHour);
+            cacheService.put(CacheKeys.IP_COUNT_CACHE,countIp,CacheService.oneDay);
             return countIp;
         }
         return (Integer) o;
