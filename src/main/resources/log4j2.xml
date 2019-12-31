@@ -15,7 +15,7 @@
         </Console>
 
         <!--配置自定义日志，按天输出-->
-        <RollingFile name="RollingFileInfo" fileName="${filepath}/gensukyo.log" filePattern="${filepath}/gensukyo-%d{yyyy-MM-dd}.log" >
+        <RollingFile name="RollingFileInfo" fileName="${filepath}/gensukyo-info.log" filePattern="${filepath}/$${date:yyyy-MM}/gensukyo-info-%d{yyyy-MM-dd}-%i.log.gz" >
             <Filters>
                 <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
                 <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
@@ -28,8 +28,8 @@
         </RollingFile>
 
         <!-- 把系统所有的error全部打到这个文件里  -->
-        <RollingFile name="RollingFileError" fileName="${filepath}/gensukyo_error.log"
-                     filePattern="${filepath}/$${date:yyyy-MM}/gensukyo_error-%d{yyyy-MM-dd}-%i.log">
+        <RollingFile name="RollingFileError" fileName="${filepath}/gensukyo-error.log"
+                     filePattern="${filepath}/$${date:yyyy-MM}/gensukyo-error-%d{yyyy-MM-dd}-%i.log.gz">
             <ThresholdFilter level="ERROR"/>
             <PatternLayout pattern="${pattern}"/>
             <Policies>
