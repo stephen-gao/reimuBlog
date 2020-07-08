@@ -14,20 +14,25 @@ import com.reimu.model.vo.ArticleVO;
 import com.reimu.security.SysUser;
 import com.reimu.service.IArticleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.reimu.utils.HttpUtil;
 import com.reimu.utils.ShortIdUtil;
 import com.reimu.utils.DateUtil;
 import com.reimu.utils.UserUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
- *   服务实现类
+ * 服务实现类
  * </p>
  *
  * @author gaosheng
@@ -35,6 +40,7 @@ import java.util.List;
  */
 @Service
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements IArticleService {
+    private static final Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
 
     @Autowired
     private ArticleMapper articleMapper;
@@ -53,6 +59,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Value("${default.article}")
     private String articleUrl;
+
+    @Value("${baidu.zz.push}")
+    private String baiduZZPushUrl;
+
+    @Value("${baidu.zz.token}")
+    private String baiduToken;
 
     @Override
     public void save(ArticleSaveUpdateRequest request) {
@@ -75,7 +87,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         info.setCategoryId(request.getCategoryId());
         //设置ID
         info.setId(createId());
-        info.setUrl(defaultUrl+articleUrl+info.getId());
+        info.setUrl(defaultUrl + articleUrl + info.getId());
         info.setAuthorId(user.getId());
         //info
         articleInfoMapper.insert(info);
@@ -90,7 +102,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         articleSrcMapper.insert(src);
         articleMapper.insert(article);
         //保存专题
-        saveSA(request.getSpecials(),info.getId());
+        saveSA(request.getSpecials(), info.getId());
+        //链接推送到百度
+        send2Baidu(info);
     }
 
     @Override
@@ -111,7 +125,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         //info
         articleInfoMapper.updateById(info);
         QueryWrapper wrapper = new QueryWrapper();
-        wrapper.eq("article_id",info.getId());
+        wrapper.eq("article_id", info.getId());
         src.setContentSrc(request.getContentSrc());
         src.setCreateTime(date);
         src.setUpdateTime(date);
@@ -120,18 +134,18 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         article.setCreateTime(date);
         article.setUpdateTime(date);
         article.setArticleId(info.getId());
-        articleSrcMapper.update(src,wrapper);
-        articleMapper.update(article,wrapper);
+        articleSrcMapper.update(src, wrapper);
+        articleMapper.update(article, wrapper);
         //保存专题
         deleteSAByAid(info.getId());
-        saveSA(request.getSpecials(),info.getId());
+        saveSA(request.getSpecials(), info.getId());
     }
 
     @Override
     public ArticleVO getOneById(String id) {
         ArticleInfo info = articleInfoMapper.selectById(id);
         QueryWrapper wrapper = new QueryWrapper();
-        wrapper.eq("article_id",id);
+        wrapper.eq("article_id", id);
         ArticleSrc src = articleSrcMapper.selectOne(wrapper);
         ArticleVO vo = new ArticleVO();
         vo.setId(info.getId());
@@ -143,34 +157,47 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         return vo;
     }
 
-    private String createId(){
+    private String createId() {
         String id = ShortIdUtil.getShortId();
         boolean b = true;
-        while (b){
+        while (b) {
             ArticleInfo info = articleInfoMapper.selectById(id);
-            if(info == null) {
+            if (info == null) {
                 b = false;
-            }else {
+            } else {
                 id = ShortIdUtil.getShortId();
             }
         }
         return id;
     }
 
-    private void deleteSAByAid(String articleId){
+    private void deleteSAByAid(String articleId) {
         QueryWrapper wrapper = new QueryWrapper();
-        wrapper.eq("article_id",articleId);
+        wrapper.eq("article_id", articleId);
         specialArticleMapper.delete(wrapper);
     }
 
-    private void saveSA(List<String> specialIds ,String articleId){
-        if(!CollectionUtils.isEmpty(specialIds)) {
+    private void saveSA(List<String> specialIds, String articleId) {
+        if (!CollectionUtils.isEmpty(specialIds)) {
             specialIds.forEach(s -> {
                 SpecialArticle specialArticle = new SpecialArticle();
                 specialArticle.setSpecialId(s);
                 specialArticle.setArticleId(articleId);
                 specialArticleMapper.insert(specialArticle);
             });
+        }
+    }
+
+
+    private void send2Baidu(ArticleInfo info){
+        //链接推送到百度
+        Map<String, Object> params = new HashMap<>(8);
+        params.put("site", info.getUrl());
+        params.put("token", baiduToken);
+        try {
+            HttpUtil.get(baiduZZPushUrl, params);
+        } catch (Throwable e) {
+            logger.error("链接推送到百度失败", e);
         }
     }
 }
