@@ -336,6 +336,10 @@ footer a:hover {
 .article-title {
     text-align: center;
 }
+.article-title a {
+    color: rgb(30 30 30);
+    text-decoration: none;
+}
 
 .article-body {
     margin-left: 40px;
