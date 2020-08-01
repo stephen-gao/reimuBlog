@@ -30,4 +30,4 @@ build/
 ### VS Code ###
 .vscode/
 
-config/application.yml
+**/application.yml
