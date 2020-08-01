@@ -36,12 +36,14 @@
     <div class="com-container">
         <div class="content-left">
             <div class="banner">
-                <img width="100%" th:src="${defaultBanner}">
+                <!--<img width="100%" th:src="${defaultBanner}">-->
             </div>
             <div class="content left-content">
                 <div class="content-article">
                     <div class="article-title">
-                        <h1 th:text="${article.title}"></h1>
+                        <a th:href="${article.url}">
+                            <h1 th:text="${article.title}"></h1>
+                        </a>
                     </div>
                     <div class="article-body markdown-body">
                         <div th:utext="${article.content}">
