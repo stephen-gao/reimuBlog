@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>幻想乡-首页</title>
-    <meta name="baidu-site-verification" content="ozzo1BTPYE" />
+    <meta name="baidu-site-verification" content="0UZ9A3pzgq" />
+    <meta name="google-site-verification" content="2HFenB_S4U_J4zD7CU3ps98_fKGeLm9JmPVATwZ_VB4" />
+    <meta name="360-site-verification" content="968bb6b395bf43b95a9d54e16c83f97a" />
     <meta name="robots" content="index,follow"/>
     <meta name="googlebot" content="index,follow"/>
 
@@ -15,7 +17,8 @@
     <meta property="og:keywords" content="幻想乡"/>
     <meta property="og:description" content="程序员的幻想乡"/>
     <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" th:href="${defaultUrl}+'/css/layout.css'"/>
+    <!--<link rel="stylesheet" th:href="${defaultUrl}+'/css/layout.css'"/>-->
+    <link rel="stylesheet" href="/css/layout.css">
     <script>
         //百度统计
         var _hmt = _hmt || [];
@@ -34,21 +37,19 @@
 <section>
     <div class="com-container">
         <div class="content-left">
-            <div class="banner">
-                <!--<img th:src="${defaultBanner}" width="100%">-->
-            </div>
             <div class="content left-content">
                 <ul class="list-ul">
                     <li class="list-li" th:each="article : ${articles}">
                         <div class="left-li-body">
-                            <a class="cat " th:href="${article.categoryUrl}+'/1'">
-                                <span th:text="${article.category}"></span>
-                                <i></i>
-                            </a>
-                            <a th:href="${article.url}" class="left-list-title">
-                                <span class="left-li-a" th:text="${article.title}"></span>
-                            </a>
-                            <br>
+                            <h3>
+                                <a class="cat " th:href="${article.categoryUrl}+'/1'">
+                                    <span th:text="${article.category}"></span>
+                                    <i></i>
+                                </a>
+                                <a th:href="${article.url}" class="left-list-title">
+                                    <span class="left-li-a" th:text="${article.title}"></span>
+                                </a>
+                            </h3>
                             <span class="left-li-b" th:text="${article.author}"></span>
                             <span class="left-li-b" th:text="${article.createTime}"></span>
                             <span class="left-li-b">阅读([[${article.viewsNum}]])</span>
@@ -89,6 +90,9 @@
 <!--<script type="text/javascript">-->
 <!--    if ('ontouchstart' in document.documentElement) document.write("<script src='js/jquery.mobile.custom.min.js'>" + "<" + "/script>");-->
 <!--</script>-->
+<!--<div class="banner">-->
+<!--&lt;!&ndash;<img th:src="${defaultBanner}" width="100%">&ndash;&gt;-->
+<!--</div>-->
 <script th:src="${defaultUrl}+'/js/blog.js'"></script>
 </body>
 </html>

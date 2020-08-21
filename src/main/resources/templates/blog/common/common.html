@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="right">
-    <div class="content right-content hot-content">
+    <div class="content right-content">
         <div class="rignt-brand-body">
             <span class="rignt-brand text-color6">热门文章</span>
         </div>
@@ -10,10 +10,11 @@
             <ul class="list-ul">
                 <li class="list-li" th:each="hot:${hots}">
                     <div class="right-li-body">
-                        <a th:href="${hot.url}">
-                            <span class="right-li-a" th:text="${hot.title}"></span>
-                        </a>
-                        <br>
+                        <h6>
+                            <a th:href="${hot.url}">
+                                <span class="right-li-a" th:text="${hot.title}"></span>
+                            </a>
+                        </h6>
                         <span class="right-li-b" th:text="${hot.createTime}"></span>
                         <span class="right-li-b">阅读([[${hot.viewsNum}]])</span>
                     </div>
@@ -21,7 +22,7 @@
             </ul>
         </div>
     </div>
-    <div class="content right-content new-content">
+    <div class="content right-content">
         <div class="rignt-brand-body">
             <span class="rignt-brand text-color6">最新文章</span>
         </div>
@@ -29,10 +30,11 @@
             <ul class="list-ul">
                 <li class="list-li" th:each="nwe : ${news}">
                     <div class="right-li-body">
-                        <a th:href="${nwe.url}">
-                            <span class="right-li-a" th:text="${nwe.title}"></span>
-                        </a>
-                        <br>
+                        <h6>
+                            <a th:href="${nwe.url}">
+                                <span class="right-li-a" th:text="${nwe.title}"></span>
+                            </a>
+                        </h6>
                         <span class="right-li-b" th:text="${nwe.createTime}"></span>
                         <span class="right-li-b">阅读([[${nwe.viewsNum}]])</span>
                     </div>
@@ -40,7 +42,7 @@
             </ul>
         </div>
     </div>
-    <div class="content right-content hot-content">
+    <div class="content right-content">
         <div class="rignt-brand-body">
             <span class="rignt-brand text-color6">专栏</span>
         </div>
@@ -48,9 +50,11 @@
             <ul class="list-ul">
                 <li class="list-li" th:each="special:${specials}">
                     <div class="right-li-body">
-                        <a th:href="${special.url}+'/1'">
-                            <span class="right-li-a" th:text="${special.name}"></span>
-                        </a>
+                        <h6>
+                            <a th:href="${special.url}+'/1'">
+                                <span class="right-li-a" th:text="${special.name}"></span>
+                            </a>
+                        </h6>
                     </div>
                 </li>
             </ul>
@@ -91,14 +95,14 @@
 <div th:fragment="footer">
     <ul>
         <li>
-            ©2019
+            ©2020
             <a th:href="${defaultUrl}">幻想乡</a>
         </li>
         <li>
             |
         </li>
         <li>
-            <a href="http://www.beian.miit.gov.cn/">豫ICP备19043044号-1</a>
+            <a href="https://beian.miit.gov.cn/">豫ICP备19043044号-1</a>
         </li>
         <li>
             |

@@ -10,10 +10,11 @@ nav {
     text-align: center;
     border-bottom: 1px solid #EAEAEA;
     background-color: #fff;
+    box-shadow: 0px 0px 3px 1px #bbbbbb;
 }
 
 section {
-    padding-top: 10px;
+    padding-top: 20px;
     min-height: 100%;
     font-family: "Meiryo UI", "Microsoft YaHei", "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, "Monaco", monospace, Tahoma, STXihei, STHeiti, "Helvetica Neue", "Droid Sans", "wenquanyi micro hei", FreeSans, Arimo, Arial, SimSun,  Heiti,  sans-serif;
 }
@@ -43,6 +44,7 @@ ul li {
     float: left;
     margin-bottom: 50px;
     text-align: left;
+    box-shadow: 1px 1px 2px 1px #bbbbbb;
 }
 
 .content-right {
@@ -55,23 +57,22 @@ ul li {
 .banner {
     width: 100%;
     background-color: #fff;
-    border: 1px solid #EAEAEA;
 }
 
 .content {
     width: 100%;
     background-color: #fff;
-    border: 1px solid #EAEAEA;
 }
 
 .left-content {
-    margin-top: 5px;
     min-height: 600px;
     height: auto;
 }
 
 .right-content {
     background-color: #f6f6f6;
+    margin-bottom: 10px;
+    box-shadow: 1px 1px 2px 1px #bbbbbb;
 }
 
 /* 布局结束 */
@@ -176,6 +177,14 @@ footer a:hover {
 
 /*   nav end  */
 /*   body start  */
+.left-content h1{
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.left-content h3{
+    margin-top: 0;
+    margin-bottom: 5px;
+}
 .left-li-body {
     margin-left: 20px;
     margin-right: 10px;
@@ -195,7 +204,6 @@ footer a:hover {
 
 .left-li-a {
     margin-right: 20px;
-    font-size: 18px;
     font-weight: bolder;
 }
 
@@ -263,13 +271,15 @@ footer a:hover {
 
 /*   body end  */
 /*   left start  */
-.hot-content {
-    height: auto;
+.right-content h6{
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-weight: normal;
 }
 
 .rignt-brand-body {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .rignt-brand {
@@ -295,7 +305,7 @@ footer a:hover {
 .right-li-body {
     margin-left: 15px;
     margin-right: 15px;
-    padding-top: 9px;
+    padding-top: 10px;
     padding-bottom: 7px;
 }
 
@@ -308,11 +318,6 @@ footer a:hover {
     margin-right: 15px;
     font-size: 12px;
     color: #bbb;
-}
-
-.new-content {
-    margin-top: 5px;
-    height: auto;
 }
 
 /*   left end  */
@@ -330,7 +335,7 @@ footer a:hover {
 /*foot end*/
 /*文章页 start*/
 .content-article{
-
+    padding-top: 20px;
     color: #484848;
 }
 .article-title {
